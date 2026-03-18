@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" width="380" height="90">
+  <defs>
+    <clipPath id="globe-clip">
+      <circle cx="43" cy="45" r="38"/>
+    </clipPath>
+  </defs>
+
+  <!-- Globe base — solid red -->
+  <circle cx="43" cy="45" r="38" fill="#cc0000"/>
+
+  <!-- Horizontal white stripes clipped to circle — thick white bands creating striped globe -->
+  <g clip-path="url(#globe-clip)" fill="white">
+    <rect x="5" y="9"  width="76" height="3.2"/>
+    <rect x="5" y="16" width="76" height="3.2"/>
+    <rect x="5" y="23" width="76" height="3.2"/>
+    <rect x="5" y="30" width="76" height="3.2"/>
+    <rect x="5" y="37" width="76" height="3.2"/>
+    <rect x="5" y="44" width="76" height="3.2"/>
+    <rect x="5" y="51" width="76" height="3.2"/>
+    <rect x="5" y="58" width="76" height="3.2"/>
+    <rect x="5" y="65" width="76" height="3.2"/>
+    <rect x="5" y="72" width="76" height="3.2"/>
+  </g>
+
+  <!-- AK geometric mark — white lines clipped to globe -->
+  <g clip-path="url(#globe-clip)" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- Left leg of A -->
+    <line x1="22" y1="64" x2="43" y2="20"/>
+    <!-- Right leg of A -->
+    <line x1="43" y1="20" x2="58" y2="64"/>
+    <!-- Crossbar -->
+    <line x1="27" y1="50" x2="51" y2="50"/>
+    <!-- K right-upper diagonal (from midpoint outward) -->
+    <line x1="51" y1="50" x2="62" y2="28"/>
+    <!-- K right-lower diagonal -->
+    <line x1="51" y1="50" x2="64" y2="64"/>
+  </g>
+
+  <!-- Chinese characters: 爱光科技 — red -->
+  <text x="96" y="50" font-family="'PingFang SC','Noto Sans CJK TC','Microsoft JhengHei','Source Han Sans CN',sans-serif" font-size="32" font-weight="700" fill="#cc0000" letter-spacing="6">爱光科技</text>
+
+  <!-- English: AI KWANG TECH — white -->
+  <text x="98" y="70" font-family="'Arial Narrow','Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="700" fill="#ffffff" letter-spacing="4.5">AI  KWANG  TECH</text>
+</svg>

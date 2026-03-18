@@ -1,227 +1,529 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PremiumContact from '../components/PremiumContact'
+import { Waves } from '../components/ui/wave-background'
 
-const accent = '#e11d48'
-const bg = '#0a0000'
-const HR = () => <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.10)', marginBottom: 40 }} />
-const ST = ({ children }) => <h2 style={{ fontSize: 17, fontWeight: 700, marginBottom: 20, color: '#fff' }}>{children}</h2>
+const accent = '#e8001b'
+const fontSans = '"TT Norms Pro", Arial, sans-serif'
 
 export default function MatatakitoyoPage() {
   const navigate = useNavigate()
+  const [hoveredProduct, setHoveredProduct] = useState(null)
+  const [openAccordion, setOpenAccordion] = useState(null)
+
   return (
-    <div style={{ minHeight: '100vh', background: bg, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif', color: '#fff', fontSize: 14 }}>
-      <nav style={{ background: 'transparent', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', padding: '0 32px', height: 56, position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
-        <span onClick={() => navigate('/')} style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color='#fff'} onMouseLeave={e => e.target.style.color='rgba(255,255,255,0.5)'}>← Back</span>
-        <img src="/logo.png" alt="Worldedit" style={{ height: 36, width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }} />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 16, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>
-          <span style={{ cursor: 'pointer' }} onMouseEnter={e=>e.target.style.color='#fff'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.4)'}>Prev</span>
-          <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
-          <span style={{ cursor: 'pointer' }} onMouseEnter={e=>e.target.style.color='#fff'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.4)'}>Next</span>
+    <div style={{
+      minHeight: '100vh',
+      background: '#ffffff',
+      fontFamily: fontSans,
+      color: '#111',
+      overflowX: 'hidden',
+    }}>
+
+      <style>{`
+        .mt-nav-link { transition: opacity 0.2s; opacity: 0.45; cursor: pointer; }
+        .mt-nav-link:hover { opacity: 1; }
+        .mt-product-img { transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .mt-product-card:hover .mt-product-img { transform: scale(1.04); }
+        .mt-accordion { cursor: pointer; }
+        .mt-accordion:hover { background: rgba(0,0,0,0.02); }
+        .mt-cta { transition: background 0.2s, color 0.2s; }
+        .mt-cta:hover { background: #080808 !important; color: #fff !important; }
+        .mt-cta-inv { transition: background 0.2s, color 0.2s; }
+        .mt-cta-inv:hover { background: #fff !important; color: #080808 !important; }
+        .mt-cta-outline { transition: background 0.2s, color 0.2s; }
+        .mt-cta-outline:hover { background: #111 !important; color: #fff !important; }
+        @media (max-width: 767px) {
+          .mt-hero-h1 { font-size: clamp(52px, 13vw, 80px) !important; }
+          .mt-two-col { grid-template-columns: 1fr !important; }
+          .mt-three-col { grid-template-columns: 1fr !important; }
+          .mt-four-col { grid-template-columns: 1fr 1fr !important; }
+          .mt-stat-row { flex-direction: column !important; gap: 0 !important; }
+          .mt-stat-row > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08) !important; }
+          .mt-footer-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+
+      {/* ══ NAV — Alaïa style: white bg, black text, ultra minimal, thin border ══ */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+        height: 56,
+        display: 'grid', gridTemplateColumns: '1fr auto 1fr',
+        alignItems: 'center',
+        padding: '0 clamp(1.5rem, 4vw, 3rem)',
+        background: '#ffffff',
+        borderBottom: '1px solid #e5e5e5',
+      }}>
+        <span
+          className="mt-nav-link"
+          onClick={() => navigate('/')}
+          style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: fontSans, color: '#111' }}
+        >← Back</span>
+        <img src="/logos/matatakitoyo-logo.png" alt="Matatakitoyo" style={{ height: 32, objectFit: 'contain' }} />
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 28, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: fontSans, color: '#111' }}>
+          <span className="mt-nav-link">Prev</span>
+          <span className="mt-nav-link">Next</span>
         </div>
       </nav>
 
-      <div style={{ maxWidth: 780, margin: '0 auto', padding: '104px 24px 80px' }}>
+      {/* ══ HERO — full viewport, black bg, right product image, title bottom-left ══ */}
+      <section style={{
+        minHeight: '100svh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        position: 'relative',
+        overflow: 'hidden',
+        paddingTop: 56,
+        background: '#080808',
+      }}>
+        {/* Wave background animation */}
+        <Waves strokeColor="rgba(255,30,30,0.75)" backgroundColor="#080808" pointerSize={0.4} />
 
-        {/* Header */}
-        <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start', marginBottom: 40 }}>
-          <div style={{ width: 64, height: 64, borderRadius: 10, background: 'rgba(225,29,72,0.15)', border: '1px solid rgba(225,29,72,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <span style={{ fontSize: 28, fontWeight: 800, color: accent }}>M</span>
+        {/* Hero product image — right-aligned */}
+        <img
+          src="/products/mt_precise3_v2_nobg.png"
+          alt="Torque Wrench"
+          style={{
+            position: 'absolute',
+            right: 0, top: 0, bottom: 0,
+            height: '100%',
+            width: '55%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            zIndex: 0,
+          }}
+        />
+        {/* Left dark fade */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, #080808 30%, rgba(8,8,8,0.55) 65%, rgba(8,8,8,0.15) 100%)', zIndex: 1 }} />
+        {/* Bottom fade */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 260, background: 'linear-gradient(to top, #080808, transparent)', zIndex: 2 }} />
+
+        {/* Hero content — bottom left */}
+        <div style={{
+          position: 'relative', zIndex: 3,
+          maxWidth: 1200, margin: '0 auto', width: '100%',
+          padding: '0 clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vh, 5rem)',
+        }}>
+          {/* Company logo */}
+          <img src="/logos/matatakitoyo-logo.png" alt="Matatakitoyo" style={{ height: 52, objectFit: 'contain', objectPosition: 'left', marginBottom: 32, alignSelf: 'flex-start', maxWidth: 240 }} />
+
+          {/* Eyebrow */}
+          <p style={{ fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20, fontFamily: fontSans }}>
+            Taiwan · Est. 1992
+          </p>
+
+          {/* Giant editorial title — italic for hero h1 only */}
+          <h1 className="mt-hero-h1" style={{
+            fontSize: 'clamp(64px, 9vw, 130px)',
+            fontWeight: 400,
+            lineHeight: 0.9,
+            letterSpacing: '-2px',
+            marginBottom: 32,
+            fontStyle: 'italic',
+            color: '#fff',
+            fontFamily: fontSans,
+          }}>
+            <span style={{ display: 'block' }}>Matataki-</span>
+            <span style={{ display: 'block', color: 'rgba(255,255,255,0.22)' }}>toyo.</span>
+          </h1>
+
+          {/* Thin red rule + tagline */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 40 }}>
+            <div style={{ width: 48, height: 1, background: accent }} />
+            <p style={{ fontSize: 12, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', fontFamily: fontSans }}>
+              Precision Torque Instruments
+            </p>
           </div>
-          <div>
-            <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 4, lineHeight: 1.2 }}>MATATAKITOYO TOOL CO., LTD.</h1>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginBottom: 10 }}>Matatakitoyo · Taiwan, Est. 1992</p>
-            <span style={{ background: 'rgba(225,29,72,0.15)', color: accent, fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 4, letterSpacing: '0.05em' }}>Torque Tools · Precision Instruments</span>
+
+          {/* CTA row */}
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button className="mt-cta-inv" style={{
+              background: accent, color: '#fff',
+              border: 'none', padding: '13px 32px',
+              fontSize: 11, fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase',
+              cursor: 'pointer', fontFamily: fontSans,
+            }}>View Products</button>
+            <button className="mt-cta-outline" style={{
+              background: 'transparent', color: 'rgba(255,255,255,0.55)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              padding: '13px 32px',
+              fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase',
+              cursor: 'pointer', fontFamily: fontSans,
+            }}>Company</button>
           </div>
         </div>
-        <HR />
+      </section>
 
-        {/* Video */}
-        <div style={{ width: '100%', aspectRatio: '16/9', borderRadius: 10, overflow: 'hidden', marginBottom: 48 }}>
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/xFhiIx4YTyA?start=8"
-            title="MATATAKITOYO TOOL CO., LTD."
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ display: 'block', width: '100%', height: '100%' }}
-          />
+      {/* ══ STATS BAR — white bg, black text, 4 numbers, thin vertical dividers ══ */}
+      <div style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="mt-stat-row" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            {[
+              { n: '1992', label: 'Founded' },
+              { n: '120+', label: 'Employees' },
+              { n: '40+', label: 'Countries' },
+              { n: 'ISO', label: '9001:2015' },
+            ].map((s, i) => (
+              <div key={i} style={{
+                padding: '2.5rem 0',
+                borderRight: i < 3 ? '1px solid #e5e5e5' : 'none',
+                flex: 1, textAlign: 'center',
+              }}>
+                <p style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 300, letterSpacing: '-1px', marginBottom: 6, color: '#111', fontFamily: fontSans }}>{s.n}</p>
+                <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', fontFamily: fontSans }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
 
-        {/* About */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>About</ST>
-          <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.9 }}>
-            <p style={{ fontWeight: 600, color: '#fff', marginBottom: 4 }}>Mission</p>
-            <p style={{ marginBottom: 20 }}>Founded in 1992, MATATAKITOYO TOOL CO., LTD. has grown into a leading Taiwanese manufacturer of precision torque tools, torque wrenches, and measurement instruments. With over 120 employees and a fully integrated production facility, we deliver engineering-grade accuracy to industries across the globe.</p>
-            <p style={{ fontWeight: 600, color: '#fff', marginBottom: 4 }}>Manufacturing Strength:</p>
-            <p style={{ marginBottom: 2 }}>120+ skilled engineers and production specialists</p>
-            <p style={{ marginBottom: 2 }}>Full in-house production from raw material to finished product</p>
-            <p style={{ marginBottom: 2 }}>ISO 9001:2015 certified quality management</p>
-            <p style={{ marginBottom: 20 }}>30+ years of accumulated torque tool engineering expertise</p>
-            <p style={{ fontWeight: 600, color: '#fff', marginBottom: 4 }}>Global Reach:</p>
-            <p style={{ marginBottom: 2 }}>Products exported to 40+ countries worldwide</p>
-            <p style={{ marginBottom: 2 }}>OEM and ODM services available for international brands</p>
-            <p>Automotive, aerospace, and industrial application specialists</p>
-          </div>
-        </section>
-        <HR />
-
-        {/* Products */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Products</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-            {[
-              { title: 'Click Torque Wrench', desc: 'Audible click mechanism signals exact torque achievement — precision from 5 to 500 Nm across multiple drive sizes.', tags: ['TORQUE', 'CLICK TYPE'], img: 'https://www.matatakitoyo.com/comm/upimage/op_221121_00227.jpg' },
-              { title: 'Digital Torque Adapter', desc: 'LCD digital readout with peak-hold function, compatible with standard square drive ratchets and extensions.', tags: ['DIGITAL', 'ADAPTER'], img: 'https://www.matatakitoyo.com/comm/upimage/op_251223_05841.png' },
-              { title: 'Torque Screwdriver Set', desc: 'Preset or adjustable torque screwdrivers for electronics, assembly lines, and delicate fastening applications.', tags: ['SCREWDRIVER', 'ASSEMBLY'], img: 'https://www.matatakitoyo.com/comm/upimage/op_220104_01835.jpg' },
-            ].map((p, i) => (
-              <div key={i} style={{ border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, background: 'rgba(255,255,255,0.04)', overflow: 'hidden' }}>
-                <div style={{ minHeight: 160, overflow: 'hidden' }}>
-                  <img src={p.img} alt={p.title} style={{ width: '100%', height: 160, objectFit: 'cover', display: 'block' }} />
-                </div>
-                <div style={{ padding: '16px 18px' }}>
-                  <p style={{ fontWeight: 700, fontSize: 13, marginBottom: 8, color: '#fff' }}>{p.title}</p>
-                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, marginBottom: 12 }}>{p.desc}</p>
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {p.tags.map(t => <span key={t} style={{ fontSize: 10, fontWeight: 700, color: accent, background: 'rgba(225,29,72,0.12)', padding: '3px 8px', borderRadius: 4 }}>◈ {t}</span>)}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-        <HR />
-
-        {/* Gallery */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Gallery</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
-            {[...Array(6)].map((_, i) => (
-              <div key={i} style={{ aspectRatio: '4/3', borderRadius: 8, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              </div>
-            ))}
-          </div>
-        </section>
-        <HR />
-
-        {/* Download */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Download Center</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {[{ label: 'CATALOG', name: 'Torque Tool Full Catalog 2024' }, { label: 'SPEC', name: 'Technical Specification Sheets' }, { label: 'CERT', name: 'ISO 9001:2015 Certificate' }, { label: 'GUIDE', name: 'OEM/ODM Service Guide' }].map((d, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
-                <div><p style={{ fontSize: 10, color: accent, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4 }}>{d.label}</p><p style={{ fontSize: 13, fontWeight: 500 }}>{d.name}</p></div>
-                <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>↓</div>
-              </div>
-            ))}
-          </div>
-        </section>
-        <HR />
-
-        {/* Contact */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Contact Information</ST>
-          <PremiumContact accent="#e11d48" bg="#0a0000" company="MATATAKITOYO TOOL CO., LTD." email="sales@matatakitoyo.com.tw" phone="+886-4-XXXX-XXXX" address="Taiwan, R.O.C." />
-        </section>
-        <HR />
-
-        {/* Trusted By */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Trusted By</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
-            {[
-              <svg key="snapon" viewBox="0 0 140 50" width="100%" height="44"><text x="70" y="22" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="18" fontWeight="800" fontFamily="Georgia,serif" letterSpacing="-0.5">Snap-on</text><rect x="20" y="28" width="100" height="1.5" fill="rgba(255,255,255,0.3)"/></svg>,
-              <svg key="wurth" viewBox="0 0 140 50" width="100%" height="44"><text x="70" y="30" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="22" fontWeight="900" fontFamily="-apple-system,sans-serif" letterSpacing="2">WÜRTH</text></svg>,
-              <svg key="stanley" viewBox="0 0 140 50" width="100%" height="44"><text x="70" y="20" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="14" fontWeight="900" fontFamily="-apple-system,sans-serif" letterSpacing="2">STANLEY</text><text x="70" y="38" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="8" fontFamily="-apple-system,sans-serif" letterSpacing="1">BLACK &amp; DECKER</text></svg>,
-              <svg key="hazet" viewBox="0 0 140 50" width="100%" height="44"><text x="70" y="30" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="22" fontWeight="800" fontFamily="-apple-system,sans-serif" letterSpacing="3">HAZET</text></svg>,
-            ].map((logo, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, aspectRatio: '3/2', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-                {logo}
-              </div>
-            ))}
-          </div>
-        </section>
-        <HR />
-
-        {/* Testimonials */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Testimonials</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            {[
-              { quote: 'The click torque wrenches have been running on our assembly line for 3 years with zero calibration issues. Reliability is outstanding.', author: 'Production Manager', org: 'Automotive Assembly Plant, Japan' },
-              { quote: 'We\'ve sourced OEM torque tools from MATATAKITOYO for 5 years. Consistent quality, competitive pricing, and responsive support.', author: 'Procurement Director', org: 'European Tool Distributor' },
-              { quote: 'Accuracy within ±4% across the full torque range — meets our aerospace maintenance spec requirements perfectly.', author: 'MRO Engineer', org: 'Aviation Services Provider' },
-              { quote: 'Their digital torque adapters are our go-to recommendation for clients needing real-time torque monitoring without full wrench replacement.', author: 'Technical Advisor', org: 'Industrial Equipment Supplier' },
-            ].map((t, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '20px 22px' }}>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8, marginBottom: 16, fontStyle: 'italic' }}>"{t.quote}"</p>
-                <p style={{ fontSize: 12, fontWeight: 600, color: '#fff' }}>{t.author}</p>
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{t.org}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-        <HR />
-
-        {/* Reviews */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Reviews</ST>
-          <div style={{ display: 'flex', gap: 32, alignItems: 'center', marginBottom: 24 }}>
-            <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 52, fontWeight: 800, lineHeight: 1 }}>4.7</p>
-              <p style={{ fontSize: 20, color: '#fbbf24', letterSpacing: 2 }}>★★★★★</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 4 }}>58 reviews</p>
+      {/* ══ ABOUT — white bg, two-col: large heading left, body + accordion right ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', padding: '6rem 0' }}>
+            {/* Left: big editorial heading */}
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 28, fontFamily: fontSans }}>Company</p>
+              <h2 style={{ fontSize: 'clamp(32px, 4.5vw, 58px)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-1px', fontStyle: 'italic', marginBottom: 0, color: '#111', fontFamily: fontSans }}>
+                Thirty years of torque precision.
+              </h2>
             </div>
-            <div style={{ flex: 1 }}>
-              {[[5,72],[4,20],[3,6],[2,1],[1,1]].map(([s,p]) => (
-                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', width: 8 }}>{s}</span>
-                  <div style={{ flex: 1, height: 6, background: 'rgba(255,255,255,0.08)', borderRadius: 3 }}><div style={{ width: `${p}%`, height: '100%', background: '#fbbf24', borderRadius: 3 }} /></div>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', width: 28 }}>{p}%</span>
+            {/* Right: body copy + accordion */}
+            <div>
+              <p style={{ fontSize: 15, color: 'rgba(0,0,0,0.55)', lineHeight: 1.9, marginBottom: 32, fontFamily: fontSans, fontWeight: 300 }}>
+                Founded in 1992, Matatakitoyo Tool Co., Ltd. manufactures precision torque instruments trusted by automotive, aerospace, and industrial clients across 40 countries. Every tool leaves our facility ISO-certified and calibration-verified.
+              </p>
+
+              {/* Accordion */}
+              {[
+                { title: 'Manufacturing', body: '120+ skilled engineers and production specialists. Full in-house production from raw material to finished product.' },
+                { title: 'Certifications', body: 'ISO 9001:2015 certified quality management system. All products meet international calibration standards.' },
+                { title: 'OEM / ODM', body: 'Custom torque tools for international brands. Flexible MOQ, fast lead times, private labelling available.' },
+                { title: 'Global Reach', body: 'Products exported to 40+ countries. Automotive, aerospace, and industrial specialists.' },
+              ].map((item, i) => (
+                <div key={i}
+                  className="mt-accordion"
+                  onClick={() => setOpenAccordion(openAccordion === i ? null : i)}
+                  style={{ padding: '18px 0', borderTop: '1px solid #e5e5e5', ...(i === 3 ? { borderBottom: '1px solid #e5e5e5' } : {}) }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 14, fontFamily: fontSans, letterSpacing: '0.02em', color: openAccordion === i ? '#111' : 'rgba(0,0,0,0.6)' }}>{item.title}</span>
+                    <span style={{ fontSize: 18, color: 'rgba(0,0,0,0.3)', lineHeight: 1 }}>{openAccordion === i ? '−' : '+'}</span>
+                  </div>
+                  {openAccordion === i && (
+                    <p style={{ marginTop: 12, fontSize: 13, color: 'rgba(0,0,0,0.45)', lineHeight: 1.8, fontFamily: fontSans, fontWeight: 300 }}>
+                      {item.body}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        </div>
+      </section>
+
+      {/* ══ VIDEO — black bg section ══ */}
+      <section style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Brand Film</p>
+          <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
+            <iframe
+              width="100%" height="100%"
+              src="https://www.youtube.com/embed/xFhiIx4YTyA?start=8"
+              title="MATATAKITOYO TOOL CO., LTD."
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ display: 'block', width: '100%', height: '100%' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ══ PRODUCTS "The Collection" — white bg, 3-col clean grid, image 4:5, text below ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48 }}>
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 14, fontFamily: fontSans }}>Products</p>
+              <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 46px)', fontWeight: 300, letterSpacing: '-0.5px', fontStyle: 'italic', color: '#111', fontFamily: fontSans }}>The Collection</h2>
+            </div>
+            <button className="mt-cta-outline" style={{
+              background: 'transparent', color: 'rgba(0,0,0,0.45)',
+              border: '1px solid rgba(0,0,0,0.2)',
+              padding: '10px 22px', fontSize: 10, letterSpacing: '0.16em',
+              textTransform: 'uppercase', cursor: 'pointer',
+              fontFamily: fontSans,
+            }}>View All</button>
+          </div>
+
+          {/* 3-col grid — image 4:5, no card chrome, text below image */}
+          <div className="mt-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
             {[
-              { name: 'H. Yamamoto', stars: 5, product: 'Click Torque Wrench 1/2"', review: 'Calibration remained within spec after 18 months of daily use. Excellent build quality for the price point.' },
-              { name: 'R. Mueller', stars: 5, product: 'Digital Torque Adapter', review: 'Real-time readings and the peak-hold function make this indispensable on our QC line. Highly recommended.' },
-              { name: 'T. Chen', stars: 4, product: 'Torque Screwdriver Set', review: 'Good accuracy and comfortable grip. Delivery from Taiwan was faster than expected.' },
-            ].map((r, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: 8, padding: '16px 18px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <div><span style={{ fontWeight: 600, fontSize: 13 }}>{r.name}</span><span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginLeft: 10 }}>{r.product}</span></div>
-                  <span style={{ color: '#fbbf24' }}>{'★'.repeat(r.stars)}</span>
+              { title: 'Click Torque Wrench', sub: '5–500 Nm · Multiple drive sizes', img: '/products/mt_precise1_v2_nobg.png' },
+              { title: 'Digital Torque Adapter', sub: 'LCD readout · Peak-hold function', img: '/products/mt_precise2_v2_nobg.png' },
+              { title: 'Torque Screwdriver Set', sub: 'Preset & adjustable · Assembly grade', img: '/products/mt_precise3_v2_nobg.png' },
+            ].map((p, i) => (
+              <div key={i}
+                className="mt-product-card"
+                onMouseEnter={() => setHoveredProduct(i)}
+                onMouseLeave={() => setHoveredProduct(null)}
+                style={{ cursor: 'pointer' }}
+              >
+                {/* Image container — 4:5 ratio */}
+                <div style={{ overflow: 'hidden', aspectRatio: '4/5', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img
+                    className="mt-product-img"
+                    src={p.img} alt={p.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '16px', display: 'block' }}
+                  />
                 </div>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{r.review}</p>
+                {/* Text below image — no card border, no background */}
+                <div style={{ paddingTop: 16 }}>
+                  {/* Thin red accent line on hover */}
+                  <div style={{ height: 1, background: hoveredProduct === i ? accent : 'transparent', marginBottom: 14, transition: 'background 0.2s' }} />
+                  <p style={{ fontSize: 14, fontFamily: fontSans, fontWeight: 400, marginBottom: 5, color: '#111' }}>{p.title}</p>
+                  <p style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.04em', fontFamily: fontSans }}>{p.sub}</p>
+                </div>
               </div>
             ))}
           </div>
-        </section>
-        <HR />
+        </div>
+      </section>
 
-        {/* Lead Magnet */}
-        <section style={{ marginBottom: 48 }}>
-          <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '40px 36px', textAlign: 'center' }}>
-            <p style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>Free Resource</p>
-            <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12, lineHeight: 1.3 }}>Complete Torque Tool Selection Guide — Free</h3>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, maxWidth: 440, margin: '0 auto 28px' }}>Which torque tool is right for your application? Compare click, beam, digital, and electronic torque solutions with our engineering guide.</p>
-            <div style={{ display: 'flex', gap: 10, maxWidth: 400, margin: '0 auto' }}>
-              <input placeholder="Your email address" style={{ flex: 1, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '10px 14px', fontSize: 13, color: '#fff', fontFamily: 'inherit', outline: 'none' }} />
-              <button style={{ background: '#fff', color: bg, border: 'none', borderRadius: 4, padding: '10px 20px', fontSize: 13, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>Get Guide</button>
+      {/* ══ FULL-BLEED CAMPAIGN IMAGE — black overlay, large text ══ */}
+      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 520 }}>
+        <img
+          src="/products/mt_gallery2_v2_nobg.png"
+          alt=""
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.62)', zIndex: 1 }} />
+        <div style={{
+          position: 'relative', zIndex: 2,
+          maxWidth: 1200, margin: '0 auto',
+          padding: '7rem clamp(1.5rem, 4vw, 3rem)',
+          display: 'flex', alignItems: 'flex-end', minHeight: 520,
+        }}>
+          <div>
+            <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20, fontFamily: fontSans }}>Engineering</p>
+            <h2 style={{ fontSize: 'clamp(36px, 6vw, 80px)', fontWeight: 300, lineHeight: 0.95, letterSpacing: '-2px', fontStyle: 'italic', maxWidth: 600, color: '#fff', fontFamily: fontSans }}>
+              Accuracy within ±4%<br />across the full range.
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ TRUSTED BY — white bg, minimal opacity logos ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', borderTop: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '4rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.25)', marginBottom: 36, fontFamily: fontSans }}>Trusted by</p>
+          <div className="mt-four-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
+            {[
+              <svg key="s" viewBox="0 0 160 48" width="100%"><text x="80" y="26" textAnchor="middle" fill="rgba(0,0,0,0.45)" fontSize="19" fontWeight="400" fontFamily="Georgia,serif" letterSpacing="-0.5">Snap-on</text></svg>,
+              <svg key="w" viewBox="0 0 160 48" width="100%"><text x="80" y="30" textAnchor="middle" fill="rgba(0,0,0,0.45)" fontSize="22" fontWeight="400" fontFamily="Georgia,serif" letterSpacing="2">WÜRTH</text></svg>,
+              <svg key="st" viewBox="0 0 160 48" width="100%"><text x="80" y="22" textAnchor="middle" fill="rgba(0,0,0,0.45)" fontSize="14" fontWeight="400" fontFamily="-apple-system,sans-serif" letterSpacing="3">STANLEY</text><text x="80" y="38" textAnchor="middle" fill="rgba(0,0,0,0.22)" fontSize="8" fontFamily="-apple-system,sans-serif" letterSpacing="1">BLACK &amp; DECKER</text></svg>,
+              <svg key="h" viewBox="0 0 160 48" width="100%"><text x="80" y="30" textAnchor="middle" fill="rgba(0,0,0,0.45)" fontSize="22" fontWeight="400" fontFamily="-apple-system,sans-serif" letterSpacing="4">HAZET</text></svg>,
+            ].map((logo, i) => (
+              <div key={i} style={{
+                aspectRatio: '3/1.5', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                borderRight: i < 3 ? '1px solid #e5e5e5' : 'none',
+                padding: '0 24px', transition: 'opacity 0.2s', opacity: 0.7,
+              }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '0.7'}
+              >{logo}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ GALLERY MASONRY — black bg, 2px gap ══ */}
+      <section style={{ background: '#080808' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Gallery</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '260px 260px', gap: 2 }}>
+            {[
+              { src: '/products/mt_gallery1_v2_nobg.png', style: { gridRow: '1 / 3' } },
+              { src: '/products/mt_precise1_v2_nobg.png', style: {} },
+              { src: '/products/mt_precise2_v2_nobg.png', style: {} },
+              { src: '/products/mt_gallery2_v2_nobg.png', style: {} },
+              { src: '/products/mt_gallery3_v2_nobg.png', style: {} },
+            ].map((item, i) => (
+              <div key={i} style={{ ...item.style, overflow: 'hidden', position: 'relative' }}
+                onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+                onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+              >
+                <img src={item.src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ TESTIMONIALS — white bg, pull quotes, thin top border per quote ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 48, fontFamily: fontSans }}>Testimonials</p>
+          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
+            {[
+              { quote: 'The click torque wrenches have been running on our assembly line for 3 years with zero calibration issues.', author: 'Production Manager', org: 'Automotive Assembly Plant, Japan' },
+              { quote: 'Consistent quality, competitive pricing, and responsive support — an OEM partner we trust completely.', author: 'Procurement Director', org: 'European Tool Distributor' },
+              { quote: 'Accuracy within ±4% across the full torque range. Meets our aerospace maintenance spec requirements.', author: 'MRO Engineer', org: 'Aviation Services Provider' },
+              { quote: 'Our go-to recommendation for clients needing real-time torque monitoring without full wrench replacement.', author: 'Technical Advisor', org: 'Industrial Equipment Supplier' },
+            ].map((t, i) => (
+              <div key={i} style={{ borderTop: '1px solid #e5e5e5', paddingTop: 28 }}>
+                <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', fontWeight: 300, lineHeight: 1.65, fontStyle: 'italic', marginBottom: 24, color: 'rgba(0,0,0,0.8)', fontFamily: fontSans }}>
+                  "{t.quote}"
+                </p>
+                <p style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', fontFamily: fontSans }}>
+                  {t.author} — {t.org}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ REVIEWS ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 40, fontFamily: fontSans }}>Reviews</p>
+          <div style={{ display: 'flex', gap: 48, alignItems: 'center', marginBottom: 40 }}>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <p style={{ fontSize: 56, fontWeight: 300, lineHeight: 1, color: '#111', fontFamily: fontSans }}>4.7</p>
+              <p style={{ fontSize: 18, color: '#f59e0b', letterSpacing: 3, margin: '8px 0' }}>★★★★★</p>
+              <p style={{ fontSize: 11, color: 'rgba(0,0,0,0.3)', fontFamily: fontSans }}>94 reviews</p>
+            </div>
+            <div style={{ flex: 1 }}>
+              {[[5,76],[4,17],[3,5],[2,2],[1,0]].map(([s,p]) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 7 }}>
+                  <span style={{ fontSize: 11, color: 'rgba(0,0,0,0.3)', width: 8, fontFamily: fontSans }}>{s}</span>
+                  <div style={{ flex: 1, height: 4, background: '#f0f0f0', borderRadius: 2 }}><div style={{ width: `${p}%`, height: '100%', background: '#111', borderRadius: 2 }} /></div>
+                  <span style={{ fontSize: 11, color: 'rgba(0,0,0,0.25)', width: 28, fontFamily: fontSans }}>{p}%</span>
+                </div>
+              ))}
             </div>
           </div>
-        </section>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+            {[
+              { name: 'A. Fischer', stars: 5, product: 'Click Torque Wrench 200Nm', review: 'Clicked at exactly the right torque every time. Checked against our reference gauge — deviation within 2%. Solid build quality throughout.' },
+              { name: 'K. Yamamoto', stars: 5, product: 'Digital Torque Adapter', review: 'The peak-hold function is essential for our assembly line. LCD is clear even in low-light conditions. Highly recommended for production use.' },
+              { name: 'M. Chen', stars: 4, product: 'Torque Screwdriver Set', review: 'Well-calibrated out of the box. The preset torque feature saves significant setup time. Would love a wider range option in future.' },
+            ].map((r, i) => (
+              <div key={i} style={{ borderTop: '1px solid #e5e5e5', padding: '24px 0' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
+                  <div><span style={{ fontWeight: 500, fontSize: 13, fontFamily: fontSans }}>{r.name}</span><span style={{ fontSize: 11, color: 'rgba(0,0,0,0.3)', marginLeft: 12, fontFamily: fontSans }}>{r.product}</span></div>
+                  <span style={{ color: '#f59e0b', letterSpacing: 2, fontSize: 13 }}>{'★'.repeat(r.stars)}</span>
+                </div>
+                <p style={{ fontSize: 13, color: 'rgba(0,0,0,0.55)', lineHeight: 1.8, fontFamily: fontSans, fontWeight: 300 }}>{r.review}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <span onClick={() => navigate('/')} style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', cursor: 'pointer' }} onMouseEnter={e=>e.target.style.color='#fff'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.4)'}>← Back to Directory</span>
-      </div>
+      {/* ══ DOWNLOAD CENTER — white bg, clean list rows ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 40, fontFamily: fontSans }}>Resources</p>
+          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
+            {[
+              { label: 'Catalog', name: 'Torque Tool Full Catalog 2024' },
+              { label: 'Spec Sheets', name: 'Technical Specification Sheets' },
+              { label: 'Certificate', name: 'ISO 9001:2015 Certificate' },
+              { label: 'OEM Guide', name: 'OEM/ODM Service Guide' },
+            ].map((d, i) => (
+              <div key={i}
+                style={{
+                  borderTop: '1px solid #e5e5e5',
+                  padding: '22px 0',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  cursor: 'pointer', transition: 'opacity 0.18s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.5'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.35)" strokeWidth="1.5" strokeLinecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <div>
+                    <p style={{ fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 5, fontFamily: fontSans }}>{d.label}</p>
+                    <p style={{ fontSize: 14, fontFamily: fontSans, fontWeight: 300, color: '#111' }}>{d.name}</p>
+                  </div>
+                </div>
+                <span style={{ fontSize: 16, color: 'rgba(0,0,0,0.3)' }}>↓</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <footer style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '32px', display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
-        <span>© 2025 Made with Worldedit Design</span>
-        <span>MATATAKITOYO TOOL CO., LTD. · Taiwan</span>
+      {/* ══ CONTACT — black bg ══ */}
+      <section style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Contact</p>
+          <PremiumContact accent="#e11d48" bg="#080808" company="MATATAKITOYO TOOL CO., LTD." email="sales@matatakitoyo.com.tw" phone="+886-4-XXXX-XXXX" address="Taiwan, R.O.C." />
+        </div>
+      </section>
+
+      {/* ══ LEAD MAGNET — white bg, two-col ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 20, fontFamily: fontSans }}>Free Resource</p>
+              <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 44px)', fontWeight: 300, fontStyle: 'italic', lineHeight: 1.1, letterSpacing: '-0.5px', color: '#111', fontFamily: fontSans }}>
+                Torque Tool Selection Guide
+              </h2>
+            </div>
+            <div>
+              <p style={{ fontSize: 14, color: 'rgba(0,0,0,0.45)', lineHeight: 1.8, marginBottom: 28, fontFamily: fontSans, fontWeight: 300 }}>
+                Compare click, beam, digital, and electronic torque solutions with our engineering guide.
+              </p>
+              <div style={{ display: 'flex', gap: 0 }}>
+                <input
+                  placeholder="Email address"
+                  style={{ flex: 1, background: 'transparent', border: '1px solid #e5e5e5', borderRight: 'none', padding: '13px 18px', fontSize: 12, color: '#111', fontFamily: fontSans, outline: 'none', letterSpacing: '0.04em' }}
+                />
+                <button className="mt-cta" style={{ background: '#111', color: '#fff', border: 'none', padding: '13px 28px', fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', cursor: 'pointer', whiteSpace: 'nowrap', fontFamily: fontSans, fontWeight: 500 }}>Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ FOOTER — black bg, minimal ══ */}
+      <footer style={{ background: '#080808' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', marginBottom: '3rem', paddingBottom: '3rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+            <div>
+              <h3 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 300, fontStyle: 'italic', lineHeight: 1.0, letterSpacing: '-1px', marginBottom: 32, color: '#fff', fontFamily: fontSans }}>
+                Engineering-grade<br />precision.
+              </h3>
+              <button className="mt-cta-inv" style={{ background: accent, color: '#fff', border: 'none', padding: '13px 32px', fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: fontSans, fontWeight: 500 }}>Request Catalog</button>
+            </div>
+            <div className="mt-two-col mt-footer-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+              <div>
+                <p style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.22)', marginBottom: 20, fontFamily: fontSans }}>Company</p>
+                {['About', 'Products', 'OEM / ODM', 'Certifications'].map(l => (
+                  <p key={l} className="mt-nav-link" style={{ fontSize: 13, marginBottom: 12, cursor: 'pointer', opacity: 0.5, color: '#fff', fontFamily: fontSans }}>{l}</p>
+                ))}
+              </div>
+              <div>
+                <p style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.22)', marginBottom: 20, fontFamily: fontSans }}>Contact</p>
+                {['Email', 'LinkedIn', 'Export Inquiry', 'Distributors'].map(l => (
+                  <p key={l} className="mt-nav-link" style={{ fontSize: 13, marginBottom: 12, cursor: 'pointer', opacity: 0.5, color: '#fff', fontFamily: fontSans }}>{l}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', fontFamily: fontSans }}>
+            <span>© 2025 Worldedit Design</span>
+            <img src="/logo.png" alt="Worldedit" style={{ height: 20, objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.18 }} />
+            <span>Matatakitoyo Tool Co., Ltd.</span>
+          </div>
+        </div>
       </footer>
     </div>
   )

@@ -1,220 +1,295 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PremiumContact from '../components/PremiumContact'
+import { EtherealShadow } from '../components/ui/etheral-shadow'
 
-const accent = '#a78bfa'
-const bg = '#0c0814'
-const HR = () => <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.10)', marginBottom: 40 }} />
-const ST = ({ children }) => <h2 style={{ fontSize: 17, fontWeight: 700, marginBottom: 20, color: '#fff' }}>{children}</h2>
+// Permian World aesthetic — pure white / black, oversized type, full-bleed imagery, decorative grid lines
+const bg = '#ffffff'
+const text = '#000000'
+const textMid = '#555'
+const textLight = '#aaa'
+const border = '#e8e8e8'
+const accent = '#a78bfa'   // GEM violet — used sparingly
+const fontSans = '"Helvetica Neue", Helvetica, Arial, sans-serif'
 
 export default function GemTerminalPage() {
   const navigate = useNavigate()
+  const [hovered, setHovered] = useState(null)
+
   return (
-    <div style={{ minHeight: '100vh', background: bg, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif', color: '#fff', fontSize: 14 }}>
-      <nav style={{ background: 'transparent', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', padding: '0 32px', height: 56, position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
-        <span onClick={() => navigate('/')} style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color='#fff'} onMouseLeave={e => e.target.style.color='rgba(255,255,255,0.5)'}>← Back</span>
-        <img src="/logo.png" alt="Worldedit" style={{ height: 36, width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }} />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 16, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>
-          <span style={{ cursor: 'pointer' }} onMouseEnter={e=>e.target.style.color='#fff'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.4)'}>Prev</span>
-          <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
-          <span style={{ cursor: 'pointer' }} onMouseEnter={e=>e.target.style.color='#fff'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.4)'}>Next</span>
+    <div style={{ minHeight: '100vh', background: bg, fontFamily: fontSans, color: text, overflowX: 'hidden' }}>
+      <style>{`
+.gem-img { transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .gem-card:hover .gem-img { transform: scale(1.05); }
+        .gem-link { cursor:pointer; text-decoration: underline; text-underline-offset: 3px; opacity:0.4; transition: opacity 0.2s; }
+        .gem-link:hover { opacity:1; }
+        @media (max-width:767px) {
+          .gem-two-col { grid-template-columns: 1fr !important; }
+          .gem-three-col { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
+
+      {/* ── DECORATIVE GRID LINES (Permian signature) ── */}
+      <div aria-hidden="true" style={{ position: 'fixed', top: 0, left: 28, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
+      <div aria-hidden="true" style={{ position: 'fixed', top: 0, right: 28, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
+
+      {/* ── NAV ── */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)',
+        borderBottom: `1px solid ${border}`,
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        padding: '0 52px', height: 52,
+      }}>
+        <span className="gem-link" onClick={() => navigate('/')} style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none' }}
+          onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.4'}>← Back</span>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <img src="/logos/gem-terminal-logo.svg" alt="GEM Terminal" style={{ height: 24, objectFit: 'contain' }} />
+          <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>GEM Terminal</span>
+        </div>
+
+        <div style={{ display: 'flex', gap: 28, fontSize: 12, fontWeight: 500, letterSpacing: '0.06em' }}>
+          <span className="gem-link" style={{ textDecoration: 'none' }}
+            onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.4'}>Prev</span>
+          <span className="gem-link" style={{ textDecoration: 'none' }}
+            onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.4'}>Next</span>
         </div>
       </nav>
 
-      <div style={{ maxWidth: 780, margin: '0 auto', padding: '104px 24px 80px' }}>
+      {/* ── HERO ── */}
+      <section style={{ minHeight: '100svh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#1e3fae' }}>
+        {/* Yellow smoke animation over blue background */}
+        <EtherealShadow
+          color="rgba(234, 179, 8, 1)"
+          animation={{ scale: 70, speed: 60 }}
+          noise={{ opacity: 0.5, scale: 1.2 }}
+          sizing="fill"
+          style={{ zIndex: 0 }}
+        />
+        {/* Dark vignette so text stays readable */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,20,80,0.3) 0%, rgba(10,20,80,0.6) 100%)', zIndex: 1 }} />
 
-        {/* Header */}
-        <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start', marginBottom: 40 }}>
-          <div style={{ width: 64, height: 64, borderRadius: 10, background: 'rgba(167,139,250,0.12)', border: '1px solid rgba(167,139,250,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: 10 }}>
-            <img src="/logos/gem-terminal-logo-white.svg" alt="GEM Terminal logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-          </div>
-          <div>
-            <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 4, lineHeight: 1.2 }}>GEM TERMINAL INDUSTRY CO., LTD.</h1>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginBottom: 10 }}>GEM Terminal · Kaohsiung, Taiwan · Est. 1977</p>
-            <span style={{ background: 'rgba(167,139,250,0.12)', color: accent, fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 4, letterSpacing: '0.05em' }}>Terminal Blocks · Electrical Connectors · Listed on TSE</span>
+        {/* Bottom-left text (Permian style) */}
+        <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 52px 52px' }}>
+          <img src="/logos/gem-terminal-logo-white.svg" alt="GEM Terminal" style={{ height: 48, objectFit: 'contain', objectPosition: 'left', marginBottom: 28, display: 'block', alignSelf: 'flex-start' }} />
+          <p style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: 18, fontWeight: 500 }}>Est. 1977 · Kaohsiung, Taiwan</p>
+          <h1 style={{ fontSize: 'clamp(52px, 9vw, 130px)', fontWeight: 700, lineHeight: 0.88, letterSpacing: '-4px', color: '#fff', marginBottom: 36, maxWidth: 800 }}>
+            GEM<br />Terminal.
+          </h1>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+            <p style={{ fontSize: 'clamp(13px, 1.4vw, 16px)', color: 'rgba(255,255,255,0.55)', maxWidth: 360, lineHeight: 1.7 }}>
+              Asia's leading manufacturer of copper electrical terminals, connectors and wire harnesses — serving automotive, EV, and electronics markets worldwide.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4 }}>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.08em' }}>22.6273° N</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.08em' }}>120.3014° E</p>
+            </div>
           </div>
         </div>
-        <HR />
+      </section>
 
-        {/* Video */}
-        <div style={{ width: '100%', aspectRatio: '16/9', background: 'rgba(0,0,0,0.5)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 48 }}>
-          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', border: '2px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: 0, height: 0, borderTop: '10px solid transparent', borderBottom: '10px solid transparent', borderLeft: '18px solid rgba(255,255,255,0.8)', marginLeft: 4 }} />
+
+      {/* ── PRODUCT SHOWCASE ── */}
+      <section style={{ borderBottom: `1px solid ${border}` }}>
+        <div style={{ padding: '5rem 52px 0' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40 }}>
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 12, fontWeight: 600 }}>Product Range</p>
+              <h2 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 700, letterSpacing: '-2px', lineHeight: 1.0 }}>Precision copper.<br />Every connection.</h2>
+            </div>
+            <p className="gem-link" style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase' }}>View all products</p>
           </div>
         </div>
 
-        {/* About */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>About</ST>
-          <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.9 }}>
-            <p style={{ fontWeight: 600, color: '#fff', marginBottom: 4 }}>Mission</p>
-            <p style={{ marginBottom: 20 }}>Founded in 1977 and listed on the Taiwan Stock Exchange, GEM TERMINAL INDUSTRY CO., LTD. is one of Taiwan's most established manufacturers of terminal blocks and electrical connection components. With over 1,000 product specifications across our catalog, we serve electrical panel builders, machine manufacturers, and infrastructure projects worldwide.</p>
-            <p style={{ fontWeight: 600, color: '#fff', marginBottom: 4 }}>Manufacturing Heritage:</p>
-            <p style={{ marginBottom: 2 }}>46+ years of terminal block manufacturing expertise in Kaohsiung</p>
-            <p style={{ marginBottom: 2 }}>Listed on Taiwan Stock Exchange — public company with transparent governance</p>
-            <p style={{ marginBottom: 2 }}>1,000+ product specifications covering all wiring applications</p>
-            <p style={{ marginBottom: 20 }}>UL, CE, and CNS certified product lines for global compliance</p>
-            <p style={{ fontWeight: 600, color: '#fff', marginBottom: 4 }}>Market Reach:</p>
-            <p style={{ marginBottom: 2 }}>Exported to 50+ countries across 5 continents</p>
-            <p style={{ marginBottom: 2 }}>Trusted by control panel builders, OEM machinery manufacturers</p>
-            <p>Used in renewable energy, industrial automation, and infrastructure projects</p>
-          </div>
-        </section>
-        <HR />
+        {/* 3-col product grid (Permian social grid adapted) */}
+        <div className="gem-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: border }}>
+          {[
+            { title: 'Automotive Connector', sub: 'High-reliability · EV ready · Multi-pin', img: 'https://www.gem.com.tw/files/images/products/iStock-1.png' },
+            { title: 'AC Power Cord Connector', sub: 'Certified · Consumer & industrial', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img3_autoxauto.png' },
+            { title: 'Wire Harness Terminal', sub: 'Electronics assembly · Automotive wiring', img: 'https://www.gem.com.tw/files/images/products/iStock-5.png' },
+            { title: 'Electrical Terminal Block', sub: 'Lead-free copper · DIN rail compatible', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img5_autoxauto.png' },
+            { title: 'New Energy Connector', sub: 'Solar · EV charging · Green energy', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img2_autoxauto.png' },
+            { title: 'Shaped Conductor Copper', sub: 'Milled profiles · Custom spec · OEM', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img1_autoxauto.png' },
+          ].map((p, i) => (
+            <div key={i} className="gem-card" onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ cursor: 'pointer', background: '#fff', overflow: 'hidden' }}>
+              <div style={{ aspectRatio: '4/3', overflow: 'hidden', background: '#f5f5f5' }}>
+                <img className="gem-img" src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+              <div style={{ padding: '20px 24px 28px' }}>
+                <div style={{ height: 1.5, background: hovered === i ? text : 'transparent', marginBottom: 14, transition: 'background 0.2s' }} />
+                <p style={{ fontSize: 14, fontWeight: 600, color: text, marginBottom: 5 }}>{p.title}</p>
+                <p style={{ fontSize: 12, color: textLight }}>{p.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* Products */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Products</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+      {/* ── FULL-BLEED EDITORIAL ── */}
+      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 560, background: '#0a0a0a' }}>
+        <img
+          src="https://www.gem.com.tw/static/web/styles/images/index/img2.jpg"
+          alt="GEM Terminal factory"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.45, zIndex: 0 }}
+        />
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '100%', padding: '7rem 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 560 }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20, fontWeight: 600 }}>Manufacturing</p>
+          <h2 style={{ fontSize: 'clamp(36px, 6.5vw, 88px)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-3px', color: '#fff', maxWidth: 700, marginBottom: 32 }}>
+            Precision<br />in every<br />micron.
+          </h2>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)', maxWidth: 420, lineHeight: 1.75 }}>
+            Proprietary copper refining. Lead-free. 30 years of milling technology producing shaped conductor copper materials for the world's most demanding industries.
+          </p>
+        </div>
+      </section>
+
+      {/* ── ABOUT / STATS ── */}
+      <section style={{ borderBottom: `1px solid ${border}` }}>
+        <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
+          {/* Left — story */}
+          <div style={{ padding: '6rem 52px', borderRight: `1px solid ${border}` }}>
+            <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 20, fontWeight: 600 }}>Our Story</p>
+            <h2 style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, letterSpacing: '-1px', lineHeight: 1.1, marginBottom: 28 }}>
+              Rooted in Taiwan.<br />Connected globally.
+            </h2>
+            <p style={{ fontSize: 14, color: textMid, lineHeight: 1.9, marginBottom: 16 }}>
+              Founded in Luzhu, Kaohsiung in 1977, GEM Terminal has grown into a publicly listed manufacturer with a reputation for lead-free copper processing that is virtually unmatched in Asia.
+            </p>
+            <p style={{ fontSize: 14, color: textMid, lineHeight: 1.9 }}>
+              "Looking globally while rooted in Taiwan" — our commitment to sustainable business growth drives every product we design and every partnership we build.
+            </p>
+          </div>
+          {/* Right — stats */}
+          <div style={{ padding: '6rem 52px' }}>
+            <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 20, fontWeight: 600 }}>By the Numbers</p>
             {[
-              { title: 'Screw Terminal Blocks', desc: 'Standard and feed-through screw clamp terminal blocks from 2.5mm² to 95mm², rated up to 1000V.', tags: ['SCREW CLAMP', 'PANEL'] },
-              { title: 'Spring Clamp Terminals', desc: 'Tool-free push-in connection terminals for fast wiring of control cabinets and automation systems.', tags: ['SPRING CLAMP', 'AUTOMATION'] },
-              { title: 'Fuse Terminal Blocks', desc: 'Integrated fuse-holder terminals for circuit protection in industrial panels — DIN rail mountable.', tags: ['FUSE HOLDER', 'DIN RAIL'] },
-            ].map((p, i) => (
-              <div key={i} style={{ border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, background: 'rgba(255,255,255,0.04)', overflow: 'hidden' }}>
-                <div style={{ background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 160 }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                </div>
-                <div style={{ padding: '16px 18px' }}>
-                  <p style={{ fontWeight: 700, fontSize: 13, marginBottom: 8, color: '#fff' }}>{p.title}</p>
-                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, marginBottom: 12 }}>{p.desc}</p>
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {p.tags.map(t => <span key={t} style={{ fontSize: 10, fontWeight: 700, color: accent, background: 'rgba(167,139,250,0.10)', padding: '3px 8px', borderRadius: 4 }}>◈ {t}</span>)}
-                  </div>
-                </div>
+              ['1977', 'Year founded in Kaohsiung'],
+              ['1,000+', 'Product specifications in catalog'],
+              ['30+', 'Years of copper milling technology'],
+              ['TSE', 'Listed on Taiwan Stock Exchange'],
+            ].map(([num, label], i) => (
+              <div key={i} style={{ borderTop: `1px solid ${border}`, padding: '22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <p style={{ fontSize: 'clamp(22px, 3vw, 36px)', fontWeight: 700, letterSpacing: '-1px' }}>{num}</p>
+                <p style={{ fontSize: 12, color: textLight, maxWidth: 200, textAlign: 'right', lineHeight: 1.5 }}>{label}</p>
               </div>
             ))}
           </div>
-        </section>
-        <HR />
+        </div>
+      </section>
 
-        {/* Gallery */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Gallery</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
-            {[...Array(6)].map((_, i) => (
-              <div key={i} style={{ aspectRatio: '4/3', borderRadius: 8, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              </div>
-            ))}
-          </div>
-        </section>
-        <HR />
-
-        {/* Download */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Download Center</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {[{ label: 'CATALOG', name: 'GEM Terminal Full Product Catalog' }, { label: 'SPEC', name: 'Technical Data Sheets by Series' }, { label: 'CERT', name: 'UL / CE / CNS Certificates' }, { label: 'GUIDE', name: 'Panel Wiring Application Guide' }].map((d, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
-                <div><p style={{ fontSize: 10, color: accent, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4 }}>{d.label}</p><p style={{ fontSize: 13, fontWeight: 500 }}>{d.name}</p></div>
-                <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>↓</div>
-              </div>
-            ))}
-          </div>
-        </section>
-        <HR />
-
-        {/* Contact */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Contact Information</ST>
-          <PremiumContact accent="#a78bfa" bg="#0c0814" company="GEM TERMINAL INDUSTRY CO., LTD." email="info@gemterminal.com.tw" phone="+886-7-696-3037" address="Kaohsiung City, Taiwan" />
-        </section>
-        <HR />
-
-        {/* Trusted By */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Trusted By</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+      {/* ── CERTIFICATIONS / TRUSTED BY ── */}
+      <section style={{ background: '#f8f8f8', borderBottom: `1px solid ${border}` }}>
+        <div style={{ padding: '5rem 52px' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 40, fontWeight: 600 }}>Trusted By</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: border }}>
             {[
-              <svg key="siemens" viewBox="0 0 140 50" width="100%" height="44"><text x="70" y="30" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="16" fontWeight="700" fontFamily="-apple-system,sans-serif" letterSpacing="1.5">SIEMENS</text></svg>,
-              <svg key="abb" viewBox="0 0 140 50" width="100%" height="44"><rect x="30" y="10" width="80" height="30" rx="2" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5"/><text x="70" y="31" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="22" fontWeight="900" fontFamily="-apple-system,sans-serif" letterSpacing="3">ABB</text></svg>,
-              <svg key="schneider" viewBox="0 0 140 50" width="100%" height="44"><text x="70" y="20" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="12" fontWeight="700" fontFamily="-apple-system,sans-serif" letterSpacing="1">SCHNEIDER</text><text x="70" y="38" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="10" fontWeight="400" fontFamily="-apple-system,sans-serif" letterSpacing="0.5">ELECTRIC</text></svg>,
-              <svg key="phoenix" viewBox="0 0 140 50" width="100%" height="44"><text x="70" y="20" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="11" fontWeight="700" fontFamily="-apple-system,sans-serif" letterSpacing="1">PHOENIX</text><text x="70" y="36" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="9" fontWeight="500" fontFamily="-apple-system,sans-serif" letterSpacing="1.5">CONTACT</text></svg>,
-            ].map((logo, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, aspectRatio: '3/2', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-                {logo}
+              { name: 'SIEMENS', sub: 'Industrial Automation' },
+              { name: 'ABB', sub: 'Power & Automation' },
+              { name: 'SCHNEIDER', sub: 'Energy Management' },
+              { name: 'PHOENIX CONTACT', sub: 'Industrial Connectivity' },
+            ].map((c, i) => (
+              <div key={i} style={{ background: '#f8f8f8', padding: '36px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <p style={{ fontSize: 16, fontWeight: 800, letterSpacing: '0.04em', color: text, marginBottom: 6 }}>{c.name}</p>
+                <p style={{ fontSize: 11, color: textLight }}>{c.sub}</p>
               </div>
             ))}
           </div>
-        </section>
-        <HR />
+        </div>
+      </section>
 
-        {/* Testimonials */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Testimonials</ST>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+      {/* ── TESTIMONIALS (Permian community section) ── */}
+      <section style={{ borderBottom: `1px solid ${border}` }}>
+        <div style={{ padding: '6rem 52px' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>What our customers say</p>
+          <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', fontWeight: 700, letterSpacing: '-1.5px', marginBottom: 52 }}>Our community is open<br />to anyone who builds.</h2>
+          <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: border }}>
             {[
-              { quote: 'We\'ve standardized our entire control panel production on GEM Terminal spring clamp series. Wiring time cut by 35% compared to screw terminals.', author: 'Panel Production Manager', org: 'Industrial Automation Builder, Germany' },
+              { quote: "We've standardized our entire control panel production on GEM Terminal spring clamp series. Wiring time cut by 35% compared to screw terminals.", author: 'Panel Production Manager', org: 'Industrial Automation Builder, Germany' },
               { quote: 'The UL and CE dual certification made approvals seamless for our North American and European projects. Reliable quality every batch.', author: 'Electrical Engineer', org: 'Infrastructure Project, Singapore' },
               { quote: 'Over 1,000 specs in one catalog — we can source virtually any terminal configuration from a single trusted supplier. Logistics simplified.', author: 'Procurement Manager', org: 'Electrical Distributor, Japan' },
-              { quote: 'As a listed company, GEM Terminal\'s financial stability and long-term commitment give us confidence for multi-year supply agreements.', author: 'Strategic Sourcing Director', org: 'Machine Tool Manufacturer, Italy' },
+              { quote: "As a listed company, GEM Terminal's financial stability and long-term commitment give us confidence for multi-year supply agreements.", author: 'Strategic Sourcing Director', org: 'Machine Tool Manufacturer, Italy' },
             ].map((t, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '20px 22px' }}>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8, marginBottom: 16, fontStyle: 'italic' }}>"{t.quote}"</p>
-                <p style={{ fontSize: 12, fontWeight: 600, color: '#fff' }}>{t.author}</p>
-                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{t.org}</p>
+              <div key={i} style={{ background: '#fff', padding: '40px 36px' }}>
+                <p style={{ fontSize: 'clamp(14px, 1.5vw, 17px)', fontWeight: 400, color: text, lineHeight: 1.75, marginBottom: 28 }}>"{t.quote}"</p>
+                <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 3 }}>{t.author}</p>
+                <p style={{ fontSize: 12, color: textLight }}>{t.org}</p>
               </div>
             ))}
           </div>
-        </section>
-        <HR />
+        </div>
+      </section>
 
-        {/* Reviews */}
-        <section style={{ marginBottom: 48 }}>
-          <ST>Reviews</ST>
-          <div style={{ display: 'flex', gap: 32, alignItems: 'center', marginBottom: 24 }}>
-            <div style={{ textAlign: 'center' }}>
-              <p style={{ fontSize: 52, fontWeight: 800, lineHeight: 1 }}>4.7</p>
-              <p style={{ fontSize: 20, color: '#fbbf24', letterSpacing: 2 }}>★★★★★</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', marginTop: 4 }}>91 reviews</p>
-            </div>
-            <div style={{ flex: 1 }}>
-              {[[5,74],[4,19],[3,5],[2,1],[1,1]].map(([s,p]) => (
-                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', width: 8 }}>{s}</span>
-                  <div style={{ flex: 1, height: 6, background: 'rgba(255,255,255,0.08)', borderRadius: 3 }}><div style={{ width: `${p}%`, height: '100%', background: '#fbbf24', borderRadius: 3 }} /></div>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', width: 28 }}>{p}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {/* ── DOWNLOAD CENTER ── */}
+      <section style={{ background: '#f8f8f8', borderBottom: `1px solid ${border}` }}>
+        <div style={{ padding: '5rem 52px' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>Downloads</p>
+          <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 34px)', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: 32 }}>Documentation</h2>
+          <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: border }}>
             {[
-              { name: 'M. Bauer', stars: 5, product: 'Spring Clamp Terminal Series', review: 'Tool-free insertion is a game changer for our panel wiring team. Consistent grip across the full temperature range.' },
-              { name: 'K. Tanaka', stars: 5, product: 'Fuse Terminal Blocks', review: 'DIN rail mounting clicks in perfectly every time. The integrated fuse holder design saves significant cabinet space.' },
-              { name: 'R. Santos', stars: 4, product: 'Screw Terminal 10mm²', review: 'Solid build quality, good torque retention after thermal cycling. Would appreciate more color variants.' },
-            ].map((r, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: 8, padding: '16px 18px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <div><span style={{ fontWeight: 600, fontSize: 13 }}>{r.name}</span><span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginLeft: 10 }}>{r.product}</span></div>
-                  <span style={{ color: '#fbbf24' }}>{'★'.repeat(r.stars)}</span>
+              { label: 'CATALOG', name: 'GEM Terminal Full Product Catalog' },
+              { label: 'SPEC', name: 'Technical Data Sheets by Series' },
+              { label: 'CERT', name: 'UL / CE / CNS Certificates' },
+              { label: 'GUIDE', name: 'Panel Wiring Application Guide' },
+            ].map((d, i) => (
+              <div key={i}
+                style={{ background: '#fff', padding: '24px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', transition: 'background 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.background = '#f0f0f0'}
+                onMouseLeave={e => e.currentTarget.style.background = '#fff'}
+              >
+                <div>
+                  <p style={{ fontSize: 9, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700, marginBottom: 7 }}>{d.label}</p>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: text }}>{d.name}</p>
                 </div>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{r.review}</p>
+                <span style={{ fontSize: 18, color: textLight }}>↓</span>
               </div>
             ))}
           </div>
-        </section>
-        <HR />
+        </div>
+      </section>
 
-        {/* Lead Magnet */}
-        <section style={{ marginBottom: 48 }}>
-          <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '40px 36px', textAlign: 'center' }}>
-            <p style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>Free Resource</p>
-            <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12, lineHeight: 1.3 }}>Terminal Block Selection Guide for Industrial Panels — Free</h3>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, maxWidth: 440, margin: '0 auto 28px' }}>Screw, spring, or fuse terminal — which is right for your panel? Download our engineer's selection matrix with current ratings, certifications, and application notes.</p>
-            <div style={{ display: 'flex', gap: 10, maxWidth: 400, margin: '0 auto' }}>
-              <input placeholder="Your email address" style={{ flex: 1, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '10px 14px', fontSize: 13, color: '#fff', fontFamily: 'inherit', outline: 'none' }} />
-              <button style={{ background: '#fff', color: bg, border: 'none', borderRadius: 4, padding: '10px 20px', fontSize: 13, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>Get Guide</button>
-            </div>
+      {/* ── LEAD MAGNET / CTA ── */}
+      <section style={{ background: '#000', padding: '7rem 52px' }}>
+        <div style={{ maxWidth: 700 }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20, fontWeight: 600 }}>Free Resource</p>
+          <h3 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 700, letterSpacing: '-1.5px', color: '#fff', lineHeight: 0.95, marginBottom: 32 }}>
+            Terminal Block<br />Selection Guide —<br />Free Download.
+          </h3>
+          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, maxWidth: 420, marginBottom: 40 }}>
+            Screw, spring, or fuse terminal — which is right for your panel? Download our engineer's selection matrix with ratings, certifications, and application notes.
+          </p>
+          <div style={{ display: 'flex', gap: 0, maxWidth: 460 }}>
+            <input placeholder="Your work email" style={{
+              flex: 1, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)',
+              borderRight: 'none', borderRadius: 0, padding: '14px 20px',
+              fontSize: 13, color: '#fff', fontFamily: 'inherit', outline: 'none',
+            }} />
+            <button style={{
+              background: '#fff', color: '#000', border: 'none',
+              padding: '14px 28px', fontSize: 12, fontWeight: 700,
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+              cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap',
+            }}>Get Guide</button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <span onClick={() => navigate('/')} style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', cursor: 'pointer' }} onMouseEnter={e=>e.target.style.color='#fff'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.4)'}>← Back to Directory</span>
-      </div>
-
-      <footer style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '32px', display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
-        <span>© 2025 Made with Worldedit Design</span>
-        <span>GEM Terminal Industry Co., Ltd. · Kaohsiung</span>
+      {/* ── FOOTER ── */}
+      <footer style={{ background: '#fff', borderTop: `1px solid ${border}`, padding: '36px 52px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+          <div>
+            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>GEM Terminal Industry Co., Ltd.</p>
+            <p style={{ fontSize: 11, color: textLight }}>Driven by precision. Connecting the world — conductor by conductor.</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3 }}>
+            <p style={{ fontSize: 11, color: textLight, letterSpacing: '0.06em' }}>Taiwan: Kaohsiung</p>
+            <p style={{ fontSize: 11, color: '#ccc', letterSpacing: '0.06em' }}>22.6273° N · 120.3014° E</p>
+          </div>
+        </div>
+        <div style={{ marginTop: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <p style={{ fontSize: 11, color: '#ccc' }}>© 2025 Made with Worldedit Design</p>
+          <span onClick={() => navigate('/')} style={{ fontSize: 11, color: '#ccc', cursor: 'pointer' }}
+            onMouseEnter={e => e.target.style.color = text} onMouseLeave={e => e.target.style.color = '#ccc'}>← Back to Directory</span>
+        </div>
       </footer>
     </div>
   )
