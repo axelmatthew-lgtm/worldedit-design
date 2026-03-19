@@ -9,8 +9,8 @@ const textMid = '#888'
 const textDim = '#555'
 const border  = 'rgba(255,255,255,0.08)'
 const accent  = '#e8001b'
-const font    = '"Inter", -apple-system, BlinkMacSystemFont, sans-serif'
-const serif   = '"Playfair Display", Georgia, "Times New Roman", serif'
+const font    = '"Helvetica Neue", Helvetica, Arial, sans-serif'
+const serif   = '"Helvetica Neue", Helvetica, Arial, sans-serif'
 
 const SERVICES = [
   { icon: '⬡', title: 'CNC Machining Centers',    desc: 'High-speed 5-axis simultaneous machining for aluminum, steel, titanium, and exotic alloys. Tolerances to ±0.005mm.' },
@@ -59,7 +59,6 @@ export default function AiKwangPage() {
   return (
     <div style={{ minHeight: '100vh', background: bg, fontFamily: font, color: text, overflowX: 'hidden' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
         * { box-sizing: border-box; }
         .ak-cta-btn { transition: background 0.18s, color 0.18s; }
         .ak-cta-btn:hover { background: #fff !important; color: #000 !important; }

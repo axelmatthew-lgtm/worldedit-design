@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const projects = [
-  { id: 'kanghe', title: 'Kanghe', year: '2024', cat: 'Landing Page' },
-  { id: 'euroaire', title: 'Euroaire', year: '2024', cat: 'Landing Page' },
-  { id: 'goldenroot', title: 'Goldenroot', year: '2024', cat: 'Landing Page' },
-  { id: 'matatakitoyo', title: 'Matatakitoyo', year: '2024', cat: 'Landing Page' },
-  { id: '3m', title: '3M', year: '2024', cat: 'Landing Page' },
-  { id: 'aikwang', title: 'AI-KWANG TECH CO.', year: '2024', cat: 'Landing Page' },
-  { id: 'gemterminal', title: 'GEM TERMINAL INDUSTRY CO', year: '2024', cat: 'Landing Page' },
+  { id: 'kanghe', title: 'Kanghe', year: '2024', cat: 'Landing Page', logo: '/logos/kanghe-logo.svg', logoBg: '#ffffff', logoBorder: '1px solid #e0e0e0' },
+  { id: 'euroaire', title: 'Euroaire', year: '2024', cat: 'Landing Page', logo: '/logos/euroaire-logo.png', logoBg: '#111111', logoFilter: 'brightness(0) invert(1)' },
+  { id: 'goldenroot', title: 'Goldenroot', year: '2024', cat: 'Landing Page', logo: '/logos/panrico-logo.png', logoBg: '#0a0800' },
+  { id: 'matatakitoyo', title: 'Matatakitoyo', year: '2024', cat: 'Landing Page', logo: '/logos/matatakitoyo-logo.png', logoBg: '#8a0014' },
+  { id: '3m', title: '3M', year: '2024', cat: 'Landing Page', logo: '/logos/3m-logo.svg', logoBg: '#e8001b' },
+  { id: 'aikwang', title: 'AI-KWANG TECH CO.', year: '2024', cat: 'Landing Page', logo: '/logos/aikwang-logo.svg', logoBg: '#0d0d0d', logoStyle: { width: '60%', height: 'auto' } },
+  { id: 'gemterminal', title: 'GEM TERMINAL INDUSTRY CO', year: '2024', cat: 'Landing Page', logo: '/logos/gem-terminal-logo-color.png', logoBg: '#ffffff', logoBorder: '1px solid #e0e0e0', logoStyle: { width: '55%', height: 'auto' } },
 ]
 
 const navLinks = ['All Projects', 'Landing Page', 'Product', 'Exhibition', 'Graphic', 'Editorial']
@@ -189,25 +189,20 @@ export default function FukasawaMockup() {
                   <div style={{
                     width: '100%',
                     aspectRatio: '4 / 5',
-                    background: '#f7f7f7',
+                    background: proj.logoBg,
+                    border: proj.logoBorder || 'none',
                     position: 'relative',
                     display: 'block',
                     overflow: 'hidden',
                   }}>
-                    {/* Subtle placeholder object */}
                     <div style={{
                       position: 'absolute',
                       inset: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
                     }}>
-                      <div style={{
-                        width: '35%',
-                        height: '35%',
-                        background: '#e8e8e8',
-                        borderRadius: proj.id % 4 === 0 ? '50%' : proj.id % 3 === 0 ? '2px' : proj.id % 2 === 0 ? '50% 0' : '1px',
-                      }} />
+                      {proj.logo
+                        ? <img src={proj.logo} alt={proj.title} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '50%', height: 'auto', objectFit: 'contain', display: 'block', filter: proj.logoFilter || 'none', ...proj.logoStyle }} />
+                        : <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '35%', height: '35%', background: '#e8e8e8', borderRadius: '1px' }} />
+                      }
                     </div>
                     {/* Hover dim */}
                     {hoveredId === proj.id && (

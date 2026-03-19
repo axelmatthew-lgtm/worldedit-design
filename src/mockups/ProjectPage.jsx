@@ -1,13 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom'
 
 const projects = [
-  { id: '1', title: 'Kanghe', year: '2024', cat: 'Landing Page' },
-  { id: '2', title: 'Euroaire', year: '2024', cat: 'Landing Page' },
-  { id: '3', title: 'Goldenroot', year: '2024', cat: 'Landing Page' },
-  { id: '4', title: 'Matatakitoyo', year: '2024', cat: 'Landing Page' },
-  { id: '5', title: '3M', year: '2024', cat: 'Landing Page' },
-  { id: '6', title: 'AI-KWANG TECH CO.', year: '2024', cat: 'Landing Page' },
-  { id: '7', title: 'GEM TERMINAL INDUSTRY CO', year: '2024', cat: 'Landing Page' },
+  { id: '1', title: 'Kanghe', year: '2024', cat: 'Landing Page', logo: null },
+  { id: '2', title: 'Euroaire', year: '2024', cat: 'Landing Page', logo: '/logos/euroaire-logo.png', logoBg: '#111111' },
+  { id: '3', title: 'Goldenroot', year: '2024', cat: 'Landing Page', logo: '/logos/panrico-logo.png', logoBg: '#0a0800' },
+  { id: '4', title: 'Matatakitoyo', year: '2024', cat: 'Landing Page', logo: '/logos/matatakitoyo-logo.png', logoBg: '#ffffff' },
+  { id: '5', title: '3M', year: '2024', cat: 'Landing Page', logo: '/logos/3m-logo.svg', logoBg: '#e8001b' },
+  { id: '6', title: 'AI-KWANG TECH CO.', year: '2024', cat: 'Landing Page', logo: '/logos/aikwang-logo.svg', logoBg: '#0d0d0d' },
+  { id: '7', title: 'GEM TERMINAL INDUSTRY CO', year: '2024', cat: 'Landing Page', logo: '/logos/gem-terminal-logo-white.svg', logoBg: '#1e3fae' },
 ]
 
 export default function ProjectPage() {
@@ -62,18 +62,21 @@ export default function ProjectPage() {
 
       {/* Content */}
       <div style={{ padding: '300px 80px 80px 360px' }}>
-        {/* Project image placeholder */}
+        {/* Project image / logo */}
         <div style={{
           width: '100%',
           maxWidth: 900,
           aspectRatio: '4 / 3',
-          background: '#f7f7f7',
+          background: project.logoBg || '#f7f7f7',
           marginBottom: 48,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <div style={{ width: '30%', height: '30%', background: '#e8e8e8', borderRadius: 2 }} />
+          {project.logo
+            ? <img src={project.logo} alt={project.title} style={{ maxWidth: '45%', maxHeight: '45%', objectFit: 'contain', display: 'block' }} />
+            : <div style={{ width: '30%', height: '30%', background: '#e8e8e8', borderRadius: 2 }} />
+          }
         </div>
 
         {/* Project info */}
