@@ -36,11 +36,14 @@ export default function MatatakitoyoPage() {
         @media (max-width: 767px) {
           .mt-hero-h1 { font-size: clamp(52px, 13vw, 80px) !important; }
           .mt-two-col { grid-template-columns: 1fr !important; }
-          .mt-three-col { grid-template-columns: 1fr !important; }
+          .mt-three-col { grid-template-columns: 1fr 1fr !important; }
           .mt-four-col { grid-template-columns: 1fr 1fr !important; }
           .mt-stat-row { flex-direction: column !important; gap: 0 !important; }
           .mt-stat-row > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08) !important; }
           .mt-footer-grid { grid-template-columns: 1fr !important; }
+          .mt-masonry { grid-template-columns: 1fr !important; }
+          .mt-reviews-grid { grid-template-columns: 1fr !important; }
+          .mt-section-pad { padding-top: 3rem !important; padding-bottom: 3rem !important; }
         }
       `}</style>
 
@@ -343,7 +346,7 @@ export default function MatatakitoyoPage() {
       <section style={{ background: '#080808' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Gallery</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '260px 260px', gap: 2 }}>
+          <div className="mt-masonry" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '260px 260px', gap: 2 }}>
             {[
               { src: '/products/mt_gallery1_v2_nobg.png', style: { gridRow: '1 / 3' } },
               { src: '/products/mt_precise1_v2_nobg.png', style: {} },
@@ -364,7 +367,7 @@ export default function MatatakitoyoPage() {
 
       {/* ══ TESTIMONIALS — white bg, pull quotes, thin top border per quote ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div className="mt-section-pad" style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 48, fontFamily: fontSans }}>Testimonials</p>
           <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
             {[
@@ -406,7 +409,7 @@ export default function MatatakitoyoPage() {
               ))}
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          <div className="mt-reviews-grid" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
             {[
               { name: 'A. Fischer', stars: 5, product: 'Click Torque Wrench 200Nm', review: 'Clicked at exactly the right torque every time. Checked against our reference gauge — deviation within 2%. Solid build quality throughout.' },
               { name: 'K. Yamamoto', stars: 5, product: 'Digital Torque Adapter', review: 'The peak-hold function is essential for our assembly line. LCD is clear even in low-light conditions. Highly recommended for production use.' },
@@ -469,7 +472,7 @@ export default function MatatakitoyoPage() {
 
       {/* ══ LEAD MAGNET — white bg, two-col ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div className="mt-section-pad" style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
           <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 20, fontFamily: fontSans }}>Free Resource</p>

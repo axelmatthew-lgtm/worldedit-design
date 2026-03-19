@@ -77,12 +77,14 @@ export default function AiKwangPage() {
           .ak-hero-h1 { font-size: 48px !important; }
           .ak-testi-grid { grid-template-columns: 1fr !important; }
           .ak-section-header { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+          .ak-decorative { display: none !important; }
+          .ak-section-header { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
         }
       `}</style>
 
       {/* ── DECORATIVE VERTICAL BORDER LINES ── */}
-      <div style={{ position: 'fixed', top: 0, left: 48, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
-      <div style={{ position: 'fixed', top: 0, right: 48, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
+      <div className="ak-decorative" style={{ position: 'fixed', top: 0, left: 48, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
+      <div className="ak-decorative" style={{ position: 'fixed', top: 0, right: 48, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
 
       {/* ── NAV ── */}
       <nav style={{
@@ -92,7 +94,7 @@ export default function AiKwangPage() {
         backdropFilter: 'blur(14px)',
         borderBottom: `1px solid ${border}`,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 clamp(4rem, 7vw, 6rem)',
+        padding: '0 clamp(1.5rem, 7vw, 6rem)',
       }}>
         {/* Logo */}
         <img src="/logos/aikwang-logo.svg" alt="AI-KWANG Tech" style={{ height: 36, width: 'auto', display: 'block' }} />
@@ -139,7 +141,7 @@ export default function AiKwangPage() {
         <div style={{
           position: 'relative', zIndex: 3,
           flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-          padding: '0 clamp(4rem, 7vw, 6rem) clamp(3rem, 6vh, 5rem)',
+          padding: '0 clamp(1.5rem, 7vw, 6rem) clamp(3rem, 6vh, 5rem)',
           maxWidth: 760,
         }}>
           {/* AI-KWANG logo */}
@@ -190,7 +192,7 @@ export default function AiKwangPage() {
         {/* Section header */}
         <div className="ak-section-header" style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-          padding: 'clamp(1.5rem, 4vh, 2.5rem) clamp(4rem, 7vw, 6rem)',
+          padding: 'clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 7vw, 6rem)',
           borderBottom: `1px solid ${border}`,
         }}>
           <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, letterSpacing: '-0.5px' }}>Our Capabilities</h2>
@@ -212,7 +214,7 @@ export default function AiKwangPage() {
               style={{
                 gridRow: i === 0 ? 'span 2' : 'auto',
                 background: bgCard,
-                padding: 'clamp(1.5rem, 3vh, 2.5rem) clamp(4rem, 7vw, 6rem)',
+                padding: 'clamp(1.5rem, 3vh, 2.5rem) clamp(1.5rem, 7vw, 6rem)',
                 borderRight: i % 2 === 0 ? `1px solid ${border}` : 'none',
                 borderBottom: i < 3 ? `1px solid ${border}` : 'none',
               }}
@@ -241,14 +243,14 @@ export default function AiKwangPage() {
         {/* Header */}
         <div className="ak-section-header" style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-          padding: 'clamp(1.5rem, 4vh, 2.5rem) clamp(4rem, 7vw, 6rem)',
+          padding: 'clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 7vw, 6rem)',
           borderBottom: `1px solid ${border}`,
         }}>
           <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, letterSpacing: '-0.5px' }}>From the Workshop</h2>
           <p style={{ fontSize: 13, fontStyle: 'italic', color: accent }}>Insights, case studies, and updates from the floor.</p>
         </div>
 
-        <div style={{ padding: '0 clamp(4rem, 7vw, 6rem)' }}>
+        <div style={{ padding: '0 clamp(1.5rem, 7vw, 6rem)' }}>
           <p style={{ fontSize: 11, fontWeight: 600, color: textDim, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '16px 0', borderBottom: `1px solid ${border}` }}>Posts</p>
           {POSTS.map((p, i) => (
             <div key={i} className="ak-post-row" style={{
@@ -287,7 +289,7 @@ export default function AiKwangPage() {
       <section id="testimonials" style={{ borderBottom: `1px solid ${border}` }}>
         <div className="ak-section-header" style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-          padding: 'clamp(1.5rem, 4vh, 2.5rem) clamp(4rem, 7vw, 6rem)',
+          padding: 'clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 7vw, 6rem)',
           borderBottom: `1px solid ${border}`,
         }}>
           <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, letterSpacing: '-0.5px' }}>Testimonials</h2>
@@ -300,7 +302,7 @@ export default function AiKwangPage() {
         }}>
           {TESTIMONIALS.map((t, i) => (
             <div key={i} style={{
-              padding: 'clamp(2rem, 4vh, 3rem) clamp(4rem, 7vw, 6rem)',
+              padding: 'clamp(2rem, 4vh, 3rem) clamp(1.5rem, 7vw, 6rem)',
               borderRight: i === 0 ? `1px solid ${border}` : 'none',
             }}>
               {/* Avatar + name */}
@@ -330,9 +332,71 @@ export default function AiKwangPage() {
         </div>
       </section>
 
+      {/* ══ REVIEWS ══ */}
+      <section style={{ borderBottom: `1px solid ${border}` }}>
+        <div className="ak-section-header" style={{
+          display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+          padding: 'clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 7vw, 6rem)',
+          borderBottom: `1px solid ${border}`,
+        }}>
+          <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, letterSpacing: '-0.5px' }}>Reviews</h2>
+          <p style={{ fontSize: 13, fontStyle: 'italic', color: accent }}>Verified by engineers who hold tolerances for a living.</p>
+        </div>
+        <div style={{ padding: 'clamp(2rem, 4vh, 3rem) clamp(1.5rem, 7vw, 6rem)' }}>
+          <div style={{ display: 'flex', gap: 48, alignItems: 'center', marginBottom: 36, paddingBottom: 36, borderBottom: `1px solid ${border}` }}>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <p style={{ fontSize: 60, fontWeight: 700, lineHeight: 1, letterSpacing: '-3px', color: text }}>4.9</p>
+              <p style={{ fontSize: 16, color: '#fbbf24', letterSpacing: 3, margin: '8px 0' }}>★★★★★</p>
+              <p style={{ fontSize: 11, color: textMid }}>63 verified reviews</p>
+            </div>
+            <div style={{ flex: 1 }}>
+              {[[5,90],[4,7],[3,2],[2,1],[1,0]].map(([s,p]) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 9 }}>
+                  <span style={{ fontSize: 11, color: textMid, width: 10 }}>{s}</span>
+                  <div style={{ flex: 1, height: 4, background: 'rgba(255,255,255,0.07)', borderRadius: 0 }}>
+                    <div style={{ width: `${p}%`, height: '100%', background: accent }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: textDim, width: 32, textAlign: 'right' }}>{p}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="ak-testi-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: `1px solid ${border}` }}>
+            {[
+              { initials: 'QE', name: 'Quality Engineer', org: 'Medical Device Manufacturer, Taipei', stars: 5, review: 'First-article approval on every submission across three separate projects. Tolerances held to ±0.003mm on hardened stainless parts. AI-KWANG is our benchmark for precision.' },
+              { initials: 'SD', name: 'Supply Chain Director', org: 'Automation Systems Integrator', stars: 5, review: 'Consistent lead times, full CMM reports with every batch, and ISO 9001 documentation that our customers accept without question. That level of traceability is rare.' },
+              { initials: 'ME', name: 'Mechanical Engineer', org: 'Semiconductor Equipment Builder', stars: 5, review: 'Complex 5-axis aluminum housings for vacuum chambers — zero re-spins in two years of production. The team understands DFM and flags issues before they become problems.' },
+              { initials: 'PM', name: 'Plant Manager', org: 'Automotive Parts OEM, Kaohsiung', stars: 4, review: 'Production-volume EDM work delivered on time and within budget. Surface finish and corner radii were exactly as specified. Will be expanding our orders next quarter.' },
+            ].map((r, i) => (
+              <div key={i} style={{
+                padding: 'clamp(2rem, 4vh, 3rem) clamp(1.5rem, 7vw, 6rem)',
+                borderRight: i % 2 === 0 ? `1px solid ${border}` : 'none',
+                borderBottom: i < 2 ? `1px solid ${border}` : 'none',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                  <div style={{
+                    width: 44, height: 44, borderRadius: '50%',
+                    background: 'rgba(255,255,255,0.07)', border: `1px solid ${border}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                  }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: textMid }}>{r.initials}</span>
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: text }}>{r.name}</p>
+                    <p style={{ fontSize: 11, color: textMid }}>{r.org}</p>
+                  </div>
+                  <span style={{ color: '#fbbf24', fontSize: 13, letterSpacing: 2 }}>{'★'.repeat(r.stars)}</span>
+                </div>
+                <p style={{ fontSize: 14, color: textMid, lineHeight: 1.85 }}>{r.review}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══ CTA ══ */}
       <section style={{
-        padding: 'clamp(5rem, 12vh, 9rem) clamp(4rem, 7vw, 6rem)',
+        padding: 'clamp(5rem, 12vh, 9rem) clamp(1.5rem, 7vw, 6rem)',
         borderBottom: `1px solid ${border}`,
         textAlign: 'center',
       }}>
@@ -363,12 +427,12 @@ export default function AiKwangPage() {
       </section>
 
       {/* ── CONTACT + FOOTER ── */}
-      <section style={{ padding: 'clamp(3rem, 6vh, 4rem) clamp(4rem, 7vw, 6rem)', borderBottom: `1px solid ${border}` }}>
+      <section style={{ padding: 'clamp(3rem, 6vh, 4rem) clamp(1.5rem, 7vw, 6rem)', borderBottom: `1px solid ${border}` }}>
         <PremiumContact accent={accent} bg={bg} company="AI-KWANG TECH CO., LTD." email="sales@aikwang.com.tw" phone="+886-7-375-7377" address="Kaohsiung City, Taiwan" />
       </section>
 
       <footer style={{
-        padding: '20px clamp(4rem, 7vw, 6rem)',
+        padding: '20px clamp(1.5rem, 7vw, 6rem)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         flexWrap: 'wrap', gap: 12,
         borderTop: `1px solid ${border}`,

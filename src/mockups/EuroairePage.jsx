@@ -47,6 +47,8 @@ export default function EuroairePage() {
           .ea-four-col { grid-template-columns: 1fr 1fr !important; }
           .ea-stat-row > div { border-right: none !important; border-bottom: 1px solid ${border} !important; }
           .ea-footer-col { grid-template-columns: 1fr !important; }
+          .ea-nav-links { display: none !important; }
+          .ea-reviews-summary { flex-direction: column !important; gap: 24px !important; }
         }
       `}</style>
 
@@ -65,8 +67,8 @@ export default function EuroairePage() {
           style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: text }}>
           ← Back
         </span>
-        <img src="/logos/tuntos-logo.svg" alt="TUNTOS" style={{ height: 28, objectFit: 'contain' }} />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 24, fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+        <img src="/logos/euroaire-logo.png" alt="Euroaire" style={{ height: 28, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+        <div className="ea-nav-links" style={{ display: 'flex', justifyContent: 'flex-end', gap: 24, fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
           <span className="ea-link" style={{ color: text }}>Prev</span>
           <span className="ea-link" style={{ color: text }}>Next</span>
         </div>
@@ -103,7 +105,7 @@ export default function EuroairePage() {
 
         {/* Centered hero content */}
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 820, padding: '0 clamp(1.5rem, 5vw, 3rem)' }}>
-          <img src="/logos/tuntos-logo.svg" alt="TUNTOS" style={{ height: 44, objectFit: 'contain', marginBottom: 36, display: 'block', margin: '0 auto 36px', filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
+          <img src="/logos/euroaire-logo.png" alt="Euroaire" style={{ height: 160, objectFit: 'contain', marginBottom: 36, display: 'block', margin: '0 auto 36px', filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
           <p style={{ fontSize: 11, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 40, fontWeight: 300 }}>
             Euroaire · 歐陸通風設備 · Taiwan
           </p>
@@ -357,7 +359,7 @@ export default function EuroairePage() {
           <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', background: '#1a1a1a' }}>
             <iframe
               width="100%" height="100%"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              src="https://www.youtube.com/embed/CrhxLWgLG30"
               title="Euroaire EC Technology"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -386,6 +388,49 @@ export default function EuroairePage() {
                 <p style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: textLight, fontWeight: 400 }}>
                   {t.author} — {t.org}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ REVIEWS ══ */}
+      <section style={{ background: bg, borderBottom: `1px solid ${border}` }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 40, fontWeight: 400 }}>Reviews</p>
+          <div className="ea-reviews-summary" style={{ display: 'flex', gap: 52, alignItems: 'center', marginBottom: 48 }}>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <p style={{ fontSize: 60, fontWeight: 100, lineHeight: 1, letterSpacing: '-3px', color: text }}>4.8</p>
+              <p style={{ fontSize: 15, color: accent, letterSpacing: 3, margin: '8px 0' }}>★★★★★</p>
+              <p style={{ fontSize: 11, color: textLight }}>94 reviews</p>
+            </div>
+            <div style={{ flex: 1 }}>
+              {[[5,84],[4,11],[3,4],[2,1],[1,0]].map(([s,p]) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+                  <span style={{ fontSize: 11, color: textLight, width: 10 }}>{s}</span>
+                  <div style={{ flex: 1, height: 3, background: border }}>
+                    <div style={{ width: `${p}%`, height: '100%', background: accent }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: textLight, width: 32, textAlign: 'right' }}>{p}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="ea-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1, background: border }}>
+            {[
+              { name: 'M. Nakamura', stars: 5, product: 'ebm-papst RadiPac EC Fan', review: 'Energy savings exceeded spec — we measured 46% reduction versus the old AC units. IoT monitoring was straightforward to integrate with our BMS. Reordering for the second facility.' },
+              { name: 'P. Schäfer', stars: 5, product: 'COPELAND Scroll Compressor', review: 'Third consecutive project using TUNTOS for Copeland supply. Lead times are consistent, documentation is always complete, and the technical line is genuinely helpful.' },
+              { name: 'C. Yang', stars: 4, product: 'ZIEHL-ABEGG Axial Fan', review: 'Very quiet operation — below the 45dB spec at all duty points. Installation was clean and the team provided full commissioning support. Minor delay on accessories, otherwise perfect.' },
+            ].map((r, i) => (
+              <div key={i} style={{ background: '#ffffff', padding: '36px 32px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 300, color: text, marginBottom: 3 }}>{r.name}</p>
+                    <p style={{ fontSize: 11, color: textLight, fontWeight: 300 }}>{r.product}</p>
+                  </div>
+                  <span style={{ color: accent, letterSpacing: 2, fontSize: 12 }}>{'★'.repeat(r.stars)}</span>
+                </div>
+                <p style={{ fontSize: 13, fontWeight: 300, color: textMid, lineHeight: 1.85 }}>{r.review}</p>
               </div>
             ))}
           </div>

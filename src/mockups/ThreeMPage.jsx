@@ -18,9 +18,11 @@ export default function ThreeMPage() {
         .tm-product-img { transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
         .tm-product-card:hover .tm-product-img { transform: scale(1.04); }
         @media (max-width:767px) {
-          .tm-three-col { grid-template-columns: 1fr 1fr !important; }
+          .tm-three-col { grid-template-columns: 1fr !important; }
           .tm-two-col { grid-template-columns: 1fr !important; }
           .tm-stats { grid-template-columns: 1fr 1fr !important; }
+          .tm-reviews-summary { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+          .tm-hero-img { display: none !important; }
         }
       `}</style>
 
@@ -49,7 +51,7 @@ export default function ThreeMPage() {
 
       {/* ── HERO ── */}
       <section style={{ background: red, minHeight: '100svh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        <img src="/products/tm_harness2_nobg.png" alt="" style={{
+        <img className="tm-hero-img" src="/products/tm_harness2_nobg.png" alt="" style={{
           position: 'absolute', right: '-2%', bottom: 0,
           height: '95%', width: '52%',
           objectFit: 'contain', objectPosition: 'right bottom',
@@ -239,6 +241,49 @@ export default function ThreeMPage() {
                 <p style={{ fontSize: 'clamp(14px, 1.5vw, 17px)', fontWeight: 400, color: '#1a1a1a', lineHeight: 1.75, marginBottom: 28 }}>"{t.quote}"</p>
                 <p style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a', marginBottom: 3 }}>{t.author}</p>
                 <p style={{ fontSize: 12, color: '#999' }}>{t.org}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── REVIEWS — white bg ── */}
+      <section style={{ background: '#ffffff', borderBottom: '1px solid #e8e8e8' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#999', marginBottom: 14, fontWeight: 600 }}>Reviews</p>
+          <div className="tm-reviews-summary" style={{ display: 'flex', gap: 52, alignItems: 'center', marginBottom: 48 }}>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <p style={{ fontSize: 64, fontWeight: 800, lineHeight: 1, letterSpacing: '-3px', color: '#1a1a1a' }}>4.8</p>
+              <p style={{ fontSize: 16, letterSpacing: 3, margin: '8px 0', color: red }}>★★★★★</p>
+              <p style={{ fontSize: 11, color: '#aaa' }}>1,240 reviews</p>
+            </div>
+            <div style={{ flex: 1 }}>
+              {[[5,83],[4,12],[3,4],[2,1],[1,0]].map(([s,p]) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+                  <span style={{ fontSize: 11, color: '#aaa', width: 10 }}>{s}</span>
+                  <div style={{ flex: 1, height: 6, background: '#f0f0f0', borderRadius: 100, overflow: 'hidden' }}>
+                    <div style={{ width: `${p}%`, height: '100%', background: red, borderRadius: 100 }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: '#aaa', width: 32, textAlign: 'right' }}>{p}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="tm-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+            {[
+              { name: 'J. Huang', stars: 5, product: 'N95 Respirator 8210', review: 'Standard issue for all our cleanroom operators. Consistent seal, easy donning, and the NIOSH certification is essential for our semiconductor compliance audits.' },
+              { name: 'A. Lin', stars: 5, product: 'ExoFit X300 Harness', review: 'Construction team wears these daily on high-rise sites. The quick-connect buckles save time and the padded vest keeps workers comfortable through a full shift.' },
+              { name: 'D. Tsai', stars: 4, product: 'PELTOR X4A Earmuffs', review: 'Excellent noise reduction on our press floor. Comfortable over long shifts. Durable build quality — pairs in use for over two years without issues.' },
+            ].map((r, i) => (
+              <div key={i} style={{ border: '1.5px solid #f0f0f0', padding: '28px 24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a', marginBottom: 3 }}>{r.name}</p>
+                    <p style={{ fontSize: 11, color: '#999' }}>{r.product}</p>
+                  </div>
+                  <span style={{ color: red, letterSpacing: 2, fontSize: 13 }}>{'★'.repeat(r.stars)}</span>
+                </div>
+                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.8 }}>{r.review}</p>
               </div>
             ))}
           </div>

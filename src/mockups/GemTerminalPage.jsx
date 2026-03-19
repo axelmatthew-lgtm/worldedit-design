@@ -25,12 +25,15 @@ export default function GemTerminalPage() {
         @media (max-width:767px) {
           .gem-two-col { grid-template-columns: 1fr !important; }
           .gem-three-col { grid-template-columns: 1fr 1fr !important; }
+          .gem-decorative { display: none !important; }
+          .gem-three-col { grid-template-columns: 1fr !important; }
+          .gem-nav-links { display: none !important; }
         }
       `}</style>
 
       {/* ── DECORATIVE GRID LINES (Permian signature) ── */}
-      <div aria-hidden="true" style={{ position: 'fixed', top: 0, left: 28, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
-      <div aria-hidden="true" style={{ position: 'fixed', top: 0, right: 28, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
+      <div aria-hidden="true" className="gem-decorative" style={{ position: 'fixed', top: 0, left: 28, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
+      <div aria-hidden="true" className="gem-decorative" style={{ position: 'fixed', top: 0, right: 28, bottom: 0, width: 1, background: border, zIndex: 50, pointerEvents: 'none' }} />
 
       {/* ── NAV ── */}
       <nav style={{
@@ -38,7 +41,7 @@ export default function GemTerminalPage() {
         background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)',
         borderBottom: `1px solid ${border}`,
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '0 52px', height: 52,
+        padding: '0 clamp(1.5rem, 4vw, 3rem)', height: 52,
       }}>
         <span className="gem-link" onClick={() => navigate('/')} style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none' }}
           onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.4'}>← Back</span>
@@ -70,7 +73,7 @@ export default function GemTerminalPage() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,20,80,0.3) 0%, rgba(10,20,80,0.6) 100%)', zIndex: 1 }} />
 
         {/* Bottom-left text (Permian style) */}
-        <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 52px 52px' }}>
+        <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(1.5rem, 4vw, 3rem) 52px' }}>
           <img src="/logos/gem-terminal-logo-white.svg" alt="GEM Terminal" style={{ height: 48, objectFit: 'contain', objectPosition: 'left', marginBottom: 28, display: 'block', alignSelf: 'flex-start' }} />
           <p style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: 18, fontWeight: 500 }}>Est. 1977 · Kaohsiung, Taiwan</p>
           <h1 style={{ fontSize: 'clamp(52px, 9vw, 130px)', fontWeight: 700, lineHeight: 0.88, letterSpacing: '-4px', color: '#fff', marginBottom: 36, maxWidth: 800 }}>
@@ -91,7 +94,7 @@ export default function GemTerminalPage() {
 
       {/* ── PRODUCT SHOWCASE ── */}
       <section style={{ borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '5rem 52px 0' }}>
+        <div style={{ padding: '5rem clamp(1.5rem, 4vw, 3rem) 0' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40 }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 12, fontWeight: 600 }}>Product Range</p>
@@ -132,7 +135,7 @@ export default function GemTerminalPage() {
           alt="GEM Terminal factory"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.45, zIndex: 0 }}
         />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '100%', padding: '7rem 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 560 }}>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '100%', padding: '7rem clamp(1.5rem, 4vw, 3rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 560 }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20, fontWeight: 600 }}>Manufacturing</p>
           <h2 style={{ fontSize: 'clamp(36px, 6.5vw, 88px)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-3px', color: '#fff', maxWidth: 700, marginBottom: 32 }}>
             Precision<br />in every<br />micron.
@@ -147,7 +150,7 @@ export default function GemTerminalPage() {
       <section style={{ borderBottom: `1px solid ${border}` }}>
         <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
           {/* Left — story */}
-          <div style={{ padding: '6rem 52px', borderRight: `1px solid ${border}` }}>
+          <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)', borderRight: `1px solid ${border}` }}>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 20, fontWeight: 600 }}>Our Story</p>
             <h2 style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, letterSpacing: '-1px', lineHeight: 1.1, marginBottom: 28 }}>
               Rooted in Taiwan.<br />Connected globally.
@@ -160,7 +163,7 @@ export default function GemTerminalPage() {
             </p>
           </div>
           {/* Right — stats */}
-          <div style={{ padding: '6rem 52px' }}>
+          <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 20, fontWeight: 600 }}>By the Numbers</p>
             {[
               ['1977', 'Year founded in Kaohsiung'],
@@ -179,7 +182,7 @@ export default function GemTerminalPage() {
 
       {/* ── CERTIFICATIONS / TRUSTED BY ── */}
       <section style={{ background: '#f8f8f8', borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '5rem 52px' }}>
+        <div style={{ padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 40, fontWeight: 600 }}>Trusted By</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: border }}>
             {[
@@ -199,7 +202,7 @@ export default function GemTerminalPage() {
 
       {/* ── TESTIMONIALS (Permian community section) ── */}
       <section style={{ borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '6rem 52px' }}>
+        <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>What our customers say</p>
           <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', fontWeight: 700, letterSpacing: '-1.5px', marginBottom: 52 }}>Our community is open<br />to anyone who builds.</h2>
           <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: border }}>
@@ -219,9 +222,52 @@ export default function GemTerminalPage() {
         </div>
       </section>
 
+      {/* ── REVIEWS ── */}
+      <section style={{ borderBottom: `1px solid ${border}` }}>
+        <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>Reviews</p>
+          <div style={{ display: 'flex', gap: 52, alignItems: 'center', marginBottom: 48 }}>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <p style={{ fontSize: 64, fontWeight: 700, lineHeight: 1, letterSpacing: '-3px', color: text }}>4.9</p>
+              <p style={{ fontSize: 16, letterSpacing: 3, margin: '8px 0', color: '#f59e0b' }}>★★★★★</p>
+              <p style={{ fontSize: 11, color: textLight }}>217 reviews</p>
+            </div>
+            <div style={{ flex: 1 }}>
+              {[[5,88],[4,9],[3,2],[2,1],[1,0]].map(([s,p]) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                  <span style={{ fontSize: 11, color: textLight, width: 10 }}>{s}</span>
+                  <div style={{ flex: 1, height: 3, background: border }}>
+                    <div style={{ width: `${p}%`, height: '100%', background: text }} />
+                  </div>
+                  <span style={{ fontSize: 11, color: textLight, width: 32, textAlign: 'right' }}>{p}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="gem-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1, background: border }}>
+            {[
+              { name: 'K. Müller', stars: 5, product: 'Spring Clamp Terminal Series', review: 'Switched our entire panel shop to GEM spring clamps two years ago. Wiring speed up, rework down to near zero. Quality consistency batch-to-batch is excellent.' },
+              { name: 'S. Tanaka', stars: 5, product: 'Shaped Conductor Copper', review: 'Custom profiles delivered to spec on first submission. Lead times shorter than any European supplier. GEM is now our preferred OEM copper source for Asia.' },
+              { name: 'A. Chen', stars: 5, product: 'New Energy Connector', review: 'EV application — passed all thermal cycle testing on first attempt. UL documentation was thorough and delivery was ahead of schedule.' },
+            ].map((r, i) => (
+              <div key={i} style={{ background: '#fff', padding: '36px 32px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 700, color: text, marginBottom: 3 }}>{r.name}</p>
+                    <p style={{ fontSize: 11, color: textLight }}>{r.product}</p>
+                  </div>
+                  <span style={{ color: '#f59e0b', letterSpacing: 2, fontSize: 13 }}>{'★'.repeat(r.stars)}</span>
+                </div>
+                <p style={{ fontSize: 13, color: textMid, lineHeight: 1.8 }}>{r.review}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── DOWNLOAD CENTER ── */}
       <section style={{ background: '#f8f8f8', borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '5rem 52px' }}>
+        <div style={{ padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>Downloads</p>
           <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 34px)', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: 32 }}>Documentation</h2>
           <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: border }}>
@@ -248,7 +294,7 @@ export default function GemTerminalPage() {
       </section>
 
       {/* ── LEAD MAGNET / CTA ── */}
-      <section style={{ background: '#000', padding: '7rem 52px' }}>
+      <section style={{ background: '#000', padding: 'clamp(3rem,7vh,5rem) clamp(1.5rem,4vw,3rem)' }}>
         <div style={{ maxWidth: 700 }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20, fontWeight: 600 }}>Free Resource</p>
           <h3 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 700, letterSpacing: '-1.5px', color: '#fff', lineHeight: 0.95, marginBottom: 32 }}>
@@ -274,7 +320,7 @@ export default function GemTerminalPage() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ background: '#fff', borderTop: `1px solid ${border}`, padding: '36px 52px' }}>
+      <footer style={{ background: '#fff', borderTop: `1px solid ${border}`, padding: '36px clamp(1.5rem,4vw,3rem)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>GEM Terminal Industry Co., Ltd.</p>

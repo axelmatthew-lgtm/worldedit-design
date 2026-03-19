@@ -72,6 +72,8 @@ export default function GoldenrootPage() {
           .gr-logo-grid { grid-template-columns: repeat(2,1fr) !important; }
           .gr-footer-inner { grid-template-columns: 1fr !important; }
           .gr-footer-links { flex-direction: column !important; gap: 2rem !important; }
+          .gr-reviews-grid { grid-template-columns: 1fr !important; }
+          .gr-reviews-summary { flex-direction: column !important; align-items: flex-start !important; }
         }
       `}</style>
 
@@ -495,7 +497,7 @@ export default function GoldenrootPage() {
         {/* ── REVIEWS ── */}
         <section style={{ padding: '5rem 0', borderBottom: '1px solid rgba(245,158,11,0.08)' }}>
           <h2 style={{ fontSize: 'clamp(22px,2.8vw,34px)', fontWeight: 900, letterSpacing: '-0.5px', marginBottom: 36 }}>Reviews</h2>
-          <div style={{ display: 'flex', gap: 40, alignItems: 'center', marginBottom: 32 }}>
+          <div className="gr-reviews-summary" style={{ display: 'flex', gap: 40, alignItems: 'center', marginBottom: 32 }}>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
               <p style={{ fontSize: 56, fontWeight: 900, lineHeight: 1, color: '#fff' }}>4.8</p>
               <p style={{ fontSize: 18, color: '#fbbf24', letterSpacing: 3, margin: '6px 0' }}>★★★★★</p>
@@ -511,7 +513,7 @@ export default function GoldenrootPage() {
               ))}
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div className="gr-reviews-grid" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {[
               { name: 'T. Watanabe', stars: 5, product: '1/2" Digital Torque Wrench', review: 'Extremely accurate — verified against our calibration bench. The digital readout is clear and the peak-hold function is essential for our QC process.' },
               { name: 'R. Schmidt', stars: 5, product: 'Borescope Camera BCH-RS20020', review: 'Image quality is impressive for the price. We use it for engine inspection and the 5.5mm probe fits where others cannot reach.' },

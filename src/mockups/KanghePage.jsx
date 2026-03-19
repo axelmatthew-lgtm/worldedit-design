@@ -117,6 +117,8 @@ export default function KanghePage() {
           .kh-hero-h1 { font-size: 32px !important; letter-spacing: -1px !important; }
           .kh-compare { flex-direction: column !important; }
           .kh-industry-2col { grid-template-columns: 1fr !important; }
+          .kh-reviews-summary { flex-direction: column !important; gap: 20px !important; }
+          .kh-reviews-summary > div:first-child { align-self: flex-start !important; }
         }
       `}</style>
 
@@ -412,6 +414,50 @@ export default function KanghePage() {
                 {openFaq === i && (
                   <p style={{ fontSize: 13, color: textMid, lineHeight: 1.8, paddingTop: 12 }}>{f.a}</p>
                 )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ REVIEWS ══ */}
+      <section style={{ background: bgLight, padding: 'clamp(3rem, 7vh, 5rem) clamp(1rem, 4vw, 2rem)', borderBottom: `1px solid ${border}` }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', fontSize: 'clamp(20px, 3vw, 28px)', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: 8 }}>What our clients say</h2>
+          <p style={{ textAlign: 'center', fontSize: 14, color: textMid, marginBottom: 48 }}>Verified reviews from project managers, engineers, and facility teams.</p>
+          <div className="kh-reviews-summary" style={{ display: 'flex', gap: 48, alignItems: 'center', marginBottom: 40 }}>
+            <div style={{ textAlign: 'center', flexShrink: 0, background: bg, border: `1px solid ${border}`, borderRadius: 16, padding: '28px 36px' }}>
+              <p style={{ fontSize: 52, fontWeight: 900, lineHeight: 1, letterSpacing: '-3px', color: accent }}>4.9</p>
+              <p style={{ fontSize: 16, color: '#fbbf24', letterSpacing: 3, margin: '8px 0' }}>★★★★★</p>
+              <p style={{ fontSize: 11, color: textLight }}>48 reviews</p>
+            </div>
+            <div style={{ flex: 1 }}>
+              {[[5,88],[4,10],[3,2],[2,0],[1,0]].map(([s,p]) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+                  <span style={{ fontSize: 12, color: textLight, width: 10 }}>{s}</span>
+                  <div style={{ flex: 1, height: 8, background: border, borderRadius: 100, overflow: 'hidden' }}>
+                    <div style={{ width: `${p}%`, height: '100%', background: accent, borderRadius: 100 }} />
+                  </div>
+                  <span style={{ fontSize: 12, color: textLight, width: 36, textAlign: 'right' }}>{p}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="kh-sectors-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+            {[
+              { name: 'H. Lin', role: 'Facility Director', org: 'MacKay Memorial Hospital', stars: 5, review: 'Eight years of operation with zero leaks. The installation team was professional and the Aquatherm system certificate gave us full compliance documentation from day one.' },
+              { name: 'W. Chang', role: 'Project Engineer', org: 'National Cheng Kung University', stars: 5, review: 'Specified Fusiotherm for all new dormitory buildings. Heat-fusion joints are permanent — no threading, no corrosion. Outstanding after-sales support from the Kanghe team.' },
+              { name: 'C. Wu', role: 'Procurement Manager', org: 'Industrial Park Authority', stars: 4, review: 'Competitive pricing for a German-certified product. Delivery from the Changhua warehouse was on time and the technical documentation exceeded our spec requirements.' },
+            ].map((r, i) => (
+              <div key={i} className="kh-badge-card" style={{ background: bg, border: `1px solid ${border}`, borderRadius: 12, padding: '22px 20px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 700, color: text, marginBottom: 2 }}>{r.name}</p>
+                    <p style={{ fontSize: 11, color: textLight }}>{r.role} · {r.org}</p>
+                  </div>
+                  <span style={{ color: '#fbbf24', fontSize: 12, letterSpacing: 2 }}>{'★'.repeat(r.stars)}</span>
+                </div>
+                <p style={{ fontSize: 13, color: textMid, lineHeight: 1.75 }}>{r.review}</p>
               </div>
             ))}
           </div>
