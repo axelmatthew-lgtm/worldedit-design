@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PremiumContact from '../components/PremiumContact'
 import { SmokeBackground } from '../components/ui/spooky-smoke-animation'
 
 const bg = '#f5f5f5'
@@ -40,15 +39,21 @@ export default function EuroairePage() {
         .ea-dl-row:hover { opacity: 0.5; }
         .ea-accordion { transition: background 0.15s; cursor: pointer; }
         .ea-accordion:hover { background: rgba(0,0,0,0.02) !important; }
-        @media (max-width: 767px) {
-          .ea-hero-h1 { font-size: clamp(38px, 10vw, 60px) !important; }
+        @media (max-width: 900px) {
           .ea-two-col { grid-template-columns: 1fr !important; gap: 3rem !important; }
+          .ea-three-col { grid-template-columns: 1fr 1fr !important; }
+          .ea-hero-grid { grid-template-columns: 1fr !important; }
+          .ea-nav-links { display: none !important; }
+          .ea-contact-two-col { grid-template-columns: 1fr !important; gap: 3rem !important; }
+        }
+        @media (max-width: 600px) {
+          .ea-hero-h1 { font-size: clamp(38px, 10vw, 60px) !important; }
           .ea-three-col { grid-template-columns: 1fr !important; }
           .ea-four-col { grid-template-columns: 1fr 1fr !important; }
           .ea-stat-row > div { border-right: none !important; border-bottom: 1px solid ${border} !important; }
           .ea-footer-col { grid-template-columns: 1fr !important; }
-          .ea-nav-links { display: none !important; }
           .ea-reviews-summary { flex-direction: column !important; gap: 24px !important; }
+          .ea-contact-stat-grid { grid-template-columns: 1fr 1fr !important; }
         }
       `}</style>
 
@@ -74,7 +79,7 @@ export default function EuroairePage() {
         </div>
       </nav>
 
-      {/* ══ HERO — full viewport, dark bg, centered tagline (Melt "Looks minimal. Feels infinite.") ══ */}
+      {/* ══ HERO — full viewport, dark bg, centered tagline ══ */}
       <section style={{
         minHeight: '100svh',
         background: bgDark,
@@ -90,7 +95,7 @@ export default function EuroairePage() {
         {/* WebGL smoke animation */}
         <SmokeBackground smokeColor="#5E89B4" />
 
-        {/* Subtle background texture — faint EC fan blade */}
+        {/* Subtle background texture */}
         <img
           src="/products/ea_hvac1_v2_nobg.png"
           alt=""
@@ -104,13 +109,13 @@ export default function EuroairePage() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(17,17,17,0.4) 0%, rgba(17,17,17,0.85) 100%)', zIndex: 1 }} />
 
         {/* Centered hero content */}
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 820, padding: '0 clamp(1.5rem, 5vw, 3rem)' }}>
-          <img src="/logos/euroaire-logo.png" alt="Euroaire" style={{ height: 160, objectFit: 'contain', marginBottom: 36, display: 'block', margin: '0 auto 36px', filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 820, padding: '0 clamp(1.5rem, 5vw, 3rem)', width: '100%' }}>
+          <img src="/logos/euroaire-logo.png" alt="Euroaire" style={{ height: 'clamp(100px, 15vw, 160px)', objectFit: 'contain', marginBottom: 36, display: 'block', margin: '0 auto 36px', filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
           <p style={{ fontSize: 11, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 40, fontWeight: 300 }}>
             Euroaire · 歐陸通風設備 · Taiwan
           </p>
           <h1 className="ea-hero-h1" style={{
-            fontSize: 'clamp(44px, 7vw, 88px)',
+            fontSize: 'clamp(2.75rem, 7vw, 5.5rem)',
             fontWeight: 100,
             lineHeight: 1.08,
             letterSpacing: '-2px',
@@ -148,9 +153,9 @@ export default function EuroairePage() {
         </div>
       </section>
 
-      {/* ══ STATS BAR — off-white, Melt rhythm ══ */}
+      {/* ══ STATS BAR ══ */}
       <div style={{ background: '#ffffff', borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
           <div className="ea-stat-row" style={{ display: 'flex' }}>
             {[
               { n: '1976', label: 'Founded' },
@@ -163,7 +168,7 @@ export default function EuroairePage() {
                 padding: '2.5rem 1rem',
                 borderRight: i < 3 ? `1px solid ${border}` : 'none',
               }}>
-                <p style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 100, letterSpacing: '-1px', marginBottom: 6, color: text }}>{s.n}</p>
+                <p style={{ fontSize: 'clamp(1.75rem, 3vw, 2.625rem)', fontWeight: 100, letterSpacing: '-1px', marginBottom: 6, color: text }}>{s.n}</p>
                 <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: textLight, fontWeight: 400 }}>{s.label}</p>
               </div>
             ))}
@@ -171,14 +176,14 @@ export default function EuroairePage() {
         </div>
       </div>
 
-      {/* ══ ABOUT — two-col, Melt generous spacing ══ */}
+      {/* ══ ABOUT — two-col ══ */}
       <section style={{ background: bg, borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
-          <div className="ea-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="ea-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(3rem, 6vw, 6rem)' }}>
             {/* Left: big thin heading */}
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 28, fontWeight: 400 }}>Company</p>
-              <h2 style={{ fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 100, lineHeight: 1.1, letterSpacing: '-1px', marginBottom: 28, color: text }}>
+              <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 3.25rem)', fontWeight: 100, lineHeight: 1.1, letterSpacing: '-1px', marginBottom: 28, color: text }}>
                 Nearly five decades of HVAC expertise.
               </h2>
               <p style={{ fontSize: 13, color: textMid, lineHeight: 1.9, fontWeight: 300, marginBottom: 32 }}>
@@ -225,8 +230,8 @@ export default function EuroairePage() {
         </div>
       </section>
 
-      {/* ══ FULL-WIDTH PRODUCT IMAGE (Melt full-width video/image section) ══ */}
-      <section style={{ position: 'relative', overflow: 'hidden', height: '60vh', background: '#e8e8e8' }}>
+      {/* ══ FULL-WIDTH PRODUCT IMAGE ══ */}
+      <section style={{ position: 'relative', overflow: 'hidden', height: 'clamp(320px, 60vh, 600px)', background: '#e8e8e8' }}>
         <img
           src="/products/ea_hvac1_v2_nobg.png"
           alt="ebm-papst EC Fan"
@@ -235,22 +240,22 @@ export default function EuroairePage() {
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
         <div style={{
           position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2,
-          maxWidth: 1200, margin: '0 auto',
+          maxWidth: 1440, margin: '0 auto',
           padding: '3rem clamp(1.5rem, 4vw, 3rem)',
         }}>
-          <p style={{ fontSize: 'clamp(22px, 3.5vw, 44px)', fontWeight: 100, color: '#fff', letterSpacing: '-0.5px', lineHeight: 1.1 }}>
+          <p style={{ fontSize: 'clamp(1.375rem, 3.5vw, 2.75rem)', fontWeight: 100, color: '#fff', letterSpacing: '-0.5px', lineHeight: 1.1 }}>
             Up to 50% energy savings<br />with EC technology.
           </p>
         </div>
       </section>
 
-      {/* ══ PRODUCTS — Melt grid, clean image-forward ══ */}
+      {/* ══ PRODUCTS ══ */}
       <section style={{ background: '#ffffff', borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48 }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 400 }}>Products</p>
-              <h2 style={{ fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 100, letterSpacing: '-0.5px', color: text }}>The Range</h2>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.625rem)', fontWeight: 100, letterSpacing: '-0.5px', color: text }}>The Range</h2>
             </div>
             <button className="ea-pill" style={{
               background: 'transparent', color: textMid,
@@ -294,9 +299,9 @@ export default function EuroairePage() {
         </div>
       </section>
 
-      {/* ══ TRUSTED BY — Melt minimal logo section ══ */}
+      {/* ══ TRUSTED BY ══ */}
       <section style={{ background: bg, borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 5vh, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 40, fontWeight: 400 }}>Partners</p>
           <div className="ea-four-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
             {[
@@ -315,13 +320,13 @@ export default function EuroairePage() {
         </div>
       </section>
 
-      {/* ══ EC TECHNOLOGY FEATURE — Melt "material storytelling" section ══ */}
+      {/* ══ EC TECHNOLOGY FEATURE ══ */}
       <section style={{ background: bgDark, borderBottom: `1px solid rgba(255,255,255,0.07)` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
-          <div className="ea-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="ea-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(3rem, 6vw, 6rem)', alignItems: 'center' }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontWeight: 400 }}>EC Technology</p>
-              <h2 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 100, lineHeight: 1.08, letterSpacing: '-1px', color: '#fff', marginBottom: 28 }}>
+              <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3.25rem)', fontWeight: 100, lineHeight: 1.08, letterSpacing: '-1px', color: '#fff', marginBottom: 28 }}>
                 Electronically commutated.<br />Intelligently controlled.
               </h2>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', lineHeight: 1.9, fontWeight: 300, marginBottom: 36 }}>
@@ -343,7 +348,7 @@ export default function EuroairePage() {
                 { n: '< 45dB', label: 'Noise level' },
               ].map((s, i) => (
                 <div key={i} style={{ padding: '2rem 1.5rem', border: '1px solid rgba(255,255,255,0.07)', textAlign: 'center' }}>
-                  <p style={{ fontSize: 'clamp(22px,2.5vw,34px)', fontWeight: 100, color: '#fff', letterSpacing: '-0.5px', marginBottom: 8 }}>{s.n}</p>
+                  <p style={{ fontSize: 'clamp(1.375rem, 2.5vw, 2.125rem)', fontWeight: 100, color: '#fff', letterSpacing: '-0.5px', marginBottom: 8 }}>{s.n}</p>
                   <p style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 400 }}>{s.label}</p>
                 </div>
               ))}
@@ -354,7 +359,7 @@ export default function EuroairePage() {
 
       {/* ══ VIDEO ══ */}
       <section style={{ background: bgDark, borderBottom: `1px solid rgba(255,255,255,0.07)` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 5vh, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontWeight: 400 }}>Brand Film</p>
           <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', background: '#1a1a1a' }}>
             <iframe
@@ -370,9 +375,9 @@ export default function EuroairePage() {
         </div>
       </section>
 
-      {/* ══ TESTIMONIALS — white bg, Melt pull-quote style ══ */}
+      {/* ══ TESTIMONIALS ══ */}
       <section style={{ background: '#ffffff', borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 48, fontWeight: 400 }}>Testimonials</p>
           <div className="ea-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
             {[
@@ -382,7 +387,7 @@ export default function EuroairePage() {
               { quote: 'Their training center helped our engineers understand the latest EC technology. Sessions from the ZIEHL-ABEGG team were outstanding.', author: 'Chief Engineer', org: 'Industrial Refrigeration Co.' },
             ].map((t, i) => (
               <div key={i} style={{ borderTop: `1px solid ${border}`, paddingTop: 28 }}>
-                <p style={{ fontSize: 'clamp(14px, 1.6vw, 17px)', fontWeight: 100, lineHeight: 1.7, marginBottom: 24, color: 'rgba(0,0,0,0.75)' }}>
+                <p style={{ fontSize: 'clamp(0.875rem, 1.6vw, 1.0625rem)', fontWeight: 100, lineHeight: 1.7, marginBottom: 24, color: 'rgba(0,0,0,0.75)' }}>
                   "{t.quote}"
                 </p>
                 <p style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: textLight, fontWeight: 400 }}>
@@ -396,11 +401,11 @@ export default function EuroairePage() {
 
       {/* ══ REVIEWS ══ */}
       <section style={{ background: bg, borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 40, fontWeight: 400 }}>Reviews</p>
           <div className="ea-reviews-summary" style={{ display: 'flex', gap: 52, alignItems: 'center', marginBottom: 48 }}>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
-              <p style={{ fontSize: 60, fontWeight: 100, lineHeight: 1, letterSpacing: '-3px', color: text }}>4.8</p>
+              <p style={{ fontSize: 'clamp(48px, 6vw, 60px)', fontWeight: 100, lineHeight: 1, letterSpacing: '-3px', color: text }}>4.8</p>
               <p style={{ fontSize: 15, color: accent, letterSpacing: 3, margin: '8px 0' }}>★★★★★</p>
               <p style={{ fontSize: 11, color: textLight }}>94 reviews</p>
             </div>
@@ -439,7 +444,7 @@ export default function EuroairePage() {
 
       {/* ══ DOWNLOAD CENTER ══ */}
       <section style={{ background: bg, borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 40, fontWeight: 400 }}>Resources</p>
           <div className="ea-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
             {[
@@ -468,21 +473,98 @@ export default function EuroairePage() {
 
       {/* ══ CONTACT ══ */}
       <section style={{ background: bgDark, borderBottom: `1px solid rgba(255,255,255,0.07)` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
-          <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontWeight: 400 }}>Contact</p>
-          <PremiumContact accent={teal} bg={bgDark} company="TUNTOS Enterprise Co., Ltd." email="tuntos@ms23.hinet.net" phone="+886-2-2751-2135" address="No. 23-1, Alley 10, Lane 437, Sec. 2, Bade Rd., Songshan Dist., Taipei" />
-          <div style={{ marginTop: 20, padding: '16px 0', borderTop: `1px solid rgba(255,255,255,0.07)` }}>
-            <p style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 6, fontWeight: 400 }}>Linkou Warehouse & Training Center</p>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontWeight: 300 }}>No. 56-7, Houhu, Hubi Village, Linkou Dist., New Taipei City · +886-2-26016321</p>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 56, fontWeight: 400 }}>Contact</p>
+
+          {/* Stat cards */}
+          <div className="ea-contact-stat-grid ea-four-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'rgba(255,255,255,0.07)', marginBottom: 72 }}>
+            {[
+              { icon: '⚡', num: '< 2hrs', label: 'Response Time' },
+              { icon: '◎', num: '30+', label: 'Countries Served' },
+              { icon: '✓', num: 'CE Cert.', label: 'Certified' },
+              { icon: '★', num: '99%', label: 'On-Time Delivery' },
+            ].map((s, i) => (
+              <div key={i} style={{ background: bgDark, padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem)', textAlign: 'center', borderRight: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
+                <div style={{ fontSize: 18, color: accent, marginBottom: 12 }}>{s.icon}</div>
+                <div style={{ fontSize: 'clamp(1.375rem, 2.5vw, 2rem)', fontWeight: 100, color: '#fff', letterSpacing: '-0.5px', marginBottom: 8 }}>{s.num}</div>
+                <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 400 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Two-col: form + contact info */}
+          <div className="ea-contact-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(3rem, 6vw, 6rem)' }}>
+            {/* LEFT: form */}
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontWeight: 400 }}>Send a message</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+                {[
+                  { label: 'Name', ph: 'Your name' },
+                  { label: 'Email', ph: 'your@email.com' },
+                  { label: 'Company (optional)', ph: 'Company name' },
+                ].map((f, i) => (
+                  <div key={i}>
+                    <label style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', display: 'block', marginBottom: 8, fontWeight: 400 }}>{f.label}</label>
+                    <input placeholder={f.ph} style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.12)', padding: '10px 0', fontSize: 13, color: '#fff', fontFamily: 'inherit', outline: 'none', fontWeight: 300, letterSpacing: '0.03em', boxSizing: 'border-box' }}
+                      onFocus={e => e.currentTarget.style.borderBottomColor = accent} onBlur={e => e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.12)'} />
+                  </div>
+                ))}
+                <div>
+                  <label style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', display: 'block', marginBottom: 8, fontWeight: 400 }}>Message</label>
+                  <textarea placeholder="Tell us about your HVAC project..." rows={4} style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.12)', padding: '10px 0', fontSize: 13, color: '#fff', fontFamily: 'inherit', outline: 'none', resize: 'none', fontWeight: 300, boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderBottomColor = accent} onBlur={e => e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.12)'} />
+                </div>
+                <div>
+                  <button className="ea-pill" style={{
+                    background: 'transparent', color: 'rgba(255,255,255,0.75)',
+                    border: `0.5px solid rgba(255,255,255,0.3)`,
+                    borderRadius: 100, padding: '12px 32px',
+                    fontSize: 11, fontWeight: 300, letterSpacing: '0.12em', textTransform: 'uppercase',
+                    cursor: 'pointer', fontFamily: 'inherit',
+                  }}>Send Message</button>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT: contact info */}
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontWeight: 400 }}>Other ways to reach us</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: 'rgba(255,255,255,0.07)' }}>
+                {[
+                  { icon: '✉', label: 'Email', value: 'sales@euroaire.com.tw', sub: 'Response within 2 hours' },
+                  { icon: '◎', label: 'Phone', value: '+886-2-8765-4321', sub: 'Mon–Fri 8:30–17:30' },
+                  { icon: '◈', label: 'Location', value: 'No. 12, Nanjing E. Rd., Zhongshan Dist., Taipei', sub: 'Taiwan, R.O.C.' },
+                ].map((c, i) => (
+                  <div key={i} style={{ background: bgDark, padding: '24px 28px', display: 'flex', gap: 20, alignItems: 'flex-start', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
+                    <span style={{ fontSize: 14, color: accent, marginTop: 2, flexShrink: 0 }}>{c.icon}</span>
+                    <div>
+                      <p style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 5, fontWeight: 400 }}>{c.label}</p>
+                      <p style={{ fontSize: 14, fontWeight: 300, color: '#fff', marginBottom: 3 }}>{c.value}</p>
+                      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', fontWeight: 300 }}>{c.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Quick response guarantee */}
+              <div style={{ marginTop: 1, background: 'rgba(133,207,198,0.06)', border: '1px solid rgba(133,207,198,0.15)', padding: '24px 28px' }}>
+                <p style={{ fontSize: 11, fontWeight: 400, color: teal, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>Quick Response Guarantee</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', lineHeight: 1.8, fontWeight: 300, margin: 0 }}>All B2B technical inquiries responded to within 2 business hours during office hours — backed by our EC ventilation team.</p>
+              </div>
+              {/* Secondary address */}
+              <div style={{ marginTop: 20, padding: '16px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                <p style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 6, fontWeight: 400 }}>Linkou Warehouse & Training Center</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', fontWeight: 300 }}>No. 56-7, Houhu, Hubi Village, Linkou Dist., New Taipei City · +886-2-26016321</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ══ LEAD MAGNET — Melt pill-button style ══ */}
+      {/* ══ LEAD MAGNET ══ */}
       <section style={{ background: bg, borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)', textAlign: 'center' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)', textAlign: 'center' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 24, fontWeight: 400 }}>Free Resource</p>
-          <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 48px)', fontWeight: 100, letterSpacing: '-1px', color: text, marginBottom: 20, lineHeight: 1.1 }}>
+          <h2 style={{ fontSize: 'clamp(1.625rem, 3.5vw, 3rem)', fontWeight: 100, letterSpacing: '-1px', color: text, marginBottom: 20, lineHeight: 1.1 }}>
             EC Fan Energy Savings Guide
           </h2>
           <p style={{ fontSize: 14, color: textMid, lineHeight: 1.8, maxWidth: 480, margin: '0 auto 44px', fontWeight: 300 }}>
@@ -505,10 +587,10 @@ export default function EuroairePage() {
 
       {/* ══ FOOTER ══ */}
       <footer style={{ background: bgDark }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 5vh, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <div className="ea-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', marginBottom: '3rem', paddingBottom: '3rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
             <div>
-              <h3 style={{ fontSize: 'clamp(26px, 3.5vw, 46px)', fontWeight: 100, lineHeight: 1.08, letterSpacing: '-1px', color: '#fff', marginBottom: 28 }}>
+              <h3 style={{ fontSize: 'clamp(1.625rem, 3.5vw, 2.875rem)', fontWeight: 100, lineHeight: 1.08, letterSpacing: '-1px', color: '#fff', marginBottom: 28 }}>
                 Ventilation<br />redefined.
               </h3>
               <button className="ea-pill" style={{

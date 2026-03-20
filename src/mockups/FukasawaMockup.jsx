@@ -9,6 +9,7 @@ const projects = [
   { id: '3m', title: '3M', year: '2024', cat: 'Landing Page', logo: '/logos/3m-logo.svg', logoBg: '#e8001b' },
   { id: 'aikwang', title: 'AI-KWANG TECH CO.', year: '2024', cat: 'Landing Page', logo: '/logos/aikwang-logo.svg', logoBg: '#0d0d0d', logoStyle: { width: '60%', height: 'auto' } },
   { id: 'gemterminal', title: 'GEM TERMINAL INDUSTRY CO', year: '2024', cat: 'Landing Page', logo: '/logos/gem-terminal-logo-color.png', logoBg: '#ffffff', logoBorder: '1px solid #e0e0e0', logoStyle: { width: '55%', height: 'auto' } },
+  { id: 'chainsafely', title: 'Chain-Safely', year: '2025', cat: 'Landing Page', logo: '/logos/chainsafely-logo.svg', logoBg: '#0c0c0c', logoFilter: 'brightness(0) invert(1)', logoStyle: { width: '60%', height: 'auto' } },
 ]
 
 const navLinks = ['All Projects', 'Landing Page', 'Product', 'Exhibition', 'Graphic', 'Editorial']
@@ -201,7 +202,9 @@ export default function FukasawaMockup() {
                     }}>
                       {proj.logo
                         ? <img src={proj.logo} alt={proj.title} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '50%', height: 'auto', objectFit: 'contain', display: 'block', filter: proj.logoFilter || 'none', ...proj.logoStyle }} />
-                        : <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '35%', height: '35%', background: '#e8e8e8', borderRadius: '1px' }} />
+                        : proj.logoText
+                          ? <span style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', ...proj.logoTextStyle }}>{proj.logoText}</span>
+                          : <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '35%', height: '35%', background: '#e8e8e8', borderRadius: '1px' }} />
                       }
                     </div>
                     {/* Hover dim */}

@@ -13,6 +13,7 @@ import MinimalMockup from './mockups/MinimalMockup'
 import BoldMockup from './mockups/BoldMockup'
 import CreativeMockup from './mockups/CreativeMockup'
 import CorporateMockup from './mockups/CorporateMockup'
+import ChainSafelyPage from './mockups/ChainSafelyPage'
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/project/3m" element={<ThreeMPage />} />
           <Route path="/project/aikwang" element={<AiKwangPage />} />
           <Route path="/project/gemterminal" element={<GemTerminalPage />} />
+          <Route path="/project/chainsafely" element={<ChainSafelyPage />} />
           <Route path="/project/:id" element={<ProjectPage />} />
           <Route path="/minimal" element={<MinimalMockup />} />
           <Route path="/bold" element={<BoldMockup />} />

@@ -22,12 +22,17 @@ export default function GemTerminalPage() {
         .gem-card:hover .gem-img { transform: scale(1.05); }
         .gem-link { cursor:pointer; text-decoration: underline; text-underline-offset: 3px; opacity:0.4; transition: opacity 0.2s; }
         .gem-link:hover { opacity:1; }
-        @media (max-width:767px) {
+        @media (max-width: 900px) {
           .gem-two-col { grid-template-columns: 1fr !important; }
           .gem-three-col { grid-template-columns: 1fr 1fr !important; }
           .gem-decorative { display: none !important; }
-          .gem-three-col { grid-template-columns: 1fr !important; }
           .gem-nav-links { display: none !important; }
+          .gem-contact-stat-grid { grid-template-columns: 1fr 1fr !important; }
+          .gem-contact-two-col { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 600px) {
+          .gem-three-col { grid-template-columns: 1fr !important; }
+          .gem-contact-stat-grid { grid-template-columns: 1fr 1fr !important; }
         }
       `}</style>
 
@@ -51,7 +56,7 @@ export default function GemTerminalPage() {
           <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>GEM Terminal</span>
         </div>
 
-        <div style={{ display: 'flex', gap: 28, fontSize: 12, fontWeight: 500, letterSpacing: '0.06em' }}>
+        <div className="gem-nav-links" style={{ display: 'flex', gap: 28, fontSize: 12, fontWeight: 500, letterSpacing: '0.06em' }}>
           <span className="gem-link" style={{ textDecoration: 'none' }}
             onMouseEnter={e => e.target.style.opacity = '1'} onMouseLeave={e => e.target.style.opacity = '0.4'}>Prev</span>
           <span className="gem-link" style={{ textDecoration: 'none' }}
@@ -60,7 +65,7 @@ export default function GemTerminalPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{ minHeight: '100svh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#1e3fae' }}>
+      <section style={{ minHeight: 'clamp(500px, 100svh, 100svh)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#1e3fae' }}>
         {/* Yellow smoke animation over blue background */}
         <EtherealShadow
           color="rgba(234, 179, 8, 1)"
@@ -73,14 +78,14 @@ export default function GemTerminalPage() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,20,80,0.3) 0%, rgba(10,20,80,0.6) 100%)', zIndex: 1 }} />
 
         {/* Bottom-left text (Permian style) */}
-        <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(1.5rem, 4vw, 3rem) 52px' }}>
+        <div style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(1.5rem, 4vw, 3rem) 52px', maxWidth: 1440, margin: '0 auto', width: '100%' }}>
           <img src="/logos/gem-terminal-logo-white.svg" alt="GEM Terminal" style={{ height: 48, objectFit: 'contain', objectPosition: 'left', marginBottom: 28, display: 'block', alignSelf: 'flex-start' }} />
           <p style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: 18, fontWeight: 500 }}>Est. 1977 · Kaohsiung, Taiwan</p>
-          <h1 style={{ fontSize: 'clamp(52px, 9vw, 130px)', fontWeight: 700, lineHeight: 0.88, letterSpacing: '-4px', color: '#fff', marginBottom: 36, maxWidth: 800 }}>
+          <h1 style={{ fontSize: 'clamp(2.75rem, 9vw, 8.125rem)', fontWeight: 700, lineHeight: 0.88, letterSpacing: '-4px', color: '#fff', marginBottom: 36, maxWidth: 800 }}>
             GEM<br />Terminal.
           </h1>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-            <p style={{ fontSize: 'clamp(13px, 1.4vw, 16px)', color: 'rgba(255,255,255,0.55)', maxWidth: 360, lineHeight: 1.7 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
+            <p style={{ fontSize: 'clamp(0.8125rem, 1.4vw, 1rem)', color: 'rgba(255,255,255,0.55)', maxWidth: 360, lineHeight: 1.7 }}>
               Asia's leading manufacturer of copper electrical terminals, connectors and wire harnesses — serving automotive, EV, and electronics markets worldwide.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4 }}>
@@ -94,18 +99,18 @@ export default function GemTerminalPage() {
 
       {/* ── PRODUCT SHOWCASE ── */}
       <section style={{ borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '5rem clamp(1.5rem, 4vw, 3rem) 0' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40 }}>
+        <div style={{ padding: 'clamp(3rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem) 0', maxWidth: 1440, margin: '0 auto', width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 12, fontWeight: 600 }}>Product Range</p>
-              <h2 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 700, letterSpacing: '-2px', lineHeight: 1.0 }}>Precision copper.<br />Every connection.</h2>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 3.25rem)', fontWeight: 700, letterSpacing: '-2px', lineHeight: 1.0 }}>Precision copper.<br />Every connection.</h2>
             </div>
             <p className="gem-link" style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase' }}>View all products</p>
           </div>
         </div>
 
         {/* 3-col product grid (Permian social grid adapted) */}
-        <div className="gem-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: border }}>
+        <div className="gem-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: border, maxWidth: 1440, margin: '0 auto', width: '100%' }}>
           {[
             { title: 'Automotive Connector', sub: 'High-reliability · EV ready · Multi-pin', img: 'https://www.gem.com.tw/files/images/products/iStock-1.png' },
             { title: 'AC Power Cord Connector', sub: 'Certified · Consumer & industrial', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img3_autoxauto.png' },
@@ -116,7 +121,7 @@ export default function GemTerminalPage() {
           ].map((p, i) => (
             <div key={i} className="gem-card" onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ cursor: 'pointer', background: '#fff', overflow: 'hidden' }}>
               <div style={{ aspectRatio: '4/3', overflow: 'hidden', background: '#f5f5f5' }}>
-                <img className="gem-img" src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <img className="gem-img" src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', maxWidth: '100%' }} />
               </div>
               <div style={{ padding: '20px 24px 28px' }}>
                 <div style={{ height: 1.5, background: hovered === i ? text : 'transparent', marginBottom: 14, transition: 'background 0.2s' }} />
@@ -129,15 +134,15 @@ export default function GemTerminalPage() {
       </section>
 
       {/* ── FULL-BLEED EDITORIAL ── */}
-      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 560, background: '#0a0a0a' }}>
+      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 'clamp(320px, 45vw, 560px)', background: '#0a0a0a' }}>
         <img
           src="https://www.gem.com.tw/static/web/styles/images/index/img2.jpg"
           alt="GEM Terminal factory"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.45, zIndex: 0 }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.45, zIndex: 0, maxWidth: '100%' }}
         />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '100%', padding: '7rem clamp(1.5rem, 4vw, 3rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 560 }}>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1440, margin: '0 auto', width: '100%', padding: 'clamp(4rem, 7vw, 7rem) clamp(1.5rem, 4vw, 3rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: 'clamp(320px, 45vw, 560px)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20, fontWeight: 600 }}>Manufacturing</p>
-          <h2 style={{ fontSize: 'clamp(36px, 6.5vw, 88px)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-3px', color: '#fff', maxWidth: 700, marginBottom: 32 }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 6.5vw, 5.5rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-3px', color: '#fff', maxWidth: 700, marginBottom: 32 }}>
             Precision<br />in every<br />micron.
           </h2>
           <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)', maxWidth: 420, lineHeight: 1.75 }}>
@@ -148,11 +153,11 @@ export default function GemTerminalPage() {
 
       {/* ── ABOUT / STATS ── */}
       <section style={{ borderBottom: `1px solid ${border}` }}>
-        <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
+        <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, maxWidth: 1440, margin: '0 auto', width: '100%' }}>
           {/* Left — story */}
-          <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)', borderRight: `1px solid ${border}` }}>
+          <div style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)', borderRight: `1px solid ${border}` }}>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 20, fontWeight: 600 }}>Our Story</p>
-            <h2 style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 700, letterSpacing: '-1px', lineHeight: 1.1, marginBottom: 28 }}>
+            <h2 style={{ fontSize: 'clamp(1.375rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-1px', lineHeight: 1.1, marginBottom: 28 }}>
               Rooted in Taiwan.<br />Connected globally.
             </h2>
             <p style={{ fontSize: 14, color: textMid, lineHeight: 1.9, marginBottom: 16 }}>
@@ -163,7 +168,7 @@ export default function GemTerminalPage() {
             </p>
           </div>
           {/* Right — stats */}
-          <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+          <div style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 20, fontWeight: 600 }}>By the Numbers</p>
             {[
               ['1977', 'Year founded in Kaohsiung'],
@@ -172,7 +177,7 @@ export default function GemTerminalPage() {
               ['TSE', 'Listed on Taiwan Stock Exchange'],
             ].map(([num, label], i) => (
               <div key={i} style={{ borderTop: `1px solid ${border}`, padding: '22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <p style={{ fontSize: 'clamp(22px, 3vw, 36px)', fontWeight: 700, letterSpacing: '-1px' }}>{num}</p>
+                <p style={{ fontSize: 'clamp(1.25rem, 3vw, 2.25rem)', fontWeight: 700, letterSpacing: '-1px' }}>{num}</p>
                 <p style={{ fontSize: 12, color: textLight, maxWidth: 200, textAlign: 'right', lineHeight: 1.5 }}>{label}</p>
               </div>
             ))}
@@ -182,9 +187,9 @@ export default function GemTerminalPage() {
 
       {/* ── CERTIFICATIONS / TRUSTED BY ── */}
       <section style={{ background: '#f8f8f8', borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ padding: 'clamp(3rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem)', maxWidth: 1440, margin: '0 auto', width: '100%' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 40, fontWeight: 600 }}>Trusted By</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: border }}>
+          <div className="gem-contact-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: border }}>
             {[
               { name: 'SIEMENS', sub: 'Industrial Automation' },
               { name: 'ABB', sub: 'Power & Automation' },
@@ -202,9 +207,9 @@ export default function GemTerminalPage() {
 
       {/* ── TESTIMONIALS (Permian community section) ── */}
       <section style={{ borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)', maxWidth: 1440, margin: '0 auto', width: '100%' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>What our customers say</p>
-          <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', fontWeight: 700, letterSpacing: '-1.5px', marginBottom: 52 }}>Our community is open<br />to anyone who builds.</h2>
+          <h2 style={{ fontSize: 'clamp(1.375rem, 3.5vw, 3rem)', fontWeight: 700, letterSpacing: '-1.5px', marginBottom: 52 }}>Our community is open<br />to anyone who builds.</h2>
           <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: border }}>
             {[
               { quote: "We've standardized our entire control panel production on GEM Terminal spring clamp series. Wiring time cut by 35% compared to screw terminals.", author: 'Panel Production Manager', org: 'Industrial Automation Builder, Germany' },
@@ -213,7 +218,7 @@ export default function GemTerminalPage() {
               { quote: "As a listed company, GEM Terminal's financial stability and long-term commitment give us confidence for multi-year supply agreements.", author: 'Strategic Sourcing Director', org: 'Machine Tool Manufacturer, Italy' },
             ].map((t, i) => (
               <div key={i} style={{ background: '#fff', padding: '40px 36px' }}>
-                <p style={{ fontSize: 'clamp(14px, 1.5vw, 17px)', fontWeight: 400, color: text, lineHeight: 1.75, marginBottom: 28 }}>"{t.quote}"</p>
+                <p style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1.0625rem)', fontWeight: 400, color: text, lineHeight: 1.75, marginBottom: 28 }}>"{t.quote}"</p>
                 <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 3 }}>{t.author}</p>
                 <p style={{ fontSize: 12, color: textLight }}>{t.org}</p>
               </div>
@@ -224,11 +229,11 @@ export default function GemTerminalPage() {
 
       {/* ── REVIEWS ── */}
       <section style={{ borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)', maxWidth: 1440, margin: '0 auto', width: '100%' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>Reviews</p>
-          <div style={{ display: 'flex', gap: 52, alignItems: 'center', marginBottom: 48 }}>
+          <div style={{ display: 'flex', gap: 52, alignItems: 'center', marginBottom: 48, flexWrap: 'wrap' }}>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
-              <p style={{ fontSize: 64, fontWeight: 700, lineHeight: 1, letterSpacing: '-3px', color: text }}>4.9</p>
+              <p style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, lineHeight: 1, letterSpacing: '-3px', color: text }}>4.9</p>
               <p style={{ fontSize: 16, letterSpacing: 3, margin: '8px 0', color: '#f59e0b' }}>★★★★★</p>
               <p style={{ fontSize: 11, color: textLight }}>217 reviews</p>
             </div>
@@ -267,9 +272,9 @@ export default function GemTerminalPage() {
 
       {/* ── DOWNLOAD CENTER ── */}
       <section style={{ background: '#f8f8f8', borderBottom: `1px solid ${border}` }}>
-        <div style={{ padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ padding: 'clamp(3rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem)', maxWidth: 1440, margin: '0 auto', width: '100%' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>Downloads</p>
-          <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 34px)', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: 32 }}>Documentation</h2>
+          <h2 style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2.125rem)', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: 32 }}>Documentation</h2>
           <div className="gem-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: border }}>
             {[
               { label: 'CATALOG', name: 'GEM Terminal Full Product Catalog' },
@@ -293,48 +298,134 @@ export default function GemTerminalPage() {
         </div>
       </section>
 
+      {/* ── CONTACT ── */}
+      <section style={{ borderBottom: `1px solid ${border}` }}>
+        <div style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)', maxWidth: 1440, margin: '0 auto', width: '100%' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 600 }}>Contact</p>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 3.25rem)', fontWeight: 700, letterSpacing: '-2px', lineHeight: 1.0, marginBottom: 56 }}>Precision copper.<br />Precise answers.</h2>
+
+          {/* Stat cards — sharp corners, Permian style */}
+          <div className="gem-contact-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: border, marginBottom: 72 }}>
+            {[
+              { icon: '⚡', num: '< 4hrs', label: 'Response Time' },
+              { icon: '◎', num: '1000+', label: 'Specifications' },
+              { icon: '✓', num: '30+', label: 'Years Technology' },
+              { icon: '★', num: 'TSE', label: 'Listed Company' },
+            ].map((s, i) => (
+              <div key={i} style={{ background: '#fff', padding: '2.5rem 2rem', textAlign: 'center' }}>
+                <div style={{ fontSize: 14, color: accent, marginBottom: 12 }}>{s.icon}</div>
+                <div style={{ fontSize: 'clamp(1.375rem, 3vw, 2.5rem)', fontWeight: 700, color: text, letterSpacing: '-1.5px', marginBottom: 8 }}>{s.num}</div>
+                <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: textLight, fontWeight: 600 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Two-col: form + contact info */}
+          <div className="gem-contact-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: border }}>
+            {/* LEFT: form */}
+            <div style={{ background: '#fff', padding: '3rem' }}>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 28, fontWeight: 600 }}>Send a message</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                {[
+                  { label: 'Name', ph: 'Your name' },
+                  { label: 'Email', ph: 'your@email.com' },
+                  { label: 'Company (optional)', ph: 'Company name' },
+                ].map((f, i) => (
+                  <div key={i}>
+                    <label style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: textLight, display: 'block', marginBottom: 8, fontWeight: 600 }}>{f.label}</label>
+                    <input placeholder={f.ph} style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${border}`, padding: '10px 0', fontSize: 14, color: text, fontFamily: fontSans, outline: 'none', boxSizing: 'border-box' }}
+                      onFocus={e => e.currentTarget.style.borderBottomColor = accent} onBlur={e => e.currentTarget.style.borderBottomColor = border} />
+                  </div>
+                ))}
+                <div>
+                  <label style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: textLight, display: 'block', marginBottom: 8, fontWeight: 600 }}>Message</label>
+                  <textarea placeholder="Tell us about your terminal specification needs..." rows={4} style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: `1px solid ${border}`, padding: '10px 0', fontSize: 14, color: text, fontFamily: fontSans, outline: 'none', resize: 'none', boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderBottomColor = accent} onBlur={e => e.currentTarget.style.borderBottomColor = border} />
+                </div>
+                <div>
+                  <button style={{ background: text, color: '#fff', border: 'none', padding: '13px 28px', fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: fontSans, transition: 'background 0.15s' }}
+                    onMouseEnter={e => e.currentTarget.style.background = accent} onMouseLeave={e => e.currentTarget.style.background = text}>Send Message</button>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT: contact info */}
+            <div style={{ background: '#f8f8f8', padding: '3rem' }}>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, marginBottom: 28, fontWeight: 600 }}>Other ways to reach us</p>
+              <div>
+                {[
+                  { icon: '✉', label: 'Email', value: 'sales@gem.com.tw', sub: 'Response within 4 hours' },
+                  { icon: '◎', label: 'Phone', value: '+886-7-622-1234', sub: 'Mon–Fri 8:30–17:30' },
+                  { icon: '◈', label: 'Location', value: 'No. 5, Luzhu 1st Rd., Luzhu Dist., Kaohsiung', sub: 'Taiwan, R.O.C.' },
+                ].map((c, i) => (
+                  <div key={i} style={{ borderTop: `1px solid ${border}`, padding: '20px 0', display: 'flex', gap: 16, alignItems: 'flex-start', ...(i === 2 ? { borderBottom: `1px solid ${border}` } : {}) }}>
+                    <span style={{ fontSize: 14, color: accent, marginTop: 2, flexShrink: 0 }}>{c.icon}</span>
+                    <div>
+                      <p style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: textLight, marginBottom: 5, fontWeight: 600 }}>{c.label}</p>
+                      <p style={{ fontSize: 14, fontWeight: 600, color: text, marginBottom: 3 }}>{c.value}</p>
+                      <p style={{ fontSize: 11, color: textLight }}>{c.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Quick response guarantee */}
+              <div style={{ marginTop: 20, padding: '20px', background: '#fff', border: `1px solid ${border}` }}>
+                <p style={{ fontSize: 9, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, marginBottom: 8 }}>Quick Response Guarantee</p>
+                <p style={{ fontSize: 13, color: textMid, lineHeight: 1.8, margin: 0 }}>All terminal specification inquiries receive a response within 4 business hours. Sample requests processed within 2 business days.</p>
+              </div>
+              {/* Secondary note */}
+              <p style={{ fontSize: 11, color: textLight, marginTop: 16 }}>22.6273° N · 120.3014° E · Luzhu, Kaohsiung</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── LEAD MAGNET / CTA ── */}
       <section style={{ background: '#000', padding: 'clamp(3rem,7vh,5rem) clamp(1.5rem,4vw,3rem)' }}>
-        <div style={{ maxWidth: 700 }}>
-          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20, fontWeight: 600 }}>Free Resource</p>
-          <h3 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 700, letterSpacing: '-1.5px', color: '#fff', lineHeight: 0.95, marginBottom: 32 }}>
-            Terminal Block<br />Selection Guide —<br />Free Download.
-          </h3>
-          <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, maxWidth: 420, marginBottom: 40 }}>
-            Screw, spring, or fuse terminal — which is right for your panel? Download our engineer's selection matrix with ratings, certifications, and application notes.
-          </p>
-          <div style={{ display: 'flex', gap: 0, maxWidth: 460 }}>
-            <input placeholder="Your work email" style={{
-              flex: 1, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)',
-              borderRight: 'none', borderRadius: 0, padding: '14px 20px',
-              fontSize: 13, color: '#fff', fontFamily: 'inherit', outline: 'none',
-            }} />
-            <button style={{
-              background: '#fff', color: '#000', border: 'none',
-              padding: '14px 28px', fontSize: 12, fontWeight: 700,
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap',
-            }}>Get Guide</button>
+        <div style={{ maxWidth: 1440, margin: '0 auto', width: '100%' }}>
+          <div style={{ maxWidth: 700 }}>
+            <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 20, fontWeight: 600 }}>Free Resource</p>
+            <h3 style={{ fontSize: 'clamp(1.5rem, 4vw, 3.25rem)', fontWeight: 700, letterSpacing: '-1.5px', color: '#fff', lineHeight: 0.95, marginBottom: 32 }}>
+              Terminal Block<br />Selection Guide —<br />Free Download.
+            </h3>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, maxWidth: 420, marginBottom: 40 }}>
+              Screw, spring, or fuse terminal — which is right for your panel? Download our engineer's selection matrix with ratings, certifications, and application notes.
+            </p>
+            <div style={{ display: 'flex', gap: 0, maxWidth: 460 }}>
+              <input placeholder="Your work email" style={{
+                flex: 1, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)',
+                borderRight: 'none', borderRadius: 0, padding: '14px 20px',
+                fontSize: 13, color: '#fff', fontFamily: 'inherit', outline: 'none',
+              }} />
+              <button style={{
+                background: '#fff', color: '#000', border: 'none',
+                padding: '14px 28px', fontSize: 12, fontWeight: 700,
+                letterSpacing: '0.08em', textTransform: 'uppercase',
+                cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap',
+              }}>Get Guide</button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
       <footer style={{ background: '#fff', borderTop: `1px solid ${border}`, padding: '36px clamp(1.5rem,4vw,3rem)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <div>
-            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>GEM Terminal Industry Co., Ltd.</p>
-            <p style={{ fontSize: 11, color: textLight }}>Driven by precision. Connecting the world — conductor by conductor.</p>
+        <div style={{ maxWidth: 1440, margin: '0 auto', width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+            <div>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>GEM Terminal Industry Co., Ltd.</p>
+              <p style={{ fontSize: 11, color: textLight }}>Driven by precision. Connecting the world — conductor by conductor.</p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3 }}>
+              <p style={{ fontSize: 11, color: textLight, letterSpacing: '0.06em' }}>Taiwan: Kaohsiung</p>
+              <p style={{ fontSize: 11, color: '#ccc', letterSpacing: '0.06em' }}>22.6273° N · 120.3014° E</p>
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3 }}>
-            <p style={{ fontSize: 11, color: textLight, letterSpacing: '0.06em' }}>Taiwan: Kaohsiung</p>
-            <p style={{ fontSize: 11, color: '#ccc', letterSpacing: '0.06em' }}>22.6273° N · 120.3014° E</p>
+          <div style={{ marginTop: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <p style={{ fontSize: 11, color: '#ccc' }}>© 2025 Made with Worldedit Design</p>
+            <span onClick={() => navigate('/')} style={{ fontSize: 11, color: '#ccc', cursor: 'pointer' }}
+              onMouseEnter={e => e.target.style.color = text} onMouseLeave={e => e.target.style.color = '#ccc'}>← Back to Directory</span>
           </div>
-        </div>
-        <div style={{ marginTop: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <p style={{ fontSize: 11, color: '#ccc' }}>© 2025 Made with Worldedit Design</p>
-          <span onClick={() => navigate('/')} style={{ fontSize: 11, color: '#ccc', cursor: 'pointer' }}
-            onMouseEnter={e => e.target.style.color = text} onMouseLeave={e => e.target.style.color = '#ccc'}>← Back to Directory</span>
         </div>
       </footer>
     </div>

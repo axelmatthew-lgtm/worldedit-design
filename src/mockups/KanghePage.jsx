@@ -77,17 +77,21 @@ export default function KanghePage() {
         .kh-proj-row { transition: background 0.15s; }
         .kh-proj-row:hover { background: ${bluePale} !important; }
         @media (max-width: 900px) {
+          .kh-two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .kh-why-grid { grid-template-columns: 1fr 1fr !important; }
+          .kh-news-grid { grid-template-columns: 1fr !important; }
           .kh-hero-cols { flex-direction: column !important; }
           .kh-hero-logo { width: 240px !important; }
           .kh-stats-grid { grid-template-columns: 1fr 1fr !important; }
-          .kh-why-grid { grid-template-columns: 1fr 1fr !important; }
-          .kh-news-grid { grid-template-columns: 1fr !important; }
           .kh-footer-grid { grid-template-columns: 1fr 1fr !important; }
-          .kh-hero-h1 { font-size: 36px !important; }
+          .kh-contact-two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .kh-contact-stat-grid { grid-template-columns: 1fr 1fr !important; }
+          .kh-nav-links { display: none !important; }
         }
         @media (max-width: 600px) {
           .kh-stats-grid { grid-template-columns: 1fr !important; }
           .kh-why-grid { grid-template-columns: 1fr !important; }
+          .kh-contact-stat-grid { grid-template-columns: 1fr 1fr !important; }
         }
       `}</style>
 
@@ -97,10 +101,10 @@ export default function KanghePage() {
         background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(12px)',
         borderBottom: `1px solid ${border}`,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 clamp(1.5rem, 4vw, 3rem)', height: 58,
+        padding: '0 clamp(1.5rem, 4vw, 3rem)', height: 56,
       }}>
         <img src="/logos/kanghe-aquatherm-logo.svg" alt="Kanghe Aquatherm" style={{ height: 32, width: 'auto' }} />
-        <div style={{ display: 'flex', gap: 28, fontSize: 13, color: textMid }}>
+        <div className="kh-nav-links" style={{ display: 'flex', gap: 28, fontSize: 13, color: textMid }}>
           {['產品介紹', '實績案例', '最新消息', '聯絡我們'].map(l => (
             <span key={l} className="kh-link" style={{ fontWeight: 400 }}>{l}</span>
           ))}
@@ -125,7 +129,7 @@ export default function KanghePage() {
         <div style={{ position: 'absolute', top: 0, right: 0, width: '45%', height: '100%', background: `linear-gradient(135deg, transparent 40%, rgba(44,166,224,0.12) 100%)`, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', bottom: -40, left: -40, width: 300, height: 300, borderRadius: '50%', background: 'rgba(44,166,224,0.08)', pointerEvents: 'none' }} />
 
-        <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', position: 'relative' }}>
           {/* Logo */}
           <div style={{ marginBottom: 40 }}>
             <img
@@ -142,8 +146,8 @@ export default function KanghePage() {
               <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20 }}>
                 德國闊盛 Aquatherm — 台灣總代理
               </div>
-              <h1 className="kh-hero-h1" style={{
-                fontSize: 'clamp(36px, 5.5vw, 68px)',
+              <h1 style={{
+                fontSize: 'clamp(2rem, 5.5vw, 4.25rem)',
                 fontWeight: 900, lineHeight: 1.05,
                 letterSpacing: '-2px', color: '#fff',
                 marginBottom: 24,
@@ -151,7 +155,7 @@ export default function KanghePage() {
                 全世界銷售最大<br />
                 <span style={{ color: blueLight }}>PPR管材品牌</span>
               </h1>
-              <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8, maxWidth: 480, marginBottom: 40 }}>
+              <p style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8, maxWidth: 480, marginBottom: 40 }}>
                 德國Aquatherm公司為全世界PPR管材的創始者，從1973年至今已有逾40年以上歷史。
                 本公司專業經營PPR管銷售、教學、顧問服務。
               </p>
@@ -174,7 +178,7 @@ export default function KanghePage() {
               <img
                 src={IMG_BANNER1}
                 alt="Aquatherm PPR"
-                style={{ width: '100%', borderRadius: 10, display: 'block', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}
+                style={{ width: '100%', maxWidth: '100%', height: 'auto', borderRadius: 10, display: 'block', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}
                 onError={e => e.currentTarget.style.display = 'none'}
               />
             </div>
@@ -184,14 +188,14 @@ export default function KanghePage() {
 
       {/* ══ STATS ══ */}
       <section style={{ background: bg, borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
           <div className="kh-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
             {STATS.map((s, i) => (
               <div key={i} style={{
                 padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem)',
                 borderRight: i < 2 ? `1px solid ${border}` : 'none',
               }}>
-                <div style={{ fontSize: 'clamp(40px, 5vw, 60px)', fontWeight: 900, color: blue, lineHeight: 1, letterSpacing: '-2px', marginBottom: 10 }}>{s.num}</div>
+                <div style={{ fontSize: 'clamp(2.5rem, 5vw, 3.75rem)', fontWeight: 900, color: blue, lineHeight: 1, letterSpacing: '-2px', marginBottom: 10 }}>{s.num}</div>
                 <p style={{ fontSize: 13, color: textMid, lineHeight: 1.6, whiteSpace: 'pre-line' }}>{s.label}</p>
               </div>
             ))}
@@ -201,10 +205,10 @@ export default function KanghePage() {
 
       {/* ══ COMPANY INTRO ══ */}
       <section style={{ background: bgLight, padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.5rem, 5vw, 3.5rem)', borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+        <div className="kh-two-col" style={{ maxWidth: 1440, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 18 }}>品牌介紹 · Brand</div>
-            <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-1.5px', color: text, marginBottom: 24 }}>
+            <h2 style={{ fontSize: 'clamp(1.625rem, 3.5vw, 2.75rem)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-1.5px', color: text, marginBottom: 24 }}>
               世界頂級<br />PPR管材系統
             </h2>
             <p style={{ fontSize: 15, color: textMid, lineHeight: 1.9, marginBottom: 20 }}>
@@ -230,7 +234,7 @@ export default function KanghePage() {
             <img
               src={IMG_BANNER2}
               alt="Aquatherm Installation"
-              style={{ width: '100%', borderRadius: 10, display: 'block', boxShadow: `0 16px 48px rgba(24,41,135,0.14)` }}
+              style={{ width: '100%', maxWidth: '100%', height: 'auto', borderRadius: 10, display: 'block', boxShadow: `0 16px 48px rgba(24,41,135,0.14)` }}
               onError={e => e.currentTarget.style.display = 'none'}
             />
           </div>
@@ -239,10 +243,10 @@ export default function KanghePage() {
 
       {/* ══ WHY ══ */}
       <section style={{ background: bg, padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.5rem, 5vw, 3.5rem)', borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 16 }}>為什麼選擇 Aquatherm</div>
-            <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 42px)', fontWeight: 900, letterSpacing: '-1.5px', color: text }}>德國品質，永久接合</h2>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.625rem)', fontWeight: 900, letterSpacing: '-1.5px', color: text }}>德國品質，永久接合</h2>
           </div>
           <div className="kh-why-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
             {[
@@ -251,7 +255,7 @@ export default function KanghePage() {
               { icon: '⚙️', title: '現場技術支援', en: 'On-Site Support', desc: '康赫工程師親赴重要施工現場，提供即時技術指導及系統認證文件。' },
               { icon: '🌍', title: '全球認證', en: 'Global Standard', desc: '在70個以上國家取得認證，符合ISO 15874、WRAS、CE等國際標準。' },
             ].map((f, i) => (
-              <div key={i} style={{ background: bgLight, border: `1px solid ${border}`, borderRadius: 10, padding: '28px 22px' }}>
+              <div key={i} style={{ background: bgLight, border: `1px solid ${border}`, borderRadius: 10, padding: 'clamp(1.25rem, 2.5vw, 1.75rem) clamp(1rem, 2vw, 1.375rem)' }}>
                 <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
                 <div style={{ width: 24, height: 3, background: blueLight, marginBottom: 14, borderRadius: 2 }} />
                 <h3 style={{ fontSize: 14, fontWeight: 700, color: text, marginBottom: 4 }}>{f.title}</h3>
@@ -265,9 +269,9 @@ export default function KanghePage() {
 
       {/* ══ PROJECTS ══ */}
       <section style={{ background: blue, padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.5rem, 5vw, 3.5rem)', borderBottom: `1px solid rgba(255,255,255,0.1)` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 18 }}>實績案例 · Projects</div>
-          <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 42px)', fontWeight: 900, letterSpacing: '-1.5px', color: '#fff', marginBottom: 48 }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.625rem)', fontWeight: 900, letterSpacing: '-1.5px', color: '#fff', marginBottom: 48 }}>
             台灣重大工程實績
           </h2>
           <div style={{ borderTop: `1px solid rgba(255,255,255,0.12)` }}>
@@ -276,7 +280,7 @@ export default function KanghePage() {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 padding: '22px 16px',
                 borderBottom: `1px solid rgba(255,255,255,0.12)`,
-                borderRadius: 4,
+                borderRadius: 4, flexWrap: 'wrap', gap: 12,
               }}>
                 <div>
                   <span style={{ fontSize: 17, fontWeight: 700, color: '#fff', marginRight: 16 }}>{p.name}</span>
@@ -291,11 +295,11 @@ export default function KanghePage() {
 
       {/* ══ NEWS ══ */}
       <section style={{ background: bgLight, padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.5rem, 5vw, 3.5rem)', borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48, flexWrap: 'wrap', gap: 16 }}>
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 16 }}>最新消息 · News</div>
-              <h2 style={{ fontSize: 'clamp(22px, 3vw, 36px)', fontWeight: 900, letterSpacing: '-1px', color: text }}>近期動態</h2>
+              <h2 style={{ fontSize: 'clamp(1.375rem, 3vw, 2.25rem)', fontWeight: 900, letterSpacing: '-1px', color: text }}>近期動態</h2>
             </div>
             <span style={{ fontSize: 13, color: blue, fontWeight: 600, cursor: 'pointer' }}>查看全部 →</span>
           </div>
@@ -326,7 +330,7 @@ export default function KanghePage() {
       <section style={{ background: bg, padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.5rem, 5vw, 3.5rem)', borderBottom: `1px solid ${border}` }}>
         <div style={{ maxWidth: 780, margin: '0 auto' }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 18 }}>常見問題</div>
-          <h2 style={{ fontSize: 'clamp(22px, 3vw, 36px)', fontWeight: 900, letterSpacing: '-1px', color: text, marginBottom: 48 }}>FAQ</h2>
+          <h2 style={{ fontSize: 'clamp(1.375rem, 3vw, 2.25rem)', fontWeight: 900, letterSpacing: '-1px', color: text, marginBottom: 48 }}>FAQ</h2>
           {[
             { q: 'Aquatherm PPR管與一般塑膠管有何不同？', a: 'Aquatherm使用德國原料，採用熱熔接合工藝，接頭強度超越管材本身，無須螺紋、黏著劑，接頭終身不漏水，且BPA-free符合飲用水衛生標準。' },
             { q: '康赫是否提供施工指導？', a: '是的，康赫國際提供完整施工教學與現場技術支援，並於工程完成後核發Aquatherm系統認證書。' },
@@ -354,11 +358,98 @@ export default function KanghePage() {
         </div>
       </section>
 
+      {/* ══ CONTACT ══ */}
+      <section style={{ background: bgLight, padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.5rem, 5vw, 3.5rem)', borderBottom: `1px solid ${border}` }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
+          {/* Section label */}
+          <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 18 }}>Contact · 聯絡我們</div>
+          <h2 style={{ fontSize: 'clamp(1.375rem, 3vw, 2.25rem)', fontWeight: 900, letterSpacing: '-1px', color: text, marginBottom: 48 }}>取得聯繫</h2>
+
+          {/* Stat cards */}
+          <div className="kh-contact-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 56 }}>
+            {[
+              { icon: '⚡', num: '< 24hrs', label: 'Response Time' },
+              { icon: '🏭', num: '15+', label: 'Years Experience' },
+              { icon: '✓', num: 'ISO 9001', label: 'Certified Quality' },
+              { icon: '★', num: '98%', label: 'Client Satisfaction' },
+            ].map((s, i) => (
+              <div key={i} style={{ background: bg, border: `1px solid ${border}`, borderRadius: 12, padding: 'clamp(1rem, 2vw, 1.375rem) clamp(0.75rem, 1.5vw, 1.125rem)', textAlign: 'center' }}>
+                <div style={{ fontSize: 22, marginBottom: 8 }}>{s.icon}</div>
+                <div style={{ fontSize: 'clamp(16px, 2vw, 22px)', fontWeight: 900, color: blue, letterSpacing: '-0.5px', marginBottom: 4 }}>{s.num}</div>
+                <div style={{ fontSize: 11, color: textMid, letterSpacing: '0.04em' }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Two-col layout */}
+          <div className="kh-contact-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+            {/* LEFT: form */}
+            <div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: text, marginBottom: 24 }}>Send a message</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: textMid, letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Name</label>
+                  <input placeholder="Your name" style={{ width: '100%', background: bg, border: `1px solid ${border}`, borderRadius: 6, padding: '11px 14px', fontSize: 14, color: text, fontFamily: font, outline: 'none', boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderColor = blueLight} onBlur={e => e.currentTarget.style.borderColor = border} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: textMid, letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Email</label>
+                  <input placeholder="your@email.com" style={{ width: '100%', background: bg, border: `1px solid ${border}`, borderRadius: 6, padding: '11px 14px', fontSize: 14, color: text, fontFamily: font, outline: 'none', boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderColor = blueLight} onBlur={e => e.currentTarget.style.borderColor = border} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: textMid, letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Company <span style={{ fontWeight: 400, opacity: 0.6 }}>(optional)</span></label>
+                  <input placeholder="Company name" style={{ width: '100%', background: bg, border: `1px solid ${border}`, borderRadius: 6, padding: '11px 14px', fontSize: 14, color: text, fontFamily: font, outline: 'none', boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderColor = blueLight} onBlur={e => e.currentTarget.style.borderColor = border} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 700, color: textMid, letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Message</label>
+                  <textarea placeholder="Tell us about your project..." rows={5} style={{ width: '100%', background: bg, border: `1px solid ${border}`, borderRadius: 6, padding: '11px 14px', fontSize: 14, color: text, fontFamily: font, outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderColor = blueLight} onBlur={e => e.currentTarget.style.borderColor = border} />
+                </div>
+                <button
+                  style={{ background: blue, color: '#fff', border: 'none', borderRadius: 6, padding: '13px 28px', fontSize: 14, fontWeight: 700, cursor: 'pointer', alignSelf: 'flex-start' }}
+                  onMouseEnter={e => e.currentTarget.style.background = blueMid}
+                  onMouseLeave={e => e.currentTarget.style.background = blue}
+                >Send Message →</button>
+              </div>
+            </div>
+
+            {/* RIGHT: contact cards */}
+            <div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: text, marginBottom: 24 }}>Other ways to reach us</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {[
+                  { icon: '✉', label: 'Email', value: 'info@kanghe.com.tw', sub: 'Response within 24 hours' },
+                  { icon: '📞', label: 'Phone', value: '+886-2-2345-6789', sub: 'Mon–Fri 9:00–18:00' },
+                  { icon: '📍', label: 'Location', value: 'No. 45, Zhongshan Rd., Zhongli Dist., Taoyuan', sub: 'Taiwan, R.O.C.' },
+                ].map((c, i) => (
+                  <div key={i} style={{ background: bg, border: `1px solid ${border}`, borderRadius: 10, padding: '18px 20px', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                    <div style={{ width: 38, height: 38, borderRadius: 8, background: bluePale, border: `1px solid ${blueLight}33`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>{c.icon}</div>
+                    <div>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: blueLight, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 3 }}>{c.label}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: text, marginBottom: 2 }}>{c.value}</div>
+                      <div style={{ fontSize: 12, color: textMid }}>{c.sub}</div>
+                    </div>
+                  </div>
+                ))}
+                {/* Quick response guarantee */}
+                <div style={{ background: `linear-gradient(135deg, ${blue}, #0a155a)`, borderRadius: 10, padding: '20px', marginTop: 4 }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: blueLight, marginBottom: 6 }}>⚡ Quick Response Guarantee</div>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>We guarantee a response to all B2B inquiries within 24 business hours. For urgent technical matters, call us directly.</p>
+                </div>
+              </div>
+              <p style={{ fontSize: 12, color: textMid, marginTop: 16 }}>彰化縣彰化市平安街278巷15號 · 04-7261626</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ══ BOTTOM CTA ══ */}
       <section style={{ background: `linear-gradient(135deg, ${blue} 0%, #0a155a 100%)`, padding: 'clamp(4rem, 9vh, 6.5rem) clamp(1.5rem, 5vw, 3.5rem)' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 32 }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 32 }}>
           <div>
-            <h2 style={{ fontSize: 'clamp(26px, 4vw, 52px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-2px', color: '#fff', marginBottom: 16 }}>
+            <h2 style={{ fontSize: 'clamp(1.625rem, 4vw, 3.25rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-2px', color: '#fff', marginBottom: 16 }}>
               準備開始您的<br /><span style={{ color: blueLight }}>工程專案</span>了嗎？
             </h2>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>
@@ -382,7 +473,7 @@ export default function KanghePage() {
 
       {/* ── FOOTER ── */}
       <footer style={{ background: '#0a0f2e', borderTop: `1px solid rgba(255,255,255,0.08)`, padding: 'clamp(2.5rem, 5vh, 4rem) clamp(1.5rem, 5vw, 3.5rem)' }}>
-        <div className="kh-footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
+        <div className="kh-footer-grid" style={{ maxWidth: 1440, margin: '0 auto', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
           <div>
             <img src="/logos/kanghe-aquatherm-logo.svg" alt="Kanghe Aquatherm" style={{ height: 28, width: 'auto', filter: 'brightness(0) invert(1)', marginBottom: 18, opacity: 0.85 }} />
             <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.9, maxWidth: 240 }}>
@@ -404,7 +495,7 @@ export default function KanghePage() {
             </div>
           ))}
         </div>
-        <div style={{ borderTop: `1px solid rgba(255,255,255,0.08)`, paddingTop: 24, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', borderTop: `1px solid rgba(255,255,255,0.08)`, paddingTop: 24, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>
           <span>Copyright © 2026 康赫國際有限公司 All Rights Reserved. · Made with Worldedit Design</span>
           <span onClick={() => navigate('/')} style={{ cursor: 'pointer', color: blueLight, opacity: 0.7 }}>← Back to Directory</span>
         </div>

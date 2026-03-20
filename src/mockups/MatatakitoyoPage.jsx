@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PremiumContact from '../components/PremiumContact'
 import { Waves } from '../components/ui/wave-background'
 
 const accent = '#e8001b'
@@ -33,21 +32,27 @@ export default function MatatakitoyoPage() {
         .mt-cta-inv:hover { background: #fff !important; color: #080808 !important; }
         .mt-cta-outline { transition: background 0.2s, color 0.2s; }
         .mt-cta-outline:hover { background: #111 !important; color: #fff !important; }
-        @media (max-width: 767px) {
-          .mt-hero-h1 { font-size: clamp(52px, 13vw, 80px) !important; }
-          .mt-two-col { grid-template-columns: 1fr !important; }
+        @media (max-width: 900px) {
+          .mt-two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
           .mt-three-col { grid-template-columns: 1fr 1fr !important; }
           .mt-four-col { grid-template-columns: 1fr 1fr !important; }
+          .mt-hero-h1 { font-size: clamp(52px, 13vw, 80px) !important; }
           .mt-stat-row { flex-direction: column !important; gap: 0 !important; }
           .mt-stat-row > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08) !important; }
           .mt-footer-grid { grid-template-columns: 1fr !important; }
           .mt-masonry { grid-template-columns: 1fr !important; }
           .mt-reviews-grid { grid-template-columns: 1fr !important; }
+          .mt-contact-two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .mt-nav-links { display: none !important; }
+        }
+        @media (max-width: 600px) {
           .mt-section-pad { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+          .mt-three-col { grid-template-columns: 1fr !important; }
+          .mt-four-col { grid-template-columns: 1fr 1fr !important; }
         }
       `}</style>
 
-      {/* ══ NAV — Alaïa style: white bg, black text, ultra minimal, thin border ══ */}
+      {/* ══ NAV ══ */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         height: 56,
@@ -63,13 +68,13 @@ export default function MatatakitoyoPage() {
           style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: fontSans, color: '#111' }}
         >← Back</span>
         <img src="/logos/matatakitoyo-logo.png" alt="Matatakitoyo" style={{ height: 32, objectFit: 'contain' }} />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 28, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: fontSans, color: '#111' }}>
+        <div className="mt-nav-links" style={{ display: 'flex', justifyContent: 'flex-end', gap: 28, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: fontSans, color: '#111' }}>
           <span className="mt-nav-link">Prev</span>
           <span className="mt-nav-link">Next</span>
         </div>
       </nav>
 
-      {/* ══ HERO — full viewport, black bg, right product image, title bottom-left ══ */}
+      {/* ══ HERO ══ */}
       <section style={{
         minHeight: '100svh',
         display: 'flex',
@@ -95,6 +100,7 @@ export default function MatatakitoyoPage() {
             objectFit: 'cover',
             objectPosition: 'center',
             zIndex: 0,
+            maxWidth: '100%',
           }}
         />
         {/* Left dark fade */}
@@ -105,7 +111,7 @@ export default function MatatakitoyoPage() {
         {/* Hero content — bottom left */}
         <div style={{
           position: 'relative', zIndex: 3,
-          maxWidth: 1200, margin: '0 auto', width: '100%',
+          maxWidth: 1440, margin: '0 auto', width: '100%',
           padding: '0 clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vh, 5rem)',
         }}>
           {/* Company logo */}
@@ -116,9 +122,9 @@ export default function MatatakitoyoPage() {
             Taiwan · Est. 1992
           </p>
 
-          {/* Giant editorial title — italic for hero h1 only */}
+          {/* Giant editorial title */}
           <h1 className="mt-hero-h1" style={{
-            fontSize: 'clamp(64px, 9vw, 130px)',
+            fontSize: 'clamp(4rem, 9vw, 8.125rem)',
             fontWeight: 400,
             lineHeight: 0.9,
             letterSpacing: '-2px',
@@ -140,7 +146,7 @@ export default function MatatakitoyoPage() {
           </div>
 
           {/* CTA row */}
-          <div style={{ display: 'flex', gap: 12 }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <button className="mt-cta-inv" style={{
               background: accent, color: '#fff',
               border: 'none', padding: '13px 32px',
@@ -158,9 +164,9 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ STATS BAR — white bg, black text, 4 numbers, thin vertical dividers ══ */}
+      {/* ══ STATS BAR ══ */}
       <div style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
           <div className="mt-stat-row" style={{ display: 'flex', justifyContent: 'space-between' }}>
             {[
               { n: '1992', label: 'Founded' },
@@ -173,7 +179,7 @@ export default function MatatakitoyoPage() {
                 borderRight: i < 3 ? '1px solid #e5e5e5' : 'none',
                 flex: 1, textAlign: 'center',
               }}>
-                <p style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 300, letterSpacing: '-1px', marginBottom: 6, color: '#111', fontFamily: fontSans }}>{s.n}</p>
+                <p style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', fontWeight: 300, letterSpacing: '-1px', marginBottom: 6, color: '#111', fontFamily: fontSans }}>{s.n}</p>
                 <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', fontFamily: fontSans }}>{s.label}</p>
               </div>
             ))}
@@ -181,14 +187,14 @@ export default function MatatakitoyoPage() {
         </div>
       </div>
 
-      {/* ══ ABOUT — white bg, two-col: large heading left, body + accordion right ══ */}
+      {/* ══ ABOUT ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
-          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', padding: '6rem 0' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(3rem, 6vw, 6rem)', padding: 'clamp(3.5rem, 6vh, 6rem) 0' }}>
             {/* Left: big editorial heading */}
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 28, fontFamily: fontSans }}>Company</p>
-              <h2 style={{ fontSize: 'clamp(32px, 4.5vw, 58px)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-1px', fontStyle: 'italic', marginBottom: 0, color: '#111', fontFamily: fontSans }}>
+              <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.625rem)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-1px', fontStyle: 'italic', marginBottom: 0, color: '#111', fontFamily: fontSans }}>
                 Thirty years of torque precision.
               </h2>
             </div>
@@ -226,9 +232,9 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ VIDEO — black bg section ══ */}
+      {/* ══ VIDEO ══ */}
       <section style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 5vh, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Brand Film</p>
           <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
             <iframe
@@ -244,13 +250,13 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ PRODUCTS "The Collection" — white bg, 3-col clean grid, image 4:5, text below ══ */}
+      {/* ══ PRODUCTS ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48 }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 14, fontFamily: fontSans }}>Products</p>
-              <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 46px)', fontWeight: 300, letterSpacing: '-0.5px', fontStyle: 'italic', color: '#111', fontFamily: fontSans }}>The Collection</h2>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.875rem)', fontWeight: 300, letterSpacing: '-0.5px', fontStyle: 'italic', color: '#111', fontFamily: fontSans }}>The Collection</h2>
             </div>
             <button className="mt-cta-outline" style={{
               background: 'transparent', color: 'rgba(0,0,0,0.45)',
@@ -261,7 +267,7 @@ export default function MatatakitoyoPage() {
             }}>View All</button>
           </div>
 
-          {/* 3-col grid — image 4:5, no card chrome, text below image */}
+          {/* 3-col grid */}
           <div className="mt-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
             {[
               { title: 'Click Torque Wrench', sub: '5–500 Nm · Multiple drive sizes', img: '/products/mt_precise1_v2_nobg.png' },
@@ -282,9 +288,8 @@ export default function MatatakitoyoPage() {
                     style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '16px', display: 'block' }}
                   />
                 </div>
-                {/* Text below image — no card border, no background */}
+                {/* Text below image */}
                 <div style={{ paddingTop: 16 }}>
-                  {/* Thin red accent line on hover */}
                   <div style={{ height: 1, background: hoveredProduct === i ? accent : 'transparent', marginBottom: 14, transition: 'background 0.2s' }} />
                   <p style={{ fontSize: 14, fontFamily: fontSans, fontWeight: 400, marginBottom: 5, color: '#111' }}>{p.title}</p>
                   <p style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.04em', fontFamily: fontSans }}>{p.sub}</p>
@@ -295,8 +300,8 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ FULL-BLEED CAMPAIGN IMAGE — black overlay, large text ══ */}
-      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 520 }}>
+      {/* ══ FULL-BLEED CAMPAIGN IMAGE ══ */}
+      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 'clamp(320px, 45vw, 520px)' }}>
         <img
           src="/products/mt_gallery2_v2_nobg.png"
           alt=""
@@ -305,22 +310,22 @@ export default function MatatakitoyoPage() {
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.62)', zIndex: 1 }} />
         <div style={{
           position: 'relative', zIndex: 2,
-          maxWidth: 1200, margin: '0 auto',
-          padding: '7rem clamp(1.5rem, 4vw, 3rem)',
-          display: 'flex', alignItems: 'flex-end', minHeight: 520,
+          maxWidth: 1440, margin: '0 auto',
+          padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)',
+          display: 'flex', alignItems: 'flex-end', minHeight: 'clamp(320px, 45vw, 520px)',
         }}>
           <div>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20, fontFamily: fontSans }}>Engineering</p>
-            <h2 style={{ fontSize: 'clamp(36px, 6vw, 80px)', fontWeight: 300, lineHeight: 0.95, letterSpacing: '-2px', fontStyle: 'italic', maxWidth: 600, color: '#fff', fontFamily: fontSans }}>
+            <h2 style={{ fontSize: 'clamp(2.25rem, 6vw, 5rem)', fontWeight: 300, lineHeight: 0.95, letterSpacing: '-2px', fontStyle: 'italic', maxWidth: 600, color: '#fff', fontFamily: fontSans }}>
               Accuracy within ±4%<br />across the full range.
             </h2>
           </div>
         </div>
       </section>
 
-      {/* ══ TRUSTED BY — white bg, minimal opacity logos ══ */}
+      {/* ══ TRUSTED BY ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', borderTop: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '4rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(2.5rem, 4vh, 4rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.25)', marginBottom: 36, fontFamily: fontSans }}>Trusted by</p>
           <div className="mt-four-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1 }}>
             {[
@@ -342,9 +347,9 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ GALLERY MASONRY — black bg, 2px gap ══ */}
+      {/* ══ GALLERY MASONRY ══ */}
       <section style={{ background: '#080808' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 5vh, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Gallery</p>
           <div className="mt-masonry" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '260px 260px', gap: 2 }}>
             {[
@@ -365,9 +370,9 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ TESTIMONIALS — white bg, pull quotes, thin top border per quote ══ */}
+      {/* ══ TESTIMONIALS ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div className="mt-section-pad" style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div className="mt-section-pad" style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 48, fontFamily: fontSans }}>Testimonials</p>
           <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
             {[
@@ -377,7 +382,7 @@ export default function MatatakitoyoPage() {
               { quote: 'Our go-to recommendation for clients needing real-time torque monitoring without full wrench replacement.', author: 'Technical Advisor', org: 'Industrial Equipment Supplier' },
             ].map((t, i) => (
               <div key={i} style={{ borderTop: '1px solid #e5e5e5', paddingTop: 28 }}>
-                <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', fontWeight: 300, lineHeight: 1.65, fontStyle: 'italic', marginBottom: 24, color: 'rgba(0,0,0,0.8)', fontFamily: fontSans }}>
+                <p style={{ fontSize: 'clamp(0.9375rem, 1.8vw, 1.125rem)', fontWeight: 300, lineHeight: 1.65, fontStyle: 'italic', marginBottom: 24, color: 'rgba(0,0,0,0.8)', fontFamily: fontSans }}>
                   "{t.quote}"
                 </p>
                 <p style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', fontFamily: fontSans }}>
@@ -391,15 +396,15 @@ export default function MatatakitoyoPage() {
 
       {/* ══ REVIEWS ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 40, fontFamily: fontSans }}>Reviews</p>
-          <div style={{ display: 'flex', gap: 48, alignItems: 'center', marginBottom: 40 }}>
+          <div style={{ display: 'flex', gap: 48, alignItems: 'center', marginBottom: 40, flexWrap: 'wrap' }}>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
-              <p style={{ fontSize: 56, fontWeight: 300, lineHeight: 1, color: '#111', fontFamily: fontSans }}>4.7</p>
+              <p style={{ fontSize: 'clamp(40px, 6vw, 56px)', fontWeight: 300, lineHeight: 1, color: '#111', fontFamily: fontSans }}>4.7</p>
               <p style={{ fontSize: 18, color: '#f59e0b', letterSpacing: 3, margin: '8px 0' }}>★★★★★</p>
               <p style={{ fontSize: 11, color: 'rgba(0,0,0,0.3)', fontFamily: fontSans }}>94 reviews</p>
             </div>
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1, minWidth: 180 }}>
               {[[5,76],[4,17],[3,5],[2,2],[1,0]].map(([s,p]) => (
                 <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 7 }}>
                   <span style={{ fontSize: 11, color: 'rgba(0,0,0,0.3)', width: 8, fontFamily: fontSans }}>{s}</span>
@@ -427,9 +432,9 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ DOWNLOAD CENTER — white bg, clean list rows ══ */}
+      {/* ══ DOWNLOAD CENTER ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 40, fontFamily: fontSans }}>Resources</p>
           <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
             {[
@@ -462,21 +467,94 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ CONTACT — black bg ══ */}
-      <section style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
-          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Contact</p>
-          <PremiumContact accent="#e11d48" bg="#080808" company="MATATAKITOYO TOOL CO., LTD." email="sales@matatakitoyo.com.tw" phone="+886-4-XXXX-XXXX" address="Taiwan, R.O.C." />
+      {/* ══ CONTACT ══ */}
+      <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.25)', marginBottom: 48, fontFamily: fontSans }}>Contact</p>
+
+          {/* Stat cards */}
+          <div className="mt-four-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: '#e5e5e5', marginBottom: 64 }}>
+            {[
+              { icon: '⚡', num: '< 4hrs', label: 'Response Time' },
+              { icon: '◎', num: '10+', label: 'Markets Served' },
+              { icon: '✓', num: 'JIS', label: 'Certified' },
+              { icon: '★', num: '97%', label: 'Quality Rate' },
+            ].map((s, i) => (
+              <div key={i} style={{ background: '#ffffff', padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem)', textAlign: 'center' }}>
+                <div style={{ fontSize: 14, color: accent, marginBottom: 12, fontFamily: fontSans }}>{s.icon}</div>
+                <div style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 300, color: '#111', letterSpacing: '-1px', marginBottom: 8, fontFamily: fontSans }}>{s.num}</div>
+                <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', fontFamily: fontSans }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Two-col: form + contact info */}
+          <div className="mt-contact-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(3rem, 6vw, 6rem)' }}>
+            {/* LEFT: form */}
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 28, fontFamily: fontSans }}>Send a message</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                {[
+                  { label: 'Name', ph: 'Your name' },
+                  { label: 'Email', ph: 'your@email.com' },
+                  { label: 'Company (optional)', ph: 'Company name' },
+                ].map((f, i) => (
+                  <div key={i}>
+                    <label style={{ fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', display: 'block', marginBottom: 8, fontFamily: fontSans }}>{f.label}</label>
+                    <input placeholder={f.ph} style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #e5e5e5', padding: '10px 0', fontSize: 14, color: '#111', fontFamily: fontSans, outline: 'none', fontWeight: 300, boxSizing: 'border-box' }}
+                      onFocus={e => e.currentTarget.style.borderBottomColor = accent} onBlur={e => e.currentTarget.style.borderBottomColor = '#e5e5e5'} />
+                  </div>
+                ))}
+                <div>
+                  <label style={{ fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', display: 'block', marginBottom: 8, fontFamily: fontSans }}>Message</label>
+                  <textarea placeholder="Tell us about your torque requirements..." rows={4} style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #e5e5e5', padding: '10px 0', fontSize: 14, color: '#111', fontFamily: fontSans, outline: 'none', resize: 'none', fontWeight: 300, boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderBottomColor = accent} onBlur={e => e.currentTarget.style.borderBottomColor = '#e5e5e5'} />
+                </div>
+                <div>
+                  <button className="mt-cta" style={{ background: accent, color: '#fff', border: 'none', padding: '13px 32px', fontSize: 11, fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: fontSans }}>Send Message</button>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT: contact info */}
+            <div>
+              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 28, fontFamily: fontSans }}>Other ways to reach us</p>
+              <div>
+                {[
+                  { icon: '✉', label: 'Email', value: 'info@matatakitoyo.com.tw', sub: 'Response within 4 hours' },
+                  { icon: '◎', label: 'Phone', value: '+886-4-2233-5566', sub: 'Mon–Fri 8:00–17:00' },
+                  { icon: '◈', label: 'Location', value: 'No. 23, Gongyuan Rd., Central Dist., Taichung', sub: 'Taiwan, R.O.C.' },
+                ].map((c, i) => (
+                  <div key={i} style={{ borderTop: '1px solid #e5e5e5', padding: '20px 0', display: 'flex', gap: 16, alignItems: 'flex-start', ...(i === 2 ? { borderBottom: '1px solid #e5e5e5' } : {}) }}>
+                    <span style={{ fontSize: 14, color: accent, marginTop: 2, flexShrink: 0 }}>{c.icon}</span>
+                    <div>
+                      <p style={{ fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.25)', marginBottom: 5, fontFamily: fontSans }}>{c.label}</p>
+                      <p style={{ fontSize: 14, fontFamily: fontSans, fontWeight: 400, color: '#111', marginBottom: 3 }}>{c.value}</p>
+                      <p style={{ fontSize: 11, color: 'rgba(0,0,0,0.35)', fontFamily: fontSans, fontWeight: 300 }}>{c.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Quick response guarantee */}
+              <div style={{ marginTop: 20, padding: '20px 0', borderTop: '1px solid #e5e5e5' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                  <div style={{ width: 24, height: 1, background: accent }} />
+                  <span style={{ fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', fontFamily: fontSans }}>Quick Response Guarantee</span>
+                </div>
+                <p style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)', lineHeight: 1.8, fontFamily: fontSans, fontWeight: 300, margin: 0 }}>All precision machining inquiries receive a response within 4 business hours. OEM/ODM quotations delivered within 5 days.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ══ LEAD MAGNET — white bg, two-col ══ */}
+      {/* ══ LEAD MAGNET ══ */}
       <section style={{ borderBottom: '1px solid #e5e5e5', background: '#ffffff' }}>
-        <div className="mt-section-pad" style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem clamp(1.5rem, 4vw, 3rem)' }}>
-          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+        <div className="mt-section-pad" style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(4rem, 7vh, 7rem) clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(3rem, 5vw, 5rem)', alignItems: 'center' }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 20, fontFamily: fontSans }}>Free Resource</p>
-              <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 44px)', fontWeight: 300, fontStyle: 'italic', lineHeight: 1.1, letterSpacing: '-0.5px', color: '#111', fontFamily: fontSans }}>
+              <h2 style={{ fontSize: 'clamp(1.625rem, 3.5vw, 2.75rem)', fontWeight: 300, fontStyle: 'italic', lineHeight: 1.1, letterSpacing: '-0.5px', color: '#111', fontFamily: fontSans }}>
                 Torque Tool Selection Guide
               </h2>
             </div>
@@ -496,12 +574,12 @@ export default function MatatakitoyoPage() {
         </div>
       </section>
 
-      {/* ══ FOOTER — black bg, minimal ══ */}
+      {/* ══ FOOTER ══ */}
       <footer style={{ background: '#080808' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 5vh, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <div className="mt-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', marginBottom: '3rem', paddingBottom: '3rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
             <div>
-              <h3 style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 300, fontStyle: 'italic', lineHeight: 1.0, letterSpacing: '-1px', marginBottom: 32, color: '#fff', fontFamily: fontSans }}>
+              <h3 style={{ fontSize: 'clamp(1.75rem, 4vw, 3.25rem)', fontWeight: 300, fontStyle: 'italic', lineHeight: 1.0, letterSpacing: '-1px', marginBottom: 32, color: '#fff', fontFamily: fontSans }}>
                 Engineering-grade<br />precision.
               </h3>
               <button className="mt-cta-inv" style={{ background: accent, color: '#fff', border: 'none', padding: '13px 32px', fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', cursor: 'pointer', fontFamily: fontSans, fontWeight: 500 }}>Request Catalog</button>

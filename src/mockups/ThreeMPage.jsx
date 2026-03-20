@@ -17,12 +17,20 @@ export default function ThreeMPage() {
 .tm-pill:hover { background: rgba(255,255,255,0.15) !important; }
         .tm-product-img { transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
         .tm-product-card:hover .tm-product-img { transform: scale(1.04); }
-        @media (max-width:767px) {
-          .tm-three-col { grid-template-columns: 1fr !important; }
-          .tm-two-col { grid-template-columns: 1fr !important; }
+        @media (max-width: 900px) {
+          .tm-three-col { grid-template-columns: 1fr 1fr !important; }
+          .tm-two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
           .tm-stats { grid-template-columns: 1fr 1fr !important; }
           .tm-reviews-summary { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
           .tm-hero-img { display: none !important; }
+          .tm-nav-links { display: none !important; }
+          .tm-contact-two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .tm-contact-stat-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 600px) {
+          .tm-three-col { grid-template-columns: 1fr !important; }
+          .tm-stats { grid-template-columns: 1fr 1fr !important; }
+          .tm-contact-stat-grid { grid-template-columns: 1fr 1fr !important; }
         }
       `}</style>
 
@@ -35,14 +43,14 @@ export default function ThreeMPage() {
       <nav style={{
         background: redDark,
         display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center',
-        padding: '0 clamp(1.5rem, 4vw, 3rem)', height: 58,
+        padding: '0 clamp(1.5rem, 4vw, 3rem)', height: 56,
         position: 'sticky', top: 0, zIndex: 100,
         borderBottom: '1px solid rgba(255,255,255,0.12)',
       }}>
         <span onClick={() => navigate('/')} style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', cursor: 'pointer', fontWeight: 500 }}
           onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.55)'}>← Back</span>
         <img src="/logos/3m-logo.svg" alt="3M" style={{ height: 36, objectFit: 'contain' }} />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 20, fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>
+        <div className="tm-nav-links" style={{ display: 'flex', justifyContent: 'flex-end', gap: 20, fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>
           <span style={{ cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.55)'}>Prev</span>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
           <span style={{ cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.55)'}>Next</span>
@@ -50,7 +58,7 @@ export default function ThreeMPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{ background: red, minHeight: '100svh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <section style={{ background: red, minHeight: 'clamp(500px, 100svh, 100svh)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         <img className="tm-hero-img" src="/products/tm_harness2_nobg.png" alt="" style={{
           position: 'absolute', right: '-2%', bottom: 0,
           height: '95%', width: '52%',
@@ -58,6 +66,7 @@ export default function ThreeMPage() {
           zIndex: 0, opacity: 0.95,
           mixBlendMode: 'luminosity',
           filter: 'brightness(1.1) contrast(0.9)',
+          maxWidth: '100%',
         }} />
         {/* subtle dark vignette left */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(180,0,20,0.6) 0%, rgba(180,0,20,0.25) 50%, transparent 100%)', zIndex: 1 }} />
@@ -65,15 +74,15 @@ export default function ThreeMPage() {
         <div style={{
           flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
           position: 'relative', zIndex: 2,
-          maxWidth: 1200, margin: '0 auto', width: '100%',
-          padding: '0 clamp(1.5rem, 5vw, 3rem) 5rem',
+          maxWidth: 1440, margin: '0 auto', width: '100%',
+          padding: 'clamp(2rem, 5vw, 5rem) clamp(1.5rem, 5vw, 4rem) 5rem',
         }}>
           <img src="/logos/3m-logo.svg" alt="3M" style={{ height: 60, objectFit: 'contain', marginBottom: 32, display: 'block', alignSelf: 'flex-start' }} />
           <p style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: 20, fontWeight: 500 }}>3M Taiwan Limited</p>
-          <h1 style={{ fontSize: 'clamp(48px, 8vw, 110px)', fontWeight: 800, lineHeight: 0.88, letterSpacing: '-4px', color: '#fff', marginBottom: 36, maxWidth: 680 }}>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 6.875rem)', fontWeight: 800, lineHeight: 0.88, letterSpacing: '-4px', color: '#fff', marginBottom: 36, maxWidth: 680 }}>
             Safety<br />Built<br />To Last.
           </h1>
-          <p style={{ fontSize: 'clamp(14px, 1.5vw, 16px)', color: 'rgba(255,255,255,0.65)', maxWidth: 380, lineHeight: 1.75, marginBottom: 44, fontWeight: 400 }}>
+          <p style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)', color: 'rgba(255,255,255,0.65)', maxWidth: 380, lineHeight: 1.75, marginBottom: 44, fontWeight: 400 }}>
             Taiwan's authorized distributor of 3M Personal Protective Equipment — from N95 respirators to full-body fall protection.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -97,7 +106,7 @@ export default function ThreeMPage() {
 
       {/* ── STATS BAR — red bg, white text ── */}
       <section style={{ background: red, borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
-        <div className="tm-stats" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        <div className="tm-stats" style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
           {[
             { num: '60K+', label: 'Products in Portfolio' },
             { num: '100+', label: 'Countries Served' },
@@ -105,7 +114,7 @@ export default function ThreeMPage() {
             { num: '50K+', label: 'Employees Worldwide' },
           ].map((s, i) => (
             <div key={i} style={{ padding: '36px 20px', textAlign: 'center', borderRight: i < 3 ? '1px solid rgba(255,255,255,0.15)' : 'none' }}>
-              <p style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', fontWeight: 800, letterSpacing: '-1px', color: '#fff', marginBottom: 6 }}>{s.num}</p>
+              <p style={{ fontSize: 'clamp(1.5rem, 3vw, 2.625rem)', fontWeight: 800, letterSpacing: '-1px', color: '#fff', marginBottom: 6 }}>{s.num}</p>
               <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', fontWeight: 400, letterSpacing: '0.03em' }}>{s.label}</p>
             </div>
           ))}
@@ -114,11 +123,11 @@ export default function ThreeMPage() {
 
       {/* ── PRODUCTS — white section for contrast ── */}
       <section style={{ background: '#ffffff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 52 }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#999', marginBottom: 14, fontWeight: 600 }}>Safety Range</p>
-              <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 44px)', fontWeight: 700, letterSpacing: '-1px', color: '#1a1a1a' }}>Protection for Every Hazard</h2>
+              <h2 style={{ fontSize: 'clamp(1.375rem, 3.5vw, 2.75rem)', fontWeight: 700, letterSpacing: '-1px', color: '#1a1a1a' }}>Protection for Every Hazard</h2>
             </div>
             <button style={{
               background: red, color: '#fff', border: 'none',
@@ -147,7 +156,7 @@ export default function ThreeMPage() {
               >
                 <div style={{ overflow: 'hidden', aspectRatio: '4/3', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <img className="tm-product-img" src={p.img} alt={p.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 20, display: 'block' }} />
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 20, display: 'block', maxWidth: '100%' }} />
                 </div>
                 <div style={{ paddingTop: 16 }}>
                   <div style={{ height: 2, background: hoveredProduct === i ? red : 'transparent', marginBottom: 12, transition: 'background 0.2s' }} />
@@ -162,21 +171,22 @@ export default function ThreeMPage() {
       </section>
 
       {/* ── CAMPAIGN — red section ── */}
-      <section style={{ background: redDeep, position: 'relative', overflow: 'hidden', minHeight: 480 }}>
+      <section style={{ background: redDeep, position: 'relative', overflow: 'hidden', minHeight: 'clamp(320px, 45vw, 480px)' }}>
         <img src="/products/tm_harness1_nobg.png" alt="" style={{
           position: 'absolute', right: '3%', top: '50%', transform: 'translateY(-50%)',
           height: '92%', width: '45%', objectFit: 'contain', zIndex: 0, opacity: 0.9,
+          maxWidth: '100%',
         }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(140,0,16,0.8) 0%, rgba(140,0,16,0.4) 60%, transparent 100%)', zIndex: 1 }} />
         <div style={{
           position: 'relative', zIndex: 2,
-          maxWidth: 1200, margin: '0 auto',
-          padding: '6rem clamp(1.5rem, 4vw, 3rem)',
-          display: 'flex', alignItems: 'center', minHeight: 480,
+          maxWidth: 1440, margin: '0 auto',
+          padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)',
+          display: 'flex', alignItems: 'center', minHeight: 'clamp(320px, 45vw, 480px)',
         }}>
           <div style={{ maxWidth: 520 }}>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>Fall Protection</p>
-            <h2 style={{ fontSize: 'clamp(32px, 5vw, 64px)', fontWeight: 800, lineHeight: 0.92, letterSpacing: '-2px', color: '#fff', marginBottom: 28 }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 0.92, letterSpacing: '-2px', color: '#fff', marginBottom: 28 }}>
               DBI-SALA ExoFit.<br />Work at heights<br />with confidence.
             </h2>
             <button style={{
@@ -192,12 +202,12 @@ export default function ThreeMPage() {
       {/* ── ABOUT — red bg ── */}
       <section style={{ background: red }}>
         <div className="tm-two-col" style={{
-          maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)',
+          maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)',
           display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem',
         }}>
           <div>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: 20, fontWeight: 600 }}>About 3M Taiwan</p>
-            <h2 style={{ fontSize: 'clamp(26px, 3vw, 42px)', fontWeight: 800, letterSpacing: '-1px', lineHeight: 1.0, marginBottom: 28, color: '#fff' }}>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.625rem)', fontWeight: 800, letterSpacing: '-1px', lineHeight: 1.0, marginBottom: 28, color: '#fff' }}>
               Science Applied<br />to Life.
             </h2>
             <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.85, marginBottom: 16 }}>
@@ -227,9 +237,9 @@ export default function ThreeMPage() {
 
       {/* ── TESTIMONIALS — white cards on red ── */}
       <section style={{ background: redDark }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 14, fontWeight: 600 }}>Testimonials</p>
-          <h2 style={{ fontSize: 'clamp(24px, 3vw, 40px)', fontWeight: 800, letterSpacing: '-1px', marginBottom: 48, color: '#fff' }}>What our customers say.</h2>
+          <h2 style={{ fontSize: 'clamp(1.375rem, 3vw, 2.5rem)', fontWeight: 800, letterSpacing: '-1px', marginBottom: 48, color: '#fff' }}>What our customers say.</h2>
           <div className="tm-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
             {[
               { quote: '3M N95 respirators are our standard issue for all cleanroom personnel. Zero compromise on worker protection.', author: 'EHS Manager', org: 'Semiconductor Fab, Hsinchu' },
@@ -238,7 +248,7 @@ export default function ThreeMPage() {
               { quote: "We've been a 3M authorized distributor for 12 years. The product breadth and brand trust makes it our strongest line.", author: 'Sales Director', org: 'Industrial Supplies Distributor' },
             ].map((t, i) => (
               <div key={i} style={{ background: '#fff', padding: '40px 36px' }}>
-                <p style={{ fontSize: 'clamp(14px, 1.5vw, 17px)', fontWeight: 400, color: '#1a1a1a', lineHeight: 1.75, marginBottom: 28 }}>"{t.quote}"</p>
+                <p style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1.0625rem)', fontWeight: 400, color: '#1a1a1a', lineHeight: 1.75, marginBottom: 28 }}>"{t.quote}"</p>
                 <p style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a', marginBottom: 3 }}>{t.author}</p>
                 <p style={{ fontSize: 12, color: '#999' }}>{t.org}</p>
               </div>
@@ -249,11 +259,11 @@ export default function ThreeMPage() {
 
       {/* ── REVIEWS — white bg ── */}
       <section style={{ background: '#ffffff', borderBottom: '1px solid #e8e8e8' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#999', marginBottom: 14, fontWeight: 600 }}>Reviews</p>
           <div className="tm-reviews-summary" style={{ display: 'flex', gap: 52, alignItems: 'center', marginBottom: 48 }}>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
-              <p style={{ fontSize: 64, fontWeight: 800, lineHeight: 1, letterSpacing: '-3px', color: '#1a1a1a' }}>4.8</p>
+              <p style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1, letterSpacing: '-3px', color: '#1a1a1a' }}>4.8</p>
               <p style={{ fontSize: 16, letterSpacing: 3, margin: '8px 0', color: red }}>★★★★★</p>
               <p style={{ fontSize: 11, color: '#aaa' }}>1,240 reviews</p>
             </div>
@@ -292,9 +302,9 @@ export default function ThreeMPage() {
 
       {/* ── DOWNLOAD CENTER — red bg ── */}
       <section style={{ background: red, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem clamp(1.5rem, 4vw, 3rem)' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
           <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 14, fontWeight: 600 }}>Resources</p>
-          <h2 style={{ fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: 32, color: '#fff' }}>Download Center</h2>
+          <h2 style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: 32, color: '#fff' }}>Download Center</h2>
           <div className="tm-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
             {[
               { label: 'CATALOG', name: '3M Taiwan Product Overview 2025' },
@@ -317,12 +327,90 @@ export default function ThreeMPage() {
         </div>
       </section>
 
+      {/* ── CONTACT — white bg ── */}
+      <section style={{ background: '#ffffff', borderBottom: '1px solid #e8e8e8' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#999', marginBottom: 14, fontWeight: 600 }}>Contact</p>
+          <h2 style={{ fontSize: 'clamp(1.375rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-1px', marginBottom: 52, color: '#1a1a1a' }}>Get in touch.</h2>
+
+          {/* Stat cards */}
+          <div className="tm-contact-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 56 }}>
+            {[
+              { icon: '⚡', num: 'Same Day', label: 'Response' },
+              { icon: '◎', num: 'Global', label: 'Coverage' },
+              { icon: '✓', num: 'ISO 9001', label: 'Certified' },
+              { icon: '★', num: '99.9%', label: 'Quality Rate' },
+            ].map((s, i) => (
+              <div key={i} style={{ background: '#f8f8f8', borderRadius: 8, padding: '24px 18px', textAlign: 'center', border: '1.5px solid #f0f0f0' }}>
+                <div style={{ fontSize: 20, color: red, marginBottom: 8 }}>{s.icon}</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: '#1a1a1a', letterSpacing: '-0.5px', marginBottom: 4 }}>{s.num}</div>
+                <div style={{ fontSize: 11, color: '#aaa', fontWeight: 400 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Two-col: form + contact info */}
+          <div className="tm-contact-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
+            {/* LEFT: form */}
+            <div>
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a', marginBottom: 24 }}>Send a message</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {[
+                  { label: 'Name', ph: 'Your name' },
+                  { label: 'Email', ph: 'your@email.com' },
+                  { label: 'Company (optional)', ph: 'Company name' },
+                ].map((f, i) => (
+                  <div key={i}>
+                    <label style={{ fontSize: 11, fontWeight: 600, color: '#aaa', letterSpacing: '0.06em', textTransform: 'uppercase', display: 'block', marginBottom: 7 }}>{f.label}</label>
+                    <input placeholder={f.ph} style={{ width: '100%', background: '#fff', border: '1.5px solid #f0f0f0', borderRadius: 6, padding: '12px 14px', fontSize: 14, color: '#1a1a1a', fontFamily: fontSans, outline: 'none', boxSizing: 'border-box' }}
+                      onFocus={e => e.currentTarget.style.borderColor = red} onBlur={e => e.currentTarget.style.borderColor = '#f0f0f0'} />
+                  </div>
+                ))}
+                <div>
+                  <label style={{ fontSize: 11, fontWeight: 600, color: '#aaa', letterSpacing: '0.06em', textTransform: 'uppercase', display: 'block', marginBottom: 7 }}>Message</label>
+                  <textarea placeholder="Tell us about your PPE requirements..." rows={5} style={{ width: '100%', background: '#fff', border: '1.5px solid #f0f0f0', borderRadius: 6, padding: '12px 14px', fontSize: 14, color: '#1a1a1a', fontFamily: fontSans, outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
+                    onFocus={e => e.currentTarget.style.borderColor = red} onBlur={e => e.currentTarget.style.borderColor = '#f0f0f0'} />
+                </div>
+                <button style={{ background: red, color: '#fff', border: 'none', borderRadius: 100, padding: '14px 36px', fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: fontSans, alignSelf: 'flex-start', transition: 'background 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = redDark} onMouseLeave={e => e.currentTarget.style.background = red}>Send Message</button>
+              </div>
+            </div>
+
+            {/* RIGHT: contact info */}
+            <div>
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a', marginBottom: 24 }}>Other ways to reach us</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {[
+                  { icon: '✉', label: 'Email', value: 'taiwan@mmm.com', sub: 'Same-day response' },
+                  { icon: '◎', label: 'Phone', value: '+886-2-2704-9011', sub: 'Mon–Fri 8:30–17:30' },
+                  { icon: '◈', label: 'Location', value: 'No. 131, Sec. 3, Minsheng E. Rd., Songshan Dist., Taipei', sub: 'Taiwan, R.O.C.' },
+                ].map((c, i) => (
+                  <div key={i} style={{ background: '#f8f8f8', border: '1.5px solid #f0f0f0', borderRadius: 8, padding: '18px 20px', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                    <div style={{ width: 36, height: 36, borderRadius: '50%', background: `${red}18`, border: `1.5px solid ${red}33`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: red, flexShrink: 0 }}>{c.icon}</div>
+                    <div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#aaa', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.label}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1a1a', marginBottom: 2 }}>{c.value}</div>
+                      <div style={{ fontSize: 12, color: '#aaa' }}>{c.sub}</div>
+                    </div>
+                  </div>
+                ))}
+                {/* Quick response guarantee */}
+                <div style={{ background: red, borderRadius: 8, padding: '20px' }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 6 }}>⚡ Quick Response Guarantee</div>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, margin: 0 }}>3M Taiwan authorized safety partner — all procurement and compliance inquiries answered same business day by our certified product specialists.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── LEAD MAGNET — deep red ── */}
       <section style={{ background: redDeep }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem clamp(1.5rem, 4vw, 3rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 40, flexWrap: 'wrap' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 40, flexWrap: 'wrap' }}>
           <div style={{ flex: 1, minWidth: 280 }}>
             <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 14, fontWeight: 600 }}>Free Download</p>
-            <h3 style={{ fontSize: 'clamp(20px, 2.5vw, 34px)', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>
+            <h3 style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2.125rem)', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>
               3M PPE Selection Guide<br />for Taiwan Manufacturers
             </h3>
           </div>
@@ -343,7 +431,7 @@ export default function ThreeMPage() {
 
       {/* ── FOOTER ── */}
       <footer style={{ background: '#1a0003', padding: '36px clamp(1.5rem, 4vw, 3rem)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <img src="/logo.png" alt="Worldedit" style={{ height: 22, objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.25 }} />
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>3M Taiwan Limited · Taipei · +886-2-2704-9011</p>
           <span onClick={() => navigate('/')} style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', cursor: 'pointer' }}
