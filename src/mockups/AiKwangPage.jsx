@@ -147,7 +147,7 @@ export default function AiKwangPage() {
           maxWidth: 1440,
         }}>
           {/* AI-KWANG logo */}
-          <img src="/logos/aikwang-logo.svg" alt="AI-KWANG Tech" style={{ height: 72, width: 'auto', display: 'block', marginBottom: 28 }} />
+          <img src="/logos/aikwang-logo.svg" alt="AI-KWANG Tech" style={{ height: 72, width: 'auto', display: 'block', marginBottom: 28, alignSelf: 'flex-start' }} />
 
           <p style={{
             fontSize: 13, fontStyle: 'italic', color: accent,

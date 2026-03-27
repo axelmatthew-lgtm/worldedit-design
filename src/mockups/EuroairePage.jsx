@@ -97,7 +97,7 @@ export default function EuroairePage() {
 
         {/* Subtle background texture */}
         <img
-          src="/products/ea_hvac1_v2_nobg.png"
+          src="http://www.tuntos.com.tw/pic/bookpic/Brochure_ebm_EC_centrifugal_fans_01.jpg"
           alt=""
           style={{
             position: 'absolute', inset: 0,
@@ -109,7 +109,7 @@ export default function EuroairePage() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(17,17,17,0.4) 0%, rgba(17,17,17,0.85) 100%)', zIndex: 1 }} />
 
         {/* Centered hero content */}
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 820, padding: '0 clamp(1.5rem, 5vw, 3rem)', width: '100%' }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 820, padding: '0 clamp(1.5rem, 5vw, 3rem) 120px', width: '100%' }}>
           <img src="/logos/euroaire-logo.png" alt="Euroaire" style={{ height: 'clamp(100px, 15vw, 160px)', objectFit: 'contain', marginBottom: 36, display: 'block', margin: '0 auto 36px', filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
           <p style={{ fontSize: 11, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 40, fontWeight: 300 }}>
             Euroaire · 歐陸通風設備 · Taiwan
@@ -231,13 +231,8 @@ export default function EuroairePage() {
       </section>
 
       {/* ══ FULL-WIDTH PRODUCT IMAGE ══ */}
-      <section style={{ position: 'relative', overflow: 'hidden', height: 'clamp(320px, 60vh, 600px)', background: '#e8e8e8' }}>
-        <img
-          src="/products/ea_hvac1_v2_nobg.png"
-          alt="ebm-papst EC Fan"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
+      <section style={{ position: 'relative', overflow: 'hidden', height: 'clamp(320px, 60vh, 600px)', background: '#b0b8be' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.18)' }} />
         <div style={{
           position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2,
           maxWidth: 1440, margin: '0 auto',
@@ -252,7 +247,7 @@ export default function EuroairePage() {
       {/* ══ PRODUCTS ══ */}
       <section style={{ background: '#ffffff', borderBottom: `1px solid ${border}` }}>
         <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3.5rem, 6vh, 6rem) clamp(1.5rem, 4vw, 3rem)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64 }}>
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: textLight, marginBottom: 14, fontWeight: 400 }}>Products</p>
               <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.625rem)', fontWeight: 100, letterSpacing: '-0.5px', color: text }}>The Range</h2>
@@ -266,36 +261,116 @@ export default function EuroairePage() {
             }}>View All</button>
           </div>
 
-          <div className="ea-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
-            {[
-              { title: 'COPELAND Compressors', sub: 'Scroll · Reciprocating · Semi-hermetic', img: '/products/ea_hvac1_v2_nobg.png' },
-              { title: 'ebm-papst EC Fans', sub: 'RadiPac · IoT-enabled · TUV certified', img: '/products/ea_hvac2_v2_nobg.png' },
-              { title: 'EMERSON / ALCO Controls', sub: 'Solenoid valves · EEV · System protectors', img: '/products/ea_hvac1_v2_nobg.png' },
-              { title: 'ZIEHL-ABEGG Fans', sub: 'Axial · Centrifugal · Drive technology', img: '/products/ea_hvac2_v2_nobg.png' },
-              { title: 'SPORLAN Controls', sub: 'Refrigeration components since 1989', img: '/products/ea_hvac1_v2_nobg.png' },
-              { title: 'Chiller & Condensing Units', sub: 'Custom-designed for industrial use', img: '/products/ea_hvac2_v2_nobg.png' },
-            ].map((p, i) => (
-              <div key={i}
-                className="ea-card"
-                onMouseEnter={() => setHoveredProduct(i)}
-                onMouseLeave={() => setHoveredProduct(null)}
-                style={{ cursor: 'pointer', background: bg, overflow: 'hidden' }}
-              >
-                <div style={{ overflow: 'hidden', aspectRatio: '4/3', background: '#ebebeb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img
-                    className="ea-card-img"
-                    src={p.img} alt={p.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '12px', display: 'block' }}
-                  />
+          {/* ── COPELAND ── */}
+          <div style={{ marginBottom: 64 }}>
+            <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, fontWeight: 400, borderBottom: `1px solid ${border}`, paddingBottom: 16, marginBottom: 32 }}>
+              COPELAND — Emerson Climate Technologies
+            </p>
+            <div className="ea-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
+              {[
+                {
+                  tag: 'SCROLL',
+                  title: 'ZR / ZP Series',
+                  sub: 'Residential & light commercial A/C · 1.5–6 tons',
+                  specs: ['R-410A / R-22 / R-32', 'High EER/COP rated', 'Low vibration, quiet operation'],
+                  img: 'http://www.tuntos.com.tw/pic/bookpic/Condensing_Unit.jpg',
+                },
+                {
+                  tag: 'SCROLL',
+                  title: 'ZB / ZF Series',
+                  sub: 'Low & medium temperature refrigeration · Cold storage',
+                  specs: ['R-404A / R-134a / R-448A', 'EVI option for sub-zero', 'Supermarket & freezer apps'],
+                  img: 'http://www.tuntos.com.tw/pic/bookpic/Brochure_ebm_RadiPac_EC_centrifugal_fans_01.jpg',
+                },
+                {
+                  tag: 'SEMI-HERMETIC',
+                  title: '4D · 6D DISCUS',
+                  sub: '3–50 HP · Commercial refrigeration & industrial chillers',
+                  specs: ['DISCUS valve plate design', 'R-22 / R-404A / R-507', 'Field-serviceable'],
+                  img: 'http://www.tuntos.com.tw/pic/bookpic/Brochure_ebm_EC_centrifugal_fans_01.jpg',
+                },
+              ].map((p, i) => (
+                <div key={i}
+                  className="ea-card"
+                  onMouseEnter={() => setHoveredProduct(i)}
+                  onMouseLeave={() => setHoveredProduct(null)}
+                  style={{ cursor: 'pointer', background: bg, overflow: 'hidden' }}
+                >
+                  <div style={{ overflow: 'hidden', aspectRatio: '4/3', background: '#ebebeb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img className="ea-card-img" src={p.img} alt={p.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '12px', display: 'block' }} />
+                  </div>
+                  <div style={{ padding: '18px 2px 28px' }}>
+                    <div style={{ height: 1, background: hoveredProduct === i ? accent : 'transparent', marginBottom: 14, transition: 'background 0.2s' }} />
+                    <p style={{ fontSize: 9, letterSpacing: '0.18em', textTransform: 'uppercase', color: accent, marginBottom: 8, fontWeight: 400 }}>{p.tag}</p>
+                    <p style={{ fontSize: 14, fontWeight: 300, color: text, marginBottom: 5 }}>{p.title}</p>
+                    <p style={{ fontSize: 11, color: textLight, letterSpacing: '0.03em', fontWeight: 300, marginBottom: 14 }}>{p.sub}</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      {p.specs.map((s, si) => (
+                        <p key={si} style={{ fontSize: 10, color: textLight, fontWeight: 300 }}>— {s}</p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div style={{ padding: '18px 2px 28px' }}>
-                  <div style={{ height: 1, background: hoveredProduct === i ? accent : 'transparent', marginBottom: 14, transition: 'background 0.2s' }} />
-                  <p style={{ fontSize: 14, fontWeight: 300, color: text, marginBottom: 5 }}>{p.title}</p>
-                  <p style={{ fontSize: 11, color: textLight, letterSpacing: '0.03em', fontWeight: 300 }}>{p.sub}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
+          {/* ── EMERSON / ALCO ── */}
+          <div>
+            <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: textLight, fontWeight: 400, borderBottom: `1px solid ${border}`, paddingBottom: 16, marginBottom: 32 }}>
+              EMERSON / ALCO Controls
+            </p>
+            <div className="ea-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
+              {[
+                {
+                  tag: 'EXPANSION VALVE',
+                  title: 'EX Electronic Expansion Valves',
+                  sub: 'EX4 · EX5 · EX6 · EX7 · EX8 — 0.5 to 70 kW',
+                  specs: ['Stepper motor driven', 'R-410A / R-404A / R-134a', 'Pairs with EC3-X controller'],
+                  img: 'http://www.tuntos.com.tw/pic/bookpic/EXV.jpg',
+                },
+                {
+                  tag: 'SOLENOID VALVE',
+                  title: 'SVE / SVD Solenoid Valves',
+                  sub: 'N/C & N/O · 2-way · ⌀6 to ⌀16 ODF connections',
+                  specs: ['Direct & servo-operated', 'MOP & low-pressure versions', 'R-22 / R-410A / R-404A'],
+                  img: 'http://www.tuntos.com.tw/pic/bookpic/200RB_240RAgif.gif',
+                },
+                {
+                  tag: 'FILTER DRIER',
+                  title: 'FDB / ADKS Filter Driers',
+                  sub: 'Solid core & shell-and-core · Bidirectional option',
+                  specs: ['Molecular sieve & activated alumina', 'HFO-compatible series', 'R-22 / R-410A / R-448A / R-452A'],
+                  img: 'http://www.tuntos.com.tw/pic/bookpic/Mueller%E4%B9%BE%E7%87%A5%E9%81%8E%E6%BF%BE%E5%99%A8.jpg',
+                },
+              ].map((p, i) => (
+                <div key={i}
+                  className="ea-card"
+                  onMouseEnter={() => setHoveredProduct(i + 3)}
+                  onMouseLeave={() => setHoveredProduct(null)}
+                  style={{ cursor: 'pointer', background: bg, overflow: 'hidden' }}
+                >
+                  <div style={{ overflow: 'hidden', aspectRatio: '4/3', background: '#ebebeb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img className="ea-card-img" src={p.img} alt={p.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '12px', display: 'block' }} />
+                  </div>
+                  <div style={{ padding: '18px 2px 28px' }}>
+                    <div style={{ height: 1, background: hoveredProduct === i + 3 ? accent : 'transparent', marginBottom: 14, transition: 'background 0.2s' }} />
+                    <p style={{ fontSize: 9, letterSpacing: '0.18em', textTransform: 'uppercase', color: accent, marginBottom: 8, fontWeight: 400 }}>{p.tag}</p>
+                    <p style={{ fontSize: 14, fontWeight: 300, color: text, marginBottom: 5 }}>{p.title}</p>
+                    <p style={{ fontSize: 11, color: textLight, letterSpacing: '0.03em', fontWeight: 300, marginBottom: 14 }}>{p.sub}</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      {p.specs.map((s, si) => (
+                        <p key={si} style={{ fontSize: 10, color: textLight, fontWeight: 300 }}>— {s}</p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 

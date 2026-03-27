@@ -116,8 +116,8 @@ export default function GemTerminalPage() {
             { title: 'AC Power Cord Connector', sub: 'Certified · Consumer & industrial', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img3_autoxauto.png' },
             { title: 'Wire Harness Terminal', sub: 'Electronics assembly · Automotive wiring', img: 'https://www.gem.com.tw/files/images/products/iStock-5.png' },
             { title: 'Electrical Terminal Block', sub: 'Lead-free copper · DIN rail compatible', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img5_autoxauto.png' },
-            { title: 'New Energy Connector', sub: 'Solar · EV charging · Green energy', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img2_autoxauto.png' },
-            { title: 'Shaped Conductor Copper', sub: 'Milled profiles · Custom spec · OEM', img: 'https://www.gem.com.tw/files/thumbnails/static_web_styles_images_products_img1_autoxauto.png' },
+            { title: 'New Energy Connector', sub: 'Solar · EV charging · Green energy', img: 'https://www.gem.com.tw/files/images/products/iStock-3.png' },
+            { title: 'Shaped Conductor Copper', sub: 'Milled profiles · Custom spec · OEM', img: 'https://www.gem.com.tw/files/images/products/iStock-2.png' },
           ].map((p, i) => (
             <div key={i} className="gem-card" onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ cursor: 'pointer', background: '#fff', overflow: 'hidden' }}>
               <div style={{ aspectRatio: '4/3', overflow: 'hidden', background: '#f5f5f5' }}>

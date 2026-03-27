@@ -270,9 +270,9 @@ export default function MatatakitoyoPage() {
           {/* 3-col grid */}
           <div className="mt-three-col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
             {[
-              { title: 'Click Torque Wrench', sub: '5–500 Nm · Multiple drive sizes', img: '/products/mt_precise1_v2_nobg.png' },
-              { title: 'Digital Torque Adapter', sub: 'LCD readout · Peak-hold function', img: '/products/mt_precise2_v2_nobg.png' },
-              { title: 'Torque Screwdriver Set', sub: 'Preset & adjustable · Assembly grade', img: '/products/mt_precise3_v2_nobg.png' },
+              { title: 'MET Digital Torque Wrench', sub: 'Digital readout · Peak-hold function', img: 'https://www.matatakitoyo.com/comm/upimage/p_200226_02595.jpg' },
+              { title: 'MEB Digital Torque Handle', sub: 'Interchangeable · Multiple drive sizes', img: 'https://www.matatakitoyo.com/comm/upimage/p_200226_02607.jpg' },
+              { title: 'META Digital Angle Wrench', sub: 'Angle measurement · Assembly grade', img: 'https://www.matatakitoyo.com/comm/upimage/p_200226_02616.jpg' },
             ].map((p, i) => (
               <div key={i}
                 className="mt-product-card"
@@ -301,13 +301,8 @@ export default function MatatakitoyoPage() {
       </section>
 
       {/* ══ FULL-BLEED CAMPAIGN IMAGE ══ */}
-      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 'clamp(320px, 45vw, 520px)' }}>
-        <img
-          src="/products/mt_gallery2_v2_nobg.png"
-          alt=""
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.62)', zIndex: 1 }} />
+      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 'clamp(320px, 45vw, 520px)', background: '#888' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.35)', zIndex: 1 }} />
         <div style={{
           position: 'relative', zIndex: 2,
           maxWidth: 1440, margin: '0 auto',
@@ -350,20 +345,23 @@ export default function MatatakitoyoPage() {
       {/* ══ GALLERY MASONRY ══ */}
       <section style={{ background: '#080808' }}>
         <div style={{ maxWidth: 1440, margin: '0 auto', padding: 'clamp(3rem, 5vh, 5rem) clamp(1.5rem, 4vw, 3rem)' }}>
-          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Gallery</p>
+          <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 28, fontFamily: fontSans }}>Product Video</p>
           <div className="mt-masonry" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '260px 260px', gap: 2 }}>
+            {/* Video tiles — all 5 embed the product video page */}
             {[
-              { src: '/products/mt_gallery1_v2_nobg.png', style: { gridRow: '1 / 3' } },
-              { src: '/products/mt_precise1_v2_nobg.png', style: {} },
-              { src: '/products/mt_precise2_v2_nobg.png', style: {} },
-              { src: '/products/mt_gallery2_v2_nobg.png', style: {} },
-              { src: '/products/mt_gallery3_v2_nobg.png', style: {} },
+              { style: { gridRow: '1 / 3' } },
+              { style: {} },
+              { style: {} },
+              { style: {} },
+              { style: {} },
             ].map((item, i) => (
-              <div key={i} style={{ ...item.style, overflow: 'hidden', position: 'relative' }}
-                onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
-                onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
-              >
-                <img src={item.src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
+              <div key={i} style={{ ...item.style, overflow: 'hidden', position: 'relative' }}>
+                <iframe
+                  src="https://www.matatakitoyo.com/en/page-5151/Video.html"
+                  title={`MATATAKITOYO Product Video ${i + 1}`}
+                  style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+                  allowFullScreen
+                />
               </div>
             ))}
           </div>

@@ -61,6 +61,11 @@ export default function GoldenrootPage() {
         .gr-cta:hover { background: #fbbf24 !important; transform: scale(1.03); }
         .gr-ghost { transition: border-color 0.18s, color 0.18s; }
         .gr-ghost:hover { border-color: rgba(245,158,11,0.8) !important; color: #fff !important; }
+        @media (max-width: 900px) {
+          .gr-two-col { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .gr-masonry { grid-template-columns: 1fr 1fr !important; }
+          .gr-logo-grid { grid-template-columns: repeat(2,1fr) !important; }
+        }
         @media (max-width: 767px) {
           .gr-hero-inner { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
           .gr-hero-h1 { font-size: 52px !important; letter-spacing: -2px !important; }
@@ -130,8 +135,8 @@ export default function GoldenrootPage() {
           position: 'relative',
           zIndex: 3,
           width: '100%',
-          maxWidth: 1200,
-          padding: '80px clamp(1.5rem, 5vw, 3rem)',
+          maxWidth: 1440,
+          padding: 'clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 3rem)',
         }}>
 
           {/* Company logo */}
@@ -215,7 +220,7 @@ export default function GoldenrootPage() {
       {/* ══════════════════════════════════════════════
           MAIN CONTAINER — 12-col grid system
       ══════════════════════════════════════════════ */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 3rem)' }}>
+      <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 3rem)' }}>
 
         {/* ── ABOUT + ACCORDION (two-col, mirrors Vertdure text+service list) ── */}
         <section className="gr-two-col" style={{
@@ -298,7 +303,7 @@ export default function GoldenrootPage() {
         borderTop: '1px solid rgba(245,158,11,0.15)',
         borderBottom: '1px solid rgba(245,158,11,0.15)',
       }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
           <div className="gr-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
             <div>
               <p style={{ fontSize: 11, color: accent, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 14, fontWeight: 700 }}>Why Golden Root</p>
@@ -325,7 +330,7 @@ export default function GoldenrootPage() {
       </section>
 
       {/* ══ PRODUCTS — MASONRY GRID (like Vertdure plant cards) ══ */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 3rem)' }}>
+      <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 3rem)' }}>
         <section style={{ padding: '5rem 0', borderBottom: '1px solid rgba(245,158,11,0.08)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36 }}>
             <div>
@@ -351,31 +356,31 @@ export default function GoldenrootPage() {
               {
                 title: '1/2" Digital Torque Wrench',
                 tags: ['TORQUE', 'DIGITAL'],
-                img: '/products/gr_drill_v2_nobg.png',
+                img: 'https://cdn.shopify.com/s/files/1/0779/8115/5604/files/BCH-CS036009_B.jpg?v=1725526365',
                 style: { gridRow: '1 / 3', gridColumn: '1 / 2' },
               },
               {
                 title: 'LED Work Light',
                 tags: ['LED'],
-                img: '/products/gr_led_v2_nobg.png',
+                img: 'https://cdn.shopify.com/s/files/1/0779/8115/5604/files/BCH-ID12020_B.jpg?v=1689233523',
                 style: {},
               },
               {
                 title: 'Borescope Camera',
                 tags: ['INSPECTION'],
-                img: '/products/gr_camera_v2_nobg.png',
+                img: 'https://cdn.shopify.com/s/files/1/0779/8115/5604/files/BCH-ID16020_B.jpg?v=1764730621',
                 style: {},
               },
               {
                 title: 'Hand Tools Set',
                 tags: ['TOOLS', 'SET'],
-                img: '/products/gr_tools_v2_nobg.png',
+                img: 'https://cdn.shopify.com/s/files/1/0779/8115/5604/files/BCH-ID20040_B.jpg?v=1689243537',
                 style: {},
               },
               {
                 title: 'Torque Wrench',
                 tags: ['TORQUE'],
-                img: '/products/gr_wrench_v2_nobg.png',
+                img: 'https://cdn.shopify.com/s/files/1/0779/8115/5604/files/BCH-DD12020_B.jpg?v=1764814972',
                 style: {},
               },
             ].map((p, i) => (
@@ -387,11 +392,11 @@ export default function GoldenrootPage() {
                   ...p.style,
                   position: 'relative', borderRadius: 14, overflow: 'hidden',
                   cursor: 'pointer',
-                  background: 'rgba(24,20,4,0.85)',
-                  border: `1px solid ${hoveredProduct === i ? 'rgba(245,158,11,0.5)' : 'rgba(255,255,255,0.06)'}`,
+                  background: '#f0f0f0',
+                  border: `1px solid ${hoveredProduct === i ? 'rgba(245,158,11,0.8)' : 'rgba(0,0,0,0.08)'}`,
                 }}
               >
-                <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '12px', display: 'block', transition: 'transform 0.45s', transform: hoveredProduct === i ? 'scale(1.08)' : 'scale(1)' }} />
+                <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '12px', display: 'block', transition: 'transform 0.45s', transform: hoveredProduct === i ? 'scale(1.08)' : 'scale(1)', mixBlendMode: 'multiply' }} />
                 {/* Gradient overlay */}
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,8,0,0.85) 0%, rgba(10,8,0,0.1) 55%, transparent 100%)' }} />
                 {/* Content */}
@@ -597,7 +602,7 @@ export default function GoldenrootPage() {
         padding: '3rem clamp(1.5rem, 5vw, 3rem)',
         background: bgSurface,
       }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
           <div className="gr-footer-inner gr-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', marginBottom: 40 }}>
             <div>
               <h3 style={{ fontSize: 'clamp(26px,3.5vw,44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-1px', marginBottom: 20, color: '#fff' }}>

@@ -44,7 +44,7 @@ export default function ThreeMPage() {
         background: redDark,
         display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center',
         padding: '0 clamp(1.5rem, 4vw, 3rem)', height: 56,
-        position: 'sticky', top: 0, zIndex: 100,
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         borderBottom: '1px solid rgba(255,255,255,0.12)',
       }}>
         <span onClick={() => navigate('/')} style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', cursor: 'pointer', fontWeight: 500 }}
@@ -58,7 +58,7 @@ export default function ThreeMPage() {
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{ background: red, minHeight: 'clamp(500px, 100svh, 100svh)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <section style={{ background: red, minHeight: 'clamp(500px, 100svh, 100svh)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', paddingTop: 56 }}>
         <img className="tm-hero-img" src="/products/tm_harness2_nobg.png" alt="" style={{
           position: 'absolute', right: '-2%', bottom: 0,
           height: '95%', width: '52%',
